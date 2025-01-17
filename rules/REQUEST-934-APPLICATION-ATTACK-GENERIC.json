@@ -1,0 +1,147 @@
+[
+  {
+    "id": "934011",
+    "phase": 1,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934012",
+    "phase": 2,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934110",
+    "phase": 2,
+    "pattern": "@pmFromFile ssrf.data",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934130",
+    "phase": 2,
+    "pattern": "@rx (?:__proto__|constructor\\s*(?:\\.|\\[)\\s*prototype)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934150",
+    "phase": 2,
+    "pattern": "@rx Process[\\s\\x0b]*\\.[\\s\\x0b]*spawn[\\s\\x0b]*\\(",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934013",
+    "phase": 1,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934014",
+    "phase": 2,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934101",
+    "phase": 2,
+    "pattern": "@rx (?:close|exists|fork|(?:ope|spaw)n|re(?:ad|quire)|w(?:atch|rite))[\\s\\x0b]*\\(",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934140",
+    "phase": 2,
+    "pattern": "@rx ^(?:[^@]|@[^\\{])*@+\\{.*\\}",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934015",
+    "phase": 1,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934016",
+    "phase": 2,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934017",
+    "phase": 1,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "934018",
+    "phase": 2,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

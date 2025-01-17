@@ -1,0 +1,191 @@
+[
+  {
+    "id": "951010",
+    "phase": 2,
+    "pattern": "@pm gzip compress deflate br zstd",
+    "targets": [
+      "HEADERS",
+      "RESPONSE_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951011",
+    "phase": 3,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951012",
+    "phase": 4,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951100",
+    "phase": 2,
+    "pattern": "!@pmFromFile sql-errors.data",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951110",
+    "phase": 2,
+    "pattern": "@rx (?i:JET Database Engine|Access Database Engine|\\[Microsoft\\]\\[ODBC Microsoft Access Driver\\])",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951130",
+    "phase": 2,
+    "pattern": "@rx (?i:DB2 SQL error:|\\[IBM\\]\\[CLI Driver\\]\\[DB2/6000\\]|CLI Driver.*DB2|DB2 SQL error|db2_\\w+\\()",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951140",
+    "phase": 2,
+    "pattern": "@rx (?i:\\[DM_QUERY_E_SYNTAX\\]|has occurred in the vicinity of:)",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951180",
+    "phase": 2,
+    "pattern": "@rx (?i:An illegal character has been found in the statement|com\\.informix\\.jdbc|Exception.*Informix)",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951190",
+    "phase": 2,
+    "pattern": "@rx (?i:Warning.*ingres_|Ingres SQLSTATE|Ingres\\W.*Driver)",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951200",
+    "phase": 2,
+    "pattern": "@rx (?i:<b>Warning</b>: ibase_|Unexpected end of command in statement)",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951210",
+    "phase": 2,
+    "pattern": "@rx (?i:SQL error.*POS[0-9]+.*|Warning.*maxdb.*)",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951013",
+    "phase": 3,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951014",
+    "phase": 4,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951015",
+    "phase": 3,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951016",
+    "phase": 4,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951017",
+    "phase": 3,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "951018",
+    "phase": 4,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

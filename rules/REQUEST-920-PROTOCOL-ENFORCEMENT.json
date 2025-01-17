@@ -1,0 +1,676 @@
+[
+  {
+    "id": "920011",
+    "phase": 1,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920012",
+    "phase": 2,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920160",
+    "phase": 2,
+    "pattern": "!@rx ^\\d+$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920170",
+    "phase": 2,
+    "pattern": "@rx ^(?:GET|HEAD)$",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920171",
+    "phase": 2,
+    "pattern": "@rx ^(?:GET|HEAD)$",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920180",
+    "phase": 2,
+    "pattern": "!@within HTTP/2 HTTP/2.0 HTTP/3 HTTP/3.0",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920181",
+    "phase": 2,
+    "pattern": "!@eq 0",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920190",
+    "phase": 2,
+    "pattern": "@rx (\\d+)-(\\d+)",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920210",
+    "phase": 2,
+    "pattern": "@rx \\b(?:keep-alive|close),\\s?(?:keep-alive|close)\\b",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920250",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920270",
+    "phase": 2,
+    "pattern": "@validateByteRange 1-255",
+    "targets": [
+      "ARGS",
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920280",
+    "phase": 2,
+    "pattern": "@eq 0",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920290",
+    "phase": 2,
+    "pattern": "@rx ^$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920310",
+    "phase": 2,
+    "pattern": "@rx ^$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920311",
+    "phase": 2,
+    "pattern": "@rx ^$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920330",
+    "phase": 2,
+    "pattern": "@rx ^$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920340",
+    "phase": 2,
+    "pattern": "!@rx ^0$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920350",
+    "phase": 2,
+    "pattern": "@rx (?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920380",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920360",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920370",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920390",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920400",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920410",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920420",
+    "phase": 2,
+    "pattern": "@rx ^[^;\\s]+",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920530",
+    "phase": 2,
+    "pattern": "@rx charset.*?charset",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920430",
+    "phase": 2,
+    "pattern": "!@within %{tx.allowed_http_versions}",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920440",
+    "phase": 2,
+    "pattern": "@rx \\.([^.]+)$",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920500",
+    "phase": 2,
+    "pattern": "@rx \\.[^.~]+~(?:/.*|)$",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920450",
+    "phase": 2,
+    "pattern": "@rx ^.*$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920520",
+    "phase": 2,
+    "pattern": "@gt 100",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920540",
+    "phase": 2,
+    "pattern": "!@streq JSON",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920610",
+    "phase": 2,
+    "pattern": "@contains #",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920620",
+    "phase": 2,
+    "pattern": "@gt 1",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920013",
+    "phase": 1,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920014",
+    "phase": 2,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920200",
+    "phase": 2,
+    "pattern": "@rx ^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){6}",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920201",
+    "phase": 2,
+    "pattern": "@endsWith .pdf",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920230",
+    "phase": 2,
+    "pattern": "@rx %[0-9a-fA-F]{2}",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920271",
+    "phase": 2,
+    "pattern": "@validateByteRange 9,10,13,32-126,128-255",
+    "targets": [
+      "ARGS",
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920320",
+    "phase": 2,
+    "pattern": "@eq 0",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920341",
+    "phase": 2,
+    "pattern": "!@rx ^0$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920451",
+    "phase": 2,
+    "pattern": "@rx ^.*$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920015",
+    "phase": 1,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920016",
+    "phase": 2,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920272",
+    "phase": 2,
+    "pattern": "@validateByteRange 32-36,38-126",
+    "targets": [
+      "ARGS",
+      "BODY",
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920300",
+    "phase": 2,
+    "pattern": "@eq 0",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920490",
+    "phase": 2,
+    "pattern": "@ge 1",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920510",
+    "phase": 2,
+    "pattern": "@gt 0",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920521",
+    "phase": 2,
+    "pattern": "!@rx br|compress|deflate|(?:pack200-)?gzip|identity|\\*|^$|aes128gcm|exi|zstd|x-(?:compress|gzip)",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920017",
+    "phase": 1,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920018",
+    "phase": 2,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920202",
+    "phase": 2,
+    "pattern": "@endsWith .pdf",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920273",
+    "phase": 2,
+    "pattern": "@validateByteRange 38,44-46,48-58,61,65-90,95,97-122",
+    "targets": [
+      "ARGS",
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920274",
+    "phase": 2,
+    "pattern": "@validateByteRange 32,34,38,42-59,61,65-90,95,97-122",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920275",
+    "phase": 2,
+    "pattern": "!@rx ^(?:\\?[01])?$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920460",
+    "phase": 2,
+    "pattern": "@rx (?:^|[^\\x5c])\\x5c[cdeghijklmpqwxyz123456789]",
+    "targets": [
+      "ARGS",
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

@@ -1,0 +1,139 @@
+[
+  {
+    "id": "950021",
+    "phase": 2,
+    "pattern": "@eq 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950010",
+    "phase": 2,
+    "pattern": "@pm gzip compress deflate br zstd",
+    "targets": [
+      "HEADERS",
+      "RESPONSE_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950011",
+    "phase": 3,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950012",
+    "phase": 4,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950130",
+    "phase": 2,
+    "pattern": "@rx (?:<(?:TITLE>Index of.*?<H|title>Index of.*?<h)1>Index of|>\\[To Parent Directory\\]</[Aa]><br>)",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950140",
+    "phase": 2,
+    "pattern": "@rx ^#\\!\\s?/",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950013",
+    "phase": 3,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950014",
+    "phase": 4,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950100",
+    "phase": 2,
+    "pattern": "@rx ^5\\d{2}$",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950015",
+    "phase": 3,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950016",
+    "phase": 4,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950017",
+    "phase": 3,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "950018",
+    "phase": 4,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

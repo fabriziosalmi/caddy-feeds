@@ -1,0 +1,262 @@
+[
+  {
+    "id": "959052",
+    "phase": 2,
+    "pattern": "@ge 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959152",
+    "phase": 2,
+    "pattern": "@ge 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959053",
+    "phase": 2,
+    "pattern": "@ge 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959153",
+    "phase": 2,
+    "pattern": "@ge 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959054",
+    "phase": 2,
+    "pattern": "@ge 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959154",
+    "phase": 2,
+    "pattern": "@ge 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959055",
+    "phase": 2,
+    "pattern": "@ge 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959155",
+    "phase": 2,
+    "pattern": "@ge 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959060",
+    "phase": 2,
+    "pattern": "@ge 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959160",
+    "phase": 2,
+    "pattern": "@ge 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959061",
+    "phase": 2,
+    "pattern": "@ge 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959161",
+    "phase": 2,
+    "pattern": "@ge 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959062",
+    "phase": 2,
+    "pattern": "@ge 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959162",
+    "phase": 2,
+    "pattern": "@ge 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959063",
+    "phase": 2,
+    "pattern": "@ge 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959163",
+    "phase": 2,
+    "pattern": "@ge 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959101",
+    "phase": 2,
+    "pattern": "@ge %{tx.outbound_anomaly_score_threshold}",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959100",
+    "phase": 2,
+    "pattern": "@ge %{tx.outbound_anomaly_score_threshold}",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959011",
+    "phase": 3,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959012",
+    "phase": 4,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959013",
+    "phase": 3,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959014",
+    "phase": 4,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959015",
+    "phase": 3,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959016",
+    "phase": 4,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959017",
+    "phase": 3,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "959018",
+    "phase": 4,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

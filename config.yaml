@@ -1,0 +1,40 @@
+ip_lists:
+  sources:
+    - name: "FireHOL Level 1"
+      url: "https://iplists.firehol.org/files/firehol_level1.netset"
+      format: "netset"
+    - name: "Emerging Threats"
+      url: "https://rules.emergingthreats.net/blockrules/compromised-ips.txt"
+      format: "netset"
+    - name: "CI Army List"
+      url: "http://cinsscore.com/list/ci-badguys.txt"
+      format: "netset"
+    - name: "IPsum"
+      url: "https://raw.githubusercontent.com/stamparm/ipsum/master/levels/1.txt"
+      format: "netset"
+    - name: "BlockList.de"
+      url: "https://www.blocklist.de/lists/all.txt"
+      format: "netset"
+    - name: "Blocklist.de - SSH"
+      url: "https://www.blocklist.de/lists/ssh.txt"
+      format: "netset"
+    - name: "Greensnow"
+      url: "https://blocklist.greensnow.co/greensnow.txt"
+      format: "netset"
+
+    # Add more IP list sources here...
+  output_file: "lists/ip_blacklist.txt"
+
+dns_lists:
+  sources:
+    # Add DNS list sources here...
+    - name: "fabriziosalmi/blacklists"
+      url: "https://github.com/fabriziosalmi/blacklists/releases/download/latest/blacklist.txt"
+  output_file: "lists/dns_blacklist.txt"
+
+owasp_rules:
+  sources:
+    - name: "OWASP CRS - REQUEST-900"
+      url: "https://raw.githubusercontent.com/coreruleset/coreruleset/v4.0/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf"
+      format: "crs-rule-conf"
+  output_file: "rules/rules.json"

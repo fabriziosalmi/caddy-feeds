@@ -1,0 +1,50 @@
+[
+  {
+    "id": "922100",
+    "phase": 2,
+    "pattern": "!@eq 0",
+    "targets": [
+      "HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "922110",
+    "phase": 2,
+    "pattern": "@rx ^content-type\\s*:\\s*(.*)$",
+    "targets": [
+      "HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "922120",
+    "phase": 2,
+    "pattern": "@rx content-transfer-encoding:(.*)",
+    "targets": [
+      "HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "922130",
+    "phase": 2,
+    "pattern": "@rx [^\\x21-\\x7E][\\x21-\\x39\\x3B-\\x7E]*:",
+    "targets": [
+      "HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

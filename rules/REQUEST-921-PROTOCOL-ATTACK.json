@@ -1,0 +1,288 @@
+[
+  {
+    "id": "921011",
+    "phase": 1,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921012",
+    "phase": 2,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921110",
+    "phase": 2,
+    "pattern": "@rx (?:get|post|head|options|connect|put|delete|trace|track|patch|propfind|propatch|mkcol|copy|move|lock|unlock)\\s+[^\\s]+\\s+http/\\d",
+    "targets": [
+      "ARGS",
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921120",
+    "phase": 2,
+    "pattern": "@rx [\\r\\n]\\W*?(?:content-(?:type|length)|set-cookie|location):\\s*\\w",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921130",
+    "phase": 2,
+    "pattern": "@rx (?:\\bhttp/\\d|<(?:html|meta)\\b)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921140",
+    "phase": 2,
+    "pattern": "@rx [\\n\\r]",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921150",
+    "phase": 2,
+    "pattern": "@rx [\\n\\r]",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921160",
+    "phase": 2,
+    "pattern": "@rx [\\n\\r]+(?:\\s|location|refresh|(?:set-)?cookie|(?:x-)?(?:forwarded-(?:for|host|server)|host|via|remote-ip|remote-addr|originating-IP))\\s*:",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921190",
+    "phase": 2,
+    "pattern": "@rx [\\n\\r]",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921200",
+    "phase": 2,
+    "pattern": "@rx ^[^:\\(\\)\\&\\|\\!\\<\\>\\~]*\\)\\s*(?:\\((?:[^,\\(\\)\\=\\&\\|\\!\\<\\>\\~]+[><~]?=|\\s*[&!|]\\s*(?:\\)|\\()?\\s*)|\\)\\s*\\(\\s*[\\&\\|\\!]\\s*|[&!|]\\s*\\([^\\(\\)\\=\\&\\|\\!\\<\\>\\~]+[><~]?=[^:\\(\\)\\&\\|\\!\\<\\>\\~]*)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921421",
+    "phase": 2,
+    "pattern": "@rx ^[^\\s\\x0b,;]+[\\s\\x0b,;].*?(?:application/(?:.+\\+)?json|(?:application/(?:soap\\+)?|text/)xml)",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921240",
+    "phase": 2,
+    "pattern": "@rx unix:[^|]*\\|",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921013",
+    "phase": 1,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921014",
+    "phase": 2,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921151",
+    "phase": 2,
+    "pattern": "@rx [\\n\\r]",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921422",
+    "phase": 2,
+    "pattern": "@rx ^[^\\s\\x0b,;]+[\\s\\x0b,;].*?\\b(?:((?:tex|multipar)t|application)|((?:audi|vide)o|image|cs[sv]|(?:vn|relate)d|p(?:df|lain)|json|(?:soa|cs)p|x(?:ml|-www-form-urlencoded)|form-data|x-amf|(?:octe|repor)t|stream)|([\\+/]))\\b",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921015",
+    "phase": 1,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921016",
+    "phase": 2,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921230",
+    "phase": 2,
+    "pattern": "@gt 0",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921170",
+    "phase": 2,
+    "pattern": "@rx .",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921180",
+    "phase": 2,
+    "pattern": "@gt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921210",
+    "phase": 2,
+    "pattern": "@rx (][^\\]]+$|][^\\]]+\\[)",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921017",
+    "phase": 1,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921018",
+    "phase": 2,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "921220",
+    "phase": 2,
+    "pattern": "@rx \\[",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

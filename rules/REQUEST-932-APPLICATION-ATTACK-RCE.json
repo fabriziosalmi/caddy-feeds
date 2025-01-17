@@ -1,0 +1,314 @@
+[
+  {
+    "id": "932011",
+    "phase": 1,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932012",
+    "phase": 2,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932120",
+    "phase": 2,
+    "pattern": "@pmFromFile windows-powershell-commands.data",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932130",
+    "phase": 2,
+    "pattern": "@rx \\$(?:\\((?:.*|\\(.*\\))\\)|\\{.*\\}|\\[.*\\])|[<>]\\(.*\\)|/[0-9A-Z_a-z]*\\[!?.+\\]",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932140",
+    "phase": 2,
+    "pattern": "@rx \\b(?:for(?:/[dflr].*)? %+[^ ]+ in\\(.*\\)[\\s\\x0b]?do|if(?:/i)?(?: not)?(?: (?:e(?:xist|rrorlevel)|defined|cmdextversion)\\b|[ \\(].*(?:\\b(?:g(?:eq|tr)|equ|neq|l(?:eq|ss))\\b|==)))",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932270",
+    "phase": 2,
+    "pattern": "@rx ~(?:[\\+\\-](?:$|[\\s\\x0b0-9]+)|[0-9]+)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932330",
+    "phase": 2,
+    "pattern": "@rx !-\\d",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932160",
+    "phase": 2,
+    "pattern": "@pmFromFile unix-shell.data",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932170",
+    "phase": 2,
+    "pattern": "@rx ^\\(\\s*\\)\\s+{",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932171",
+    "phase": 2,
+    "pattern": "@rx ^\\(\\s*\\)\\s+{",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932180",
+    "phase": 2,
+    "pattern": "@pmFromFile restricted-upload.data",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932013",
+    "phase": 1,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932014",
+    "phase": 2,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932131",
+    "phase": 2,
+    "pattern": "@rx \\$(?:\\((?:.*|\\(.*\\))\\)|\\{.*\\}|\\[.*\\])|[<>]\\(.*\\)|/[0-9A-Z_a-z]*\\[!?.+\\]",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932200",
+    "phase": 2,
+    "pattern": "@rx ['\\*\\?\\x5c`][^\\n/]+/|/[^/]+?['\\*\\?\\x5c`]|\\$[!#\\$\\(\\*\\-0-9\\?-\\[_a-\\{]",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932205",
+    "phase": 2,
+    "pattern": "@rx ^[^#]+",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932206",
+    "phase": 2,
+    "pattern": "@rx ^[^\\.]*?(?:['\\*\\?\\x5c`][^\\n/]+/|/[^/]+?['\\*\\?\\x5c`]|\\$[!#\\$\\(\\*\\-0-9\\?-\\[_a-\\{])",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932161",
+    "phase": 2,
+    "pattern": "@pmFromFile unix-shell.data",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932015",
+    "phase": 1,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932016",
+    "phase": 2,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932190",
+    "phase": 2,
+    "pattern": "@rx /(?:[?*]+[a-z/]+|[a-z/]+[?*]+)",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932301",
+    "phase": 2,
+    "pattern": "@rx \\r\\n.*?\\b(?:DATA|QUIT|HELP(?: .{1,255})?)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932321",
+    "phase": 2,
+    "pattern": "@rx \\r\\n.*?\\b(?:(?:QUI|STA|RSE)T|NOOP|CAPA)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932331",
+    "phase": 2,
+    "pattern": "@rx !(?:\\d|!)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932017",
+    "phase": 1,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "932018",
+    "phase": 2,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]

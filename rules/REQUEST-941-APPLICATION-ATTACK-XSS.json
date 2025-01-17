@@ -1,0 +1,276 @@
+[
+  {
+    "id": "941011",
+    "phase": 1,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941012",
+    "phase": 2,
+    "pattern": "@lt 1",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941010",
+    "phase": 2,
+    "pattern": "!@validateByteRange 20, 45-47, 48-57, 65-90, 95, 97-122",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941100",
+    "phase": 2,
+    "pattern": "@detectXSS",
+    "targets": [
+      "ARGS",
+      "HEADERS",
+      "REQUEST_HEADERS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941190",
+    "phase": 2,
+    "pattern": "@rx (?i:<style.*?>.*?(?:@[i\\x5c]|(?:[:=]|&#x?0*(?:58|3A|61|3D);?).*?(?:[(\\x5c]|&#x?0*(?:40|28|92|5C);?)))",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941200",
+    "phase": 2,
+    "pattern": "@rx (?i:<.*[:]?vmlframe.*?[\\s/+]*?src[\\s/+]*=)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941240",
+    "phase": 2,
+    "pattern": "@rx <[?]?import[\\s/+\\S]*?implementation[\\s/+]*?=",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941260",
+    "phase": 2,
+    "pattern": "@rx (?i:<META[\\s/+].*?charset[\\s/+]*=)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941310",
+    "phase": 2,
+    "pattern": "@rx \\xbc[^\\xbe>]*[\\xbe>]|<[^\\xbe]*\\xbe",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941350",
+    "phase": 2,
+    "pattern": "@rx \\+ADw-.*(?:\\+AD4-|>)|<.*\\+AD4-",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941360",
+    "phase": 2,
+    "pattern": "@rx ![!+ ]\\[\\]",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941370",
+    "phase": 2,
+    "pattern": "@rx (?:self|document|this|top|window)\\s*(?:/\\*|[\\[)]).+?(?:\\]|\\*/)",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941400",
+    "phase": 2,
+    "pattern": "@rx ((?:\\[[^\\]]*\\][^.]*\\.)|Reflect[^.]*\\.).*(?:map|sort|apply)[^.]*\\..*call[^`]*`.*`",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941013",
+    "phase": 1,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941014",
+    "phase": 2,
+    "pattern": "@lt 2",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941101",
+    "phase": 2,
+    "pattern": "@detectXSS",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941181",
+    "phase": 2,
+    "pattern": "@contains -->",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941320",
+    "phase": 2,
+    "pattern": "@rx <(?:a|abbr|acronym|address|applet|area|audioscope|b|base|basefront|bdo|bgsound|big|blackface|blink|blockquote|body|bq|br|button|caption|center|cite|code|col|colgroup|comment|dd|del|dfn|dir|div|dl|dt|em|embed|fieldset|fn|font|form|frame|frameset|h1|head|hr|html|i|iframe|ilayer|img|input|ins|isindex|kdb|keygen|label|layer|legend|li|limittext|link|listing|map|marquee|menu|meta|multicol|nobr|noembed|noframes|noscript|nosmartquotes|object|ol|optgroup|option|p|param|plaintext|pre|q|rt|ruby|s|samp|script|select|server|shadow|sidebar|small|spacer|span|strike|strong|style|sub|sup|table|tbody|td|textarea|tfoot|th|thead|title|tr|tt|u|ul|var|wbr|xml|xmp)\\W",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941380",
+    "phase": 2,
+    "pattern": "@rx {{.*?}}",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941015",
+    "phase": 1,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941016",
+    "phase": 2,
+    "pattern": "@lt 3",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941017",
+    "phase": 1,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "941018",
+    "phase": 2,
+    "pattern": "@lt 4",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  }
+]
