@@ -21,8 +21,6 @@ ip_lists:
     - name: "Greensnow"
       url: "https://blocklist.greensnow.co/greensnow.txt"
       format: "netset"
-
-    # Add more IP list sources here...
   output_file: "lists/ip_blacklist.txt"
 
 dns_lists:
