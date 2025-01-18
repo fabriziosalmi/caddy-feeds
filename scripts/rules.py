@@ -227,10 +227,40 @@ def main():
         with open(output_file, 'w') as f:
            json.dump(aggregated_rules, f, indent=2)
         logging.info(f"Successfully saved all aggregated rules to {output_file}")
+        
+        # Validate rules in rules.json
+        validate_rules(output_file)
     except IOError as e:
         logging.error(f"Error writing to aggregated output file {output_file}: {e}")
 
     logging.info("OWASP rules aggregation complete.")
+
+def validate_rules(file_path):
+    """
+    Validates the loaded rules by checking if each rule has targets.
+
+    Args:
+        file_path (str): Path to the JSON file containing rules.
+    """
+    try:
+        with open(file_path, 'r') as f:
+            rules = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        logging.error(f"Error loading or parsing rules from {file_path}: {e}")
+        return
+
+    invalid_rules = []
+    for index, rule in enumerate(rules):
+        if not rule.get('targets'):
+           invalid_rules.append(f"Rule at index {index}: rule '{rule.get('id', 'unknown')}' has no targets")
+
+    if invalid_rules:
+      logging.warning(f"Some rules failed validation    {{\"file\": \"{file_path}\", \"invalid_rules\": {invalid_rules}}}")
+    logging.info(f"Rules loaded    {{\"file\": \"{file_path}\", \"total_rules\": {len(rules)}, \"invalid_rules\": {len(invalid_rules)}}}")
+    if invalid_rules:
+      logging.warning(f"Some rules across files failed validation       {{\"invalid_rules\": {invalid_rules}}}")
+
+
 
 if __name__ == "__main__":
     main()
