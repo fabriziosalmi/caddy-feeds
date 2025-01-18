@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import time
+import glob
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -191,6 +192,7 @@ def download_owasp_rules(repo_url, rules_dir):
         logging.error(f"Error downloading OWASP rules: {e}")
     return all_rules_with_filenames
 
+
 def main():
     """Main function to aggregate and save OWASP rules."""
     config = load_config()
@@ -206,7 +208,8 @@ def main():
     crs_rules_dir = "rules"
     all_crs_rules_with_filenames = download_owasp_rules(crs_repo_url, crs_rules_dir)
 
-    # Save OWASP CRS rules
+    # Save OWASP CRS rules into individual files and collect all rules
+    aggregated_rules = []
     logging.info("Saving OWASP CRS rules into individual files in the rules directory.")
     for filename, rules in all_crs_rules_with_filenames:
         output_file = os.path.join(OUTPUT_DIR, f"{filename.replace('.conf', '')}.json")
@@ -214,8 +217,18 @@ def main():
             with open(output_file, 'w') as f:
                 json.dump(rules, f, indent=2)
             logging.info(f"Successfully saved {len(rules)} rules from {filename} to {output_file}")
+            aggregated_rules.extend(rules)  # Aggregate the rules
         except IOError as e:
             logging.error(f"Error writing to output file {output_file}: {e}")
+
+    # Save all aggregated rules into a single file
+    output_file = os.path.join(OUTPUT_DIR, "rules.json")
+    try:
+        with open(output_file, 'w') as f:
+           json.dump(aggregated_rules, f, indent=2)
+        logging.info(f"Successfully saved all aggregated rules to {output_file}")
+    except IOError as e:
+        logging.error(f"Error writing to aggregated output file {output_file}: {e}")
 
     logging.info("OWASP rules aggregation complete.")
 
