@@ -5,10 +5,16 @@ import json
 import logging
 import os
 import time
+import glob
+import warnings
 from typing import List, Dict, Tuple, Any
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Suppress DeprecationWarnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 CONFIG_FILE = 'config.yaml'
 OUTPUT_DIR = 'rules'
@@ -91,6 +97,12 @@ def extract_rules(rule_text: str) -> List[Dict[str, Any]]:
                                 "CONTENT_TYPE", "X-FORWARDED-FOR", "X-REAL-IP"]:
                     if re.search(rf'(?i)\b{target}\b', variables):
                         targets.append(target)
+
+            # Skip rule if no targets are found
+            if not targets:
+               logging.debug(f"Skipping rule '{rule_id}' because it has no targets.")
+               continue
+
 
             severity_match = re.search(r'severity:\'?([^,\'\s]+)', actions)
             action_match = re.search(r'action:\'?([^,\'\s]+)', actions)
