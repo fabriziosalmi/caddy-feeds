@@ -31,7 +31,6 @@ dns_lists:
       url: "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/ultimate.txt"
   output_file: "lists/dns_blacklist.txt"
 
-
 owasp_rules:
   sources:
     - name: "OWASP CRS - REQUEST-900"

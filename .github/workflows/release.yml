@@ -30,9 +30,34 @@ jobs:
           python scripts/dns.py
           python scripts/rules.py
 
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Delete existing release if it exists
+        uses: actions/github-script@v6
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+             try {
+              const tag = 'latest';
+               const { data: releases } = await github.rest.repos.listReleases({
+                 owner: context.repo.owner,
+                 repo: context.repo.repo,
+               });
+               const release = releases.find(release => release.tag_name === tag);
+                if (release) {
+                   console.log(`deleting release with tag: ${tag}`)
+                  await github.rest.repos.deleteRelease({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      release_id: release.id
+                    });
+                     console.log(`deleted release with tag: ${tag}`)
+                } else {
+                   console.log(`No release to delete for tag: ${tag}`)
+                }
+              } catch (error) {
+                  console.error('Error deleting existing release:', error);
+              }
+
 
       - name: Create Release
         id: create_release
@@ -40,14 +65,37 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.RELEASE_DATE }}
-          release_name: ${{ env.RELEASE_DATE }}
+          tag_name: latest
+          release_name: latest
           draft: false
           prerelease: false
           body: |
             Daily release of ip_blacklist.txt, dns_blacklist.txt, and aggregated rules.json.
-          
-          artifacts: |
-            lists/ip_blacklist.txt
-            lists/dns_blacklist.txt
-            rules/rules.json
+
+      - name: Upload Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: lists/ip_blacklist.txt
+          asset_name: ip_blacklist.txt
+          asset_content_type: text/plain
+      - name: Upload Release Assets dns
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: lists/dns_blacklist.txt
+          asset_name: dns_blacklist.txt
+          asset_content_type: text/plain
+      - name: Upload Release Assets rules
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: rules/rules.json
+          asset_name: rules.json
+          asset_content_type: application/json
