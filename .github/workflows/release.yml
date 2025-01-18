@@ -2,8 +2,8 @@ name: Daily Release
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs at 00:00 UTC every day
-  workflow_dispatch: # Allow manual triggering
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10' # or any compatible Python version
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
@@ -29,10 +29,10 @@ jobs:
           python scripts/ip.py
           python scripts/dns.py
           python scripts/rules.py
-          
+
       - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        id: get_date
+        run: echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
       - name: Create Release
         id: create_release
@@ -40,14 +40,37 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.date.outputs.date }}
-          release_name: ${{ steps.date.outputs.date }}
+          tag_name: ${{ env.RELEASE_DATE }}
+          release_name: ${{ env.RELEASE_DATE }}
           draft: false
           prerelease: false
           body: |
             Daily release of ip_blacklist.txt, dns_blacklist.txt, and aggregated rules.json.
-          
-          artifacts: |
-            lists/ip_blacklist.txt
-            lists/dns_blacklist.txt
-            rules/rules.json
+
+      - name: Upload Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: lists/ip_blacklist.txt
+          asset_name: ip_blacklist.txt
+          asset_content_type: text/plain
+      - name: Upload Release Assets dns
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: lists/dns_blacklist.txt
+          asset_name: dns_blacklist.txt
+          asset_content_type: text/plain
+      - name: Upload Release Assets rules
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: rules/rules.json
+          asset_name: rules.json
+          asset_content_type: application/json
