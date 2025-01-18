@@ -25,16 +25,12 @@ ip_lists:
 
 dns_lists:
   sources:
-    # Add DNS list sources here...
-    - name: "uBlockOrigin"
-      url: "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt"
-    - name: "RPiList"
-      url: "https://raw.githubusercontent.com/RPiList/specials/master/Blocklisten/malware"
     - name: "badmojr"
       url: "https://raw.githubusercontent.com/badmojr/1Hosts/master/Pro/domains.txt"
     - name: "hagezi"
       url: "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/ultimate.txt"
   output_file: "lists/dns_blacklist.txt"
+
 
 owasp_rules:
   sources:

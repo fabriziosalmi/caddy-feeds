@@ -20,6 +20,16 @@
     "description": "No description provided."
   },
   {
+    "id": "920100",
+    "phase": 2,
+    "pattern": "!@rx (?i)^(?:get /[^#\\?]*(?:\\?[^\\s\\x0b#]*)?(?:#[^\\s\\x0b]*)?|(?:connect (?:(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\.?(?::[0-9]+)?|[\\--9A-Z_a-z]+:[0-9]+)|options \\*|[a-z]{3,10}[\\s\\x0b]+(?:[0-9A-Z_a-z]{3,7}?://[\\--9A-Z_a-z]*(?::[0-9]+)?)?/[^#\\?]*(?:\\?[^\\s\\x0b#]*)?(?:#[^\\s\\x0b]*)?)[\\s\\x0b]+[\\.-9A-Z_a-z]+)$",
+    "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
     "id": "920160",
     "phase": 2,
     "pattern": "!@rx ^\\d+$",
@@ -106,6 +116,18 @@
     "phase": 2,
     "pattern": "@eq 1",
     "targets": [],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920260",
+    "phase": 2,
+    "pattern": "@rx (?i)%uff[0-9a-f]{2}",
+    "targets": [
+      "BODY"
+    ],
     "severity": "LOW",
     "action": "log",
     "score": 1,
@@ -494,6 +516,19 @@
     "id": "920451",
     "phase": 2,
     "pattern": "@rx ^.*$",
+    "targets": [
+      "HEADERS",
+      "REQUEST_HEADERS"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "920240",
+    "phase": 2,
+    "pattern": "@rx ^(?i)application/x-www-form-urlencoded",
     "targets": [
       "HEADERS",
       "REQUEST_HEADERS"

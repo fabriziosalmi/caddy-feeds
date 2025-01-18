@@ -20,6 +20,19 @@
     "description": "No description provided."
   },
   {
+    "id": "933100",
+    "phase": 2,
+    "pattern": "@rx (?i)<\\?(?:[^x]|x(?:[^m]|m(?:[^l]|l(?:[^\\s\\x0b]|[\\s\\x0b]+[^a-z]|$)))|$|php)|\\[[/\\x5c]?php\\]",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
     "id": "933110",
     "phase": 2,
     "pattern": "@rx .*\\.ph(?:p\\d*|tml|ar|ps|t|pt)\\.*$",
@@ -62,6 +75,19 @@
     "id": "933135",
     "phase": 2,
     "pattern": "@rx \\$\\s*\\{\\s*\\S[^\\{\\}]*\\}",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "933140",
+    "phase": 2,
+    "pattern": "@rx (?i)php://(?:std(?:in|out|err)|(?:in|out)put|fd|memory|temp|filter)",
     "targets": [
       "ARGS",
       "REQUEST_COOKIES"
@@ -167,6 +193,19 @@
     "id": "933131",
     "phase": 2,
     "pattern": "@rx AUTH_TYPE|HTTP_(?:ACCEPT(?:_(?:CHARSET|ENCODING|LANGUAGE))?|CONNECTION|(?:HOS|USER_AGEN)T|KEEP_ALIVE|(?:REFERE|X_FORWARDED_FO)R)|ORIG_PATH_INFO|PATH_(?:INFO|TRANSLATED)|QUERY_STRING|REQUEST_URI",
+    "targets": [
+      "ARGS",
+      "REQUEST_COOKIES"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "933161",
+    "phase": 2,
+    "pattern": "@rx (?i)\\b(?:a(?:bs|s(?:in|sert(?:_options)?))|basename|c(?:h(?:eckdate|r(?:oot)?)|o(?:(?:mpac|(?:nsta|u)n)t|py|sh?)|r(?:eate_function|ypt)|urrent)|d(?:ate|e(?:coct|fined?)|ir)|e(?:nd|val|x(?:ec|p(?:lode)?|tract))|f(?:ile(?:(?:[acm]tim|inod|siz|typ)e|group|owner|perms)?|l(?:o(?:ck|or)|ush))|glob|h(?:ash|eader)|i(?:date|m(?:age(?:gif|(?:jpe|pn)g|wbmp|xbm)|plode)|s_a)|key|l(?:ink|og)|m(?:a(?:il|x)|d5|in)|n(?:ame|ext)|o(?:pendir|rd)|p(?:a(?:ck|ss(?:thru)?)|i|o(?:pen|w)|rev)|r(?:an(?:d|ge)|e(?:(?:adfil|nam)e|set)|ound)|s(?:(?:erializ|huffl)e|in|leep|(?:or|ta)t|ubstr|y(?:mlink|s(?:log|tem)))|t(?:an|(?:im|mpfil)e|ouch|rim)|u(?:cfirst|n(?:lin|pac)k)|virtual)(?:[\\s\\x0b]|/\\*.*\\*/|(?:#|//).*)*\\(.*\\)",
     "targets": [
       "ARGS",
       "REQUEST_COOKIES"
