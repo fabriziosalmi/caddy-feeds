@@ -17,7 +17,7 @@ https://github.com/fabriziosalmi/caddy-feeds/releases/download/latest/ip_blackli
 https://github.com/fabriziosalmi/caddy-feeds/releases/download/latest/dns_blacklist.txt
 ```
 
-## OWASP Rules
+## OWASP rules
 
 ```
 https://github.com/fabriziosalmi/caddy-feeds/releases/download/latest/rules.json
