@@ -5,7 +5,7 @@ import json
 import logging
 import os
 import time
-import glob
+from typing import List, Dict, Tuple, Any
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -13,19 +13,22 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 CONFIG_FILE = 'config.yaml'
 OUTPUT_DIR = 'rules'
 
-def load_config():
+def load_config() -> Dict[str, Any]:
     """Loads the configuration from config.yaml."""
     try:
         with open(CONFIG_FILE, 'r') as f:
-            return yaml.safe_load(f)
+            config = yaml.safe_load(f)
+            if not isinstance(config, dict):
+                raise yaml.YAMLError("Configuration file must contain a dictionary.")
+            return config
     except FileNotFoundError:
         logging.error(f"Configuration file not found: {CONFIG_FILE}")
-        return None
+        return {}
     except yaml.YAMLError as e:
         logging.error(f"Error parsing configuration file: {e}")
-        return None
+        return {}
 
-def fetch_content(url):
+def fetch_content(url: str) -> str:
     """Fetches the content from a given URL."""
     try:
         response = requests.get(url, timeout=10)
@@ -33,111 +36,78 @@ def fetch_content(url):
         return response.text
     except requests.exceptions.RequestException as e:
         logging.error(f"Error fetching content from {url}: {e}")
-        return None
+        return ""
 
-def preprocess_pattern(pattern):
+def preprocess_pattern(pattern: str) -> str:
     """
     Preprocesses the regex pattern to ensure flags like (?i) are at the start.
     Also handles special cases like [CDATA[] and unterminated character sets.
-
-    Args:
-        pattern (str): The regex pattern to preprocess.
-
-    Returns:
-        str: The preprocessed pattern.
     """
-    # Handle flags like (?i) or (?is)
     if pattern.startswith('@rx'):
-        # Extract the pattern part after '@rx'
         pattern_part = pattern[3:].strip()
-        
-        # Move flags to the start of the pattern
         flags = []
         for flag in ['(?i)', '(?is)', '(?s)']:
             if flag in pattern_part:
                 flags.append(flag)
                 pattern_part = pattern_part.replace(flag, '')
-        
-        # Add flags to the start of the pattern
         if flags:
             pattern_part = ''.join(flags) + pattern_part
-        
         pattern = '@rx ' + pattern_part
 
-    # Handle unterminated character sets
     if '[' in pattern and ']' not in pattern:
         logging.warning(f"Unterminated character set in pattern: {pattern}")
-        # Attempt to fix by adding a closing bracket
-        pattern = pattern + ']'
+        pattern += ']'
 
-    # Handle special characters in pattern
     pattern = pattern.replace('[CDATA[', '\\[CDATA\\[')
-
     return pattern
 
-def extract_rules(rule_text):
+def extract_rules(rule_text: str) -> List[Dict[str, Any]]:
     """
     Extracts individual ModSecurity rules from rule file content using regex.
-
-    Args:
-        rule_text (str): Content of ModSecurity rule file.
-
-    Returns:
-        list: List of dictionaries containing parsed rule information.
     """
     rules = []
-    # Regex pattern to match ModSecurity SecRule directives
     rule_pattern = r'SecRule\s+([^"]*)"([^"]+)"\s*(\\\s*\n\s*.*?|.*?)(?=\s*SecRule|\s*$)'
 
     for match in re.finditer(rule_pattern, rule_text, re.MULTILINE | re.DOTALL):
         try:
             variables, pattern, actions = match.groups()
-
-            # Preprocess the pattern to handle flags and special cases
             pattern = preprocess_pattern(pattern)
 
-            # Extract key rule properties using regex
-            rule_id = re.search(r'id:(\d+)', actions)
-            severity = re.search(r'severity:\'?([^,\'\s]+)', actions)
-            action = re.search(r'action:\'?([^,\'\s]+)', actions)
-            phase = re.search(r'phase:(\d+)', actions)
-            description = re.search(r'msg:\'?([^\']+)\'', actions)
-
-            if not rule_id:
+            rule_id_match = re.search(r'id:(\d+)', actions)
+            if not rule_id_match:
                 continue
+            rule_id = rule_id_match.group(1)
 
-            # Validate regex pattern
             try:
                 re.compile(pattern)
             except re.error as e:
-                logging.warning(f"Invalid regex pattern in rule {rule_id.group(1)}: {pattern}. Error: {e}")
+                logging.warning(f"Invalid regex pattern in rule {rule_id}: {pattern}. Error: {e}")
                 continue
 
-            # Extract targeted variables from rule
             targets = []
             if variables:
-                # List of possible ModSecurity variables to check for
                 for target in ["ARGS", "BODY", "URL", "HEADERS", "REQUEST_HEADERS",
-                             "RESPONSE_HEADERS", "REQUEST_COOKIES", "USER_AGENT",
-                             "CONTENT_TYPE", "X-FORWARDED-FOR", "X-REAL-IP"]:
-                    if target in variables.upper():
+                                "RESPONSE_HEADERS", "REQUEST_COOKIES", "USER_AGENT",
+                                "CONTENT_TYPE", "X-FORWARDED-FOR", "X-REAL-IP"]:
+                    if re.search(rf'(?i)\b{target}\b', variables):
                         targets.append(target)
 
-            # Set default values if properties are missing
-            severity_val = severity.group(1) if severity else "LOW"
-            action_val = action.group(1) if action else "log"
-            description_val = description.group(1) if description else "No description provided."
+            severity_match = re.search(r'severity:\'?([^,\'\s]+)', actions)
+            action_match = re.search(r'action:\'?([^,\'\s]+)', actions)
+            description_match = re.search(r'msg:\'?([^\']+)\'', actions)
 
-            # Calculate rule score based on severity and action
+            severity_val = severity_match.group(1) if severity_match else "LOW"
+            action_val = action_match.group(1) if action_match else "log"
+            description_val = description_match.group(1) if description_match else "No description provided."
+
             score = 0 if action_val == "pass" else \
                     5 if action_val == "block" else \
                     4 if severity_val.upper() == "HIGH" else \
                     3 if severity_val.upper() == "MEDIUM" else 1
 
-            # Create rule dictionary with extracted information
             rule = {
-                "id": rule_id.group(1),
-                "phase": int(phase.group(1)) if phase else 2,
+                "id": rule_id,
+                "phase": int(re.search(r'phase:(\d+)', actions).group(1)) if re.search(r'phase:(\d+)', actions) else 2,
                 "pattern": pattern,
                 "targets": targets,
                 "severity": severity_val,
@@ -153,38 +123,26 @@ def extract_rules(rule_text):
 
     return rules
 
-def download_owasp_rules(repo_url, rules_dir):
+def download_owasp_rules(repo_url: str, rules_dir: str) -> List[Tuple[str, List[Dict[str, Any]]]]:
     """
     Downloads and processes OWASP ModSecurity Core Rule Set (CRS) files from GitHub.
-
-    Args:
-        repo_url (str): GitHub repository path (e.g., 'coreruleset/coreruleset').
-        rules_dir (str): Directory containing rule files in the repository.
-
-    Returns:
-        list: A list of tuples, where each tuple contains the filename and a list of its rules.
     """
     all_rules_with_filenames = []
-    headers = {}  # Can be used to add GitHub API token if needed
+    headers = {}
 
     try:
-        # Construct GitHub API URL to list contents of rules directory
         api_url = f"https://api.github.com/repos/{repo_url}/contents/{rules_dir}"
         response = requests.get(api_url, headers=headers)
         response.raise_for_status()
 
-        # Process each .conf file in the directory
         for file in response.json():
             if not file['name'].endswith('.conf'):
                 continue
 
-            # Add delay to avoid hitting GitHub API rate limits
             time.sleep(1)
             response = requests.get(file["download_url"], headers=headers)
             response.raise_for_status()
             logging.info(f"Processing rule file: {file['name']}")
-
-            # Extract rules from file content
             rules = extract_rules(response.text)
             all_rules_with_filenames.append((file['name'], rules))
 
@@ -203,12 +161,10 @@ def main():
 
     logging.info("Starting OWASP rules aggregation.")
 
-    # Download OWASP CRS rules
     crs_repo_url = "coreruleset/coreruleset"
     crs_rules_dir = "rules"
     all_crs_rules_with_filenames = download_owasp_rules(crs_repo_url, crs_rules_dir)
 
-    # Save OWASP CRS rules into individual files and collect all rules
     aggregated_rules = []
     logging.info("Saving OWASP CRS rules into individual files in the rules directory.")
     for filename, rules in all_crs_rules_with_filenames:
@@ -217,11 +173,10 @@ def main():
             with open(output_file, 'w') as f:
                 json.dump(rules, f, indent=2)
             logging.info(f"Successfully saved {len(rules)} rules from {filename} to {output_file}")
-            aggregated_rules.extend(rules)  # Aggregate the rules
+            aggregated_rules.extend(rules)
         except IOError as e:
             logging.error(f"Error writing to output file {output_file}: {e}")
 
-    # Save all aggregated rules into a single file
     output_file = os.path.join(OUTPUT_DIR, "rules.json")
     try:
         with open(output_file, 'w') as f:
@@ -235,12 +190,9 @@ def main():
 
     logging.info("OWASP rules aggregation complete.")
 
-def validate_rules(file_path):
+def validate_rules(file_path: str) -> None:
     """
     Validates the loaded rules by checking if each rule has targets.
-
-    Args:
-        file_path (str): Path to the JSON file containing rules.
     """
     try:
         with open(file_path, 'r') as f:
@@ -251,15 +203,15 @@ def validate_rules(file_path):
 
     invalid_rules = []
     for index, rule in enumerate(rules):
-        if not rule.get('targets'):
-           invalid_rules.append(f"Rule at index {index}: rule '{rule.get('id', 'unknown')}' has no targets")
+      if not rule.get('targets'):
+        invalid_rules.append(f"Rule at index {index}: rule '{rule.get('id', 'unknown')}' has no targets")
+
 
     if invalid_rules:
-      logging.warning(f"Some rules failed validation    {{\"file\": \"{file_path}\", \"invalid_rules\": {invalid_rules}}}")
+        logging.warning(f"Some rules failed validation    {{\"file\": \"{file_path}\", \"invalid_rules\": {invalid_rules}}}")
     logging.info(f"Rules loaded    {{\"file\": \"{file_path}\", \"total_rules\": {len(rules)}, \"invalid_rules\": {len(invalid_rules)}}}")
     if invalid_rules:
-      logging.warning(f"Some rules across files failed validation       {{\"invalid_rules\": {invalid_rules}}}")
-
+        logging.warning(f"Some rules across files failed validation       {{\"invalid_rules\": {invalid_rules}}}")
 
 
 if __name__ == "__main__":
