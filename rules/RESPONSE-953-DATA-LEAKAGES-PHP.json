@@ -57,18 +57,6 @@
     "description": "No description provided."
   },
   {
-    "id": "953120",
-    "phase": 2,
-    "pattern": "@rx (?i)<\\?(?:=|php)?\\s+",
-    "targets": [
-      "BODY"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
     "id": "953013",
     "phase": 3,
     "pattern": "@lt 2",

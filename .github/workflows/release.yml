@@ -31,8 +31,8 @@ jobs:
           python scripts/rules.py
 
       - name: Get current date
-        id: get_date
-        run: echo "RELEASE_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: Create Release
         id: create_release
@@ -46,31 +46,8 @@ jobs:
           prerelease: false
           body: |
             Daily release of ip_blacklist.txt, dns_blacklist.txt, and aggregated rules.json.
-
-      - name: Upload Release Assets
-        uses: actions/upload-release-asset@v1
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: lists/ip_blacklist.txt
-          asset_name: ip_blacklist.txt
-          asset_content_type: text/plain
-      - name: Upload Release Assets dns
-        uses: actions/upload-release-asset@v1
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: lists/dns_blacklist.txt
-          asset_name: dns_blacklist.txt
-          asset_content_type: text/plain
-      - name: Upload Release Assets rules
-        uses: actions/upload-release-asset@v1
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: rules/rules.json
-          asset_name: rules.json
-          asset_content_type: application/json
+          
+          artifacts: |
+            lists/ip_blacklist.txt
+            lists/dns_blacklist.txt
+            rules/rules.json

@@ -34,15 +34,55 @@ def fetch_content(url):
         logging.error(f"Error fetching content from {url}: {e}")
         return None
 
+def preprocess_pattern(pattern):
+    """
+    Preprocesses the regex pattern to ensure flags like (?i) are at the start.
+    Also handles special cases like [CDATA[] and unterminated character sets.
+
+    Args:
+        pattern (str): The regex pattern to preprocess.
+
+    Returns:
+        str: The preprocessed pattern.
+    """
+    # Handle flags like (?i) or (?is)
+    if pattern.startswith('@rx'):
+        # Extract the pattern part after '@rx'
+        pattern_part = pattern[3:].strip()
+        
+        # Move flags to the start of the pattern
+        flags = []
+        for flag in ['(?i)', '(?is)', '(?s)']:
+            if flag in pattern_part:
+                flags.append(flag)
+                pattern_part = pattern_part.replace(flag, '')
+        
+        # Add flags to the start of the pattern
+        if flags:
+            pattern_part = ''.join(flags) + pattern_part
+        
+        pattern = '@rx ' + pattern_part
+
+    # Handle unterminated character sets
+    if '[' in pattern and ']' not in pattern:
+        logging.warning(f"Unterminated character set in pattern: {pattern}")
+        # Attempt to fix by adding a closing bracket
+        pattern = pattern + ']'
+
+    # Handle special characters in pattern
+    pattern = pattern.replace('[CDATA[', '\\[CDATA\\[')
+
+    return pattern
+
 def extract_rules(rule_text):
     """
     Extracts individual ModSecurity rules from rule file content using regex.
 
     Args:
-        rule_text (str): Content of ModSecurity rule file
+        rule_text (str): Content of ModSecurity rule file.
 
     Returns:
-        list: List of dictionaries containing parsed rule information
+        list: List of dictionaries containing parsed rule information.
     """
     rules = []
     # Regex pattern to match ModSecurity SecRule directives
@@ -51,6 +91,9 @@ def extract_rules(rule_text):
     for match in re.finditer(rule_pattern, rule_text, re.MULTILINE | re.DOTALL):
         try:
             variables, pattern, actions = match.groups()
+
+            # Preprocess the pattern to handle flags and special cases
+            pattern = preprocess_pattern(pattern)
 
             # Extract key rule properties using regex
             rule_id = re.search(r'id:(\d+)', actions)
@@ -62,14 +105,11 @@ def extract_rules(rule_text):
             if not rule_id:
                 continue
 
-            # Handle special characters in pattern
-            pattern = pattern.replace('[CDATA[', '\\[CDATA\\[')
-
             # Validate regex pattern
             try:
                 re.compile(pattern)
-            except re.error:
-                logging.warning(f"Invalid regex pattern in rule {rule_id.group(1)}: {pattern}")
+            except re.error as e:
+                logging.warning(f"Invalid regex pattern in rule {rule_id.group(1)}: {pattern}. Error: {e}")
                 continue
 
             # Extract targeted variables from rule
@@ -106,7 +146,8 @@ def extract_rules(rule_text):
             }
             rules.append(rule)
 
-        except (AttributeError, ValueError) as e:
+        except (AttributeError, ValueError, re.error) as e:
+            logging.warning(f"Error parsing rule: {e}")
             continue
 
     return rules
@@ -116,8 +157,8 @@ def download_owasp_rules(repo_url, rules_dir):
     Downloads and processes OWASP ModSecurity Core Rule Set (CRS) files from GitHub.
 
     Args:
-        repo_url (str): GitHub repository path (e.g., 'coreruleset/coreruleset')
-        rules_dir (str): Directory containing rule files in the repository
+        repo_url (str): GitHub repository path (e.g., 'coreruleset/coreruleset').
+        rules_dir (str): Directory containing rule files in the repository.
 
     Returns:
         list: A list of tuples, where each tuple contains the filename and a list of its rules.
@@ -175,9 +216,6 @@ def main():
             logging.info(f"Successfully saved {len(rules)} rules from {filename} to {output_file}")
         except IOError as e:
             logging.error(f"Error writing to output file {output_file}: {e}")
-
-    # TODO: Add logic to process other rule sources from config.yaml if needed
-    # (e.g., using fetch_content and potentially different parsing logic)
 
     logging.info("OWASP rules aggregation complete.")
 

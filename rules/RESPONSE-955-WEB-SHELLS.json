@@ -131,7 +131,7 @@
   {
     "id": "955180",
     "phase": 2,
-    "pattern": "@rx ^<html>\\r\\n<head>\\r\\n<title>GRP WebShell [0-9.]+ ",
+    "pattern": "@rx ^<html>\\r\\n<head>\\r\\n<title>GRP WebShell [0-9.]+",
     "targets": [
       "BODY"
     ],
@@ -155,7 +155,7 @@
   {
     "id": "955200",
     "phase": 2,
-    "pattern": "@rx <title>SimAttacker - (?:Version|Vrsion) : [0-9.]+ - ",
+    "pattern": "@rx <title>SimAttacker - (?:Version|Vrsion) : [0-9.]+ -",
     "targets": [
       "BODY"
     ],
@@ -191,7 +191,7 @@
   {
     "id": "955230",
     "phase": 2,
-    "pattern": "@rx ^ *<html>\\n[ ]+<head>\\n[ ]+<title>lostDC - ",
+    "pattern": "@rx ^ *<html>\\n[ ]+<head>\\n[ ]+<title>lostDC -",
     "targets": [
       "BODY"
     ],
@@ -215,7 +215,7 @@
   {
     "id": "955260",
     "phase": 2,
-    "pattern": "@rx ^<html>\\n<head>\\n<title>Ru24PostWebShell ",
+    "pattern": "@rx ^<html>\\n<head>\\n<title>Ru24PostWebShell",
     "targets": [
       "BODY"
     ],
@@ -239,7 +239,7 @@
   {
     "id": "955290",
     "phase": 2,
-    "pattern": "@rx ^ <html>\\n\\n<head>\\n\\n<title>g00nshell v[0-9.]+ ",
+    "pattern": "@rx ^ <html>\\n\\n<head>\\n\\n<title>g00nshell v[0-9.]+",
     "targets": [
       "BODY"
     ],

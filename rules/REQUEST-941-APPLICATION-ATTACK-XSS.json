@@ -45,43 +45,11 @@
     "description": "No description provided."
   },
   {
-    "id": "941110",
+    "id": "941180",
     "phase": 2,
-    "pattern": "@rx (?i)<script[^>]*>[\\s\\S]*?",
+    "pattern": "@pm document.cookie document.domain document.write .parentnode .innerhtml window.location -moz-binding <!-- <![cdata[]",
     "targets": [
       "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941130",
-    "phase": 2,
-    "pattern": "@rx (?i).(?:\\b(?:(?:x(?:link:href|html|mlns)|data:text/html|formaction)\\b|pattern[\\s\\x0b]*=)|(?:!ENTITY[\\s\\x0b]+(?:%[\\s\\x0b]+)?[^\\s\\x0b]+[\\s\\x0b]+(?:SYSTEM|PUBLIC)|@import|;base64)\\b)",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941140",
-    "phase": 2,
-    "pattern": "@rx (?i)[a-z]+=(?:[^:=]+:.+;)*?[^:=]+:url\\(javascript",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
       "REQUEST_COOKIES"
     ],
     "severity": "LOW",
@@ -116,45 +84,6 @@
     "description": "No description provided."
   },
   {
-    "id": "941210",
-    "phase": 2,
-    "pattern": "@rx (?i)(?:j|&#(?:0*(?:74|106)|x0*[46]A);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:a|&#(?:0*(?:65|97)|x0*[46]1);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:v|&#(?:0*(?:86|118)|x0*[57]6);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:a|&#(?:0*(?:65|97)|x0*[46]1);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:s|&#(?:0*(?:115|83)|x0*[57]3);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:c|&#(?:x0*[46]3|0*(?:99|67));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:r|&#(?:x0*[57]2|0*(?:114|82));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:i|&#(?:x0*[46]9|0*(?:105|73));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:p|&#(?:x0*[57]0|0*(?:112|80));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:t|&#(?:x0*[57]4|0*(?:116|84));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?::|&(?:#(?:0*58|x0*3A);?|colon;)).",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941220",
-    "phase": 2,
-    "pattern": "@rx (?i)(?:v|&#(?:0*(?:118|86)|x0*[57]6);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:b|&#(?:0*(?:98|66)|x0*[46]2);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:s|&#(?:0*(?:115|83)|x0*[57]3);)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:c|&#(?:x0*[46]3|0*(?:99|67));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:r|&#(?:x0*[57]2|0*(?:114|82));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:i|&#(?:x0*[46]9|0*(?:105|73));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:p|&#(?:x0*[57]0|0*(?:112|80));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?:t|&#(?:x0*[57]4|0*(?:116|84));)(?:[\\t\\n\\r]|&(?:#(?:0*(?:9|1[03])|x0*[AD]);?|(?:tab|newline);))*(?::|&(?:#(?:0*58|x0*3A);?|colon;)).",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941230",
-    "phase": 2,
-    "pattern": "@rx (?i)<EMBED[\\s/+].*?(?:src|type).*?=",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
     "id": "941240",
     "phase": 2,
     "pattern": "@rx <[?]?import[\\s/+\\S]*?implementation[\\s/+]*?=",
@@ -171,58 +100,6 @@
     "id": "941260",
     "phase": 2,
     "pattern": "@rx (?i:<META[\\s/+].*?charset[\\s/+]*=)",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941270",
-    "phase": 2,
-    "pattern": "@rx (?i)<LINK[\\s/+].*?href[\\s/+]*=",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941280",
-    "phase": 2,
-    "pattern": "@rx (?i)<BASE[\\s/+].*?href[\\s/+]*=",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941290",
-    "phase": 2,
-    "pattern": "@rx (?i)<APPLET[\\s/+>]",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941300",
-    "phase": 2,
-    "pattern": "@rx (?i)<OBJECT[\\s/+].*?(?:type|codetype|classid|code|data)[\\s/+]*=",
     "targets": [
       "ARGS",
       "REQUEST_COOKIES"
@@ -285,19 +162,6 @@
     "description": "No description provided."
   },
   {
-    "id": "941390",
-    "phase": 2,
-    "pattern": "@rx (?i)\\b(?:eval|set(?:timeout|interval)|new[\\s\\x0b]+Function|a(?:lert|tob)|btoa|prompt|confirm)[\\s\\x0b]*\\(",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
     "id": "941400",
     "phase": 2,
     "pattern": "@rx ((?:\\[[^\\]]*\\][^.]*\\.)|Reflect[^.]*\\.).*(?:map|sort|apply)[^.]*\\..*call[^`]*`.*`",
@@ -337,21 +201,6 @@
     "targets": [
       "HEADERS",
       "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "941150",
-    "phase": 2,
-    "pattern": "@rx (?i)\\b(?:s(?:tyle|rc)|href)\\b[\\s\\S]*?=",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
     ],
     "severity": "LOW",
     "action": "log",

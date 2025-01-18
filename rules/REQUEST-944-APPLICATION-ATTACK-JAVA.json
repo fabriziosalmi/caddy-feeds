@@ -97,21 +97,6 @@
     "description": "No description provided."
   },
   {
-    "id": "944150",
-    "phase": 2,
-    "pattern": "@rx (?i)(?:\\$|&dollar;?)(?:\\{|&l(?:brace|cub);?)(?:[^\\}]{0,15}(?:\\$|&dollar;?)(?:\\{|&l(?:brace|cub);?)|jndi|ctx)",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
     "id": "944013",
     "phase": 1,
     "pattern": "@lt 2",
@@ -126,21 +111,6 @@
     "phase": 2,
     "pattern": "@lt 2",
     "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "944151",
-    "phase": 2,
-    "pattern": "@rx (?i)(?:\\$|&dollar;?)(?:\\{|&l(?:brace|cub);?)(?:[^\\}]*(?:\\$|&dollar;?)(?:\\{|&l(?:brace|cub);?)|jndi|ctx)",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
-    ],
     "severity": "LOW",
     "action": "log",
     "score": 1,
@@ -277,21 +247,6 @@
     "phase": 2,
     "pattern": "@lt 4",
     "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "944152",
-    "phase": 2,
-    "pattern": "@rx (?i)(?:\\$|&dollar;?)(?:\\{|&l(?:brace|cub);?)",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
-    ],
     "severity": "LOW",
     "action": "log",
     "score": 1,
