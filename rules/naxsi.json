@@ -1,0 +1,172 @@
+[
+  {
+    "id": "1000",
+    "phase": 2,
+    "pattern": "(?:select|union|update|delete|insert)\\s+.+\\s+from",
+    "targets": ["ARGS", "BODY"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "SQL injection attempt with SELECT/UNION/UPDATE/DELETE/INSERT"
+  },
+  {
+    "id": "1002",
+    "phase": 2,
+    "pattern": "0x[0-9a-fA-F]{2,}",
+    "targets": ["ARGS", "BODY"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "Possible hex-encoded payload"
+  },
+  {
+    "id": "1003",
+    "phase": 2,
+    "pattern": "/\\*.*?\\*/",
+    "targets": ["ARGS", "BODY"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "MySQL comment (/* ... */)"
+  },
+  {
+    "id": "1007",
+    "phase": 2,
+    "pattern": "--\\s",
+    "targets": ["ARGS", "BODY"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "MySQL comment (--)"
+  },
+  {
+    "id": "1009",
+    "phase": 2,
+    "pattern": "=\\s*['\"]?\\s*\\d+\\s*['\"]?",
+    "targets": ["ARGS"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "Equal sign with numeric value, possible SQL/XSS"
+  },
+  {
+    "id": "1100",
+    "phase": 2,
+    "pattern": "(?:http|https|ftp|php|sftp|zlib|data|glob|phar|file|gopher|zip|expect|input)://",
+    "targets": ["ARGS", "BODY"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Potential Remote File Inclusion (RFI) attempt"
+  },
+  {
+    "id": "1200",
+    "phase": 2,
+    "pattern": "\\.\\./",
+    "targets": ["ARGS", "URL"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "Directory traversal attempt (../)"
+  },
+  {
+    "id": "1202",
+    "phase": 2,
+    "pattern": "/etc/passwd",
+    "targets": ["ARGS", "URL"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Attempt to access /etc/passwd"
+  },
+  {
+    "id": "1203",
+    "phase": 2,
+    "pattern": "[cC]:\\\\",
+    "targets": ["ARGS", "URL"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "Windows path traversal attempt"
+  },
+  {
+    "id": "1204",
+    "phase": 2,
+    "pattern": "cmd\\.exe",
+    "targets": ["ARGS", "URL"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Attempt to execute cmd.exe"
+  },
+  {
+    "id": "1302",
+    "phase": 2,
+    "pattern": "<script",
+    "targets": ["ARGS", "BODY"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Potential XSS attempt (<script>)"
+  },
+  {
+    "id": "1303",
+    "phase": 2,
+    "pattern": ">",
+    "targets": ["ARGS", "BODY"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "HTML close tag, possible XSS"
+  },
+  {
+    "id": "1314",
+    "phase": 2,
+    "pattern": "`",
+    "targets": ["ARGS", "BODY"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Backtick character, possible XSS"
+  },
+  {
+    "id": "1315",
+    "phase": 2,
+    "pattern": "%[23][0-9a-fA-F]",
+    "targets": ["ARGS", "URL"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Double encoding attempt"
+  },
+  {
+    "id": "1400",
+    "phase": 2,
+    "pattern": "&#",
+    "targets": ["ARGS", "BODY"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "UTF-7/8 encoding attempt"
+  },
+  {
+    "id": "1401",
+    "phase": 2,
+    "pattern": "%U",
+    "targets": ["ARGS", "BODY"],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 4,
+    "description": "Microsoft encoding attempt"
+  },
+  {
+    "id": "1500",
+    "phase": 2,
+    "pattern": "\\.(?:php|asp|ht|jsp)",
+    "targets": ["FILE_EXT"],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Block file uploads with dangerous extensions"
+  }
+]
