@@ -21,19 +21,38 @@ ip_lists:
     - name: "Greensnow"
       url: "https://blocklist.greensnow.co/greensnow.txt"
       format: "netset"
+    - name: "Spamhaus DROP"
+      url: "https://www.spamhaus.org/drop/drop.txt"
+      format: "netset"
+    - name: "AlienVault IP Reputation"
+      url: "https://reputation.alienvault.com/reputation.data"
+      format: "netset"
+    - name: "BinaryDefense IPs"
+      url: "https://www.binarydefense.com/banlist.txt"
+      format: "netset"
+    - name: "Nozomi Networks Bad IPs"
+      url: "https://osint.nozominetworks.com/badips.txt"
+      format: "netset"
+    - name: "Dragon Research Group"
+      url: "https://drg.pt/blocklist.txt"
+      format: "netset"
+
   output_file: "lists/ip_blacklist.txt"
 
 dns_lists:
   sources:
-    - name: "badmojr"
-      url: "https://raw.githubusercontent.com/badmojr/1Hosts/master/Pro/domains.txt"
-    - name: "hagezi"
-      url: "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/ultimate.txt"
-  output_file: "lists/dns_blacklist.txt"
+    - name: "StevenBlack Unified"
+      url: "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+  dns_servers:
+    - address: "8.8.8.8"
+      protocol: "plain"
+    - address: "1.1.1.1"
+      protocol: "plain"
+  output_file: "dns_blacklist.txt"
 
 owasp_rules:
   sources:
     - name: "OWASP CRS - REQUEST-900"
       url: "https://raw.githubusercontent.com/coreruleset/coreruleset/v4.0/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf"
-      format: "crs-rule-conf"
+      format: "plain"
   output_file: "rules/rules.json"

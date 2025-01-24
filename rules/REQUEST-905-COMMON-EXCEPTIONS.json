@@ -1,19 +1,11 @@
 [
   {
-    "id": "905100",
+    "id": "synthetic-id-REQUEST-905-COMMON-EXCEPTIONS-4",
     "phase": 2,
-    "pattern": "@streq GET /",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "905110",
-    "phase": 2,
-    "pattern": "@ipMatch 127.0.0.1,::1",
-    "targets": [],
+    "pattern": "\\(internal\\ dummy\\ connection\\)$",
+    "targets": [
+      "REQUEST_HEADERS:USER-AGENT"
+    ],
     "severity": "LOW",
     "action": "log",
     "score": 1,

@@ -1,33 +1,10 @@
 [
   {
-    "id": "942011",
-    "phase": 1,
-    "pattern": "@lt 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942012",
+    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-49",
     "phase": 2,
-    "pattern": "@lt 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942100",
-    "phase": 2,
-    "pattern": "@detectSQLi",
+    "pattern": "[a-zA-Z0-9_-]{61,61}",
     "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS",
-      "REQUEST_COOKIES"
+      "ARGS_GET:FBCLID"
     ],
     "severity": "LOW",
     "action": "log",
@@ -35,12 +12,11 @@
     "description": "No description provided."
   },
   {
-    "id": "942160",
+    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-50",
     "phase": 2,
-    "pattern": "@rx (?i:sleep\\(\\s*?\\d*?\\s*?\\)|benchmark\\(.*?\\,.*?\\))",
+    "pattern": "[a-zA-Z0-9_-]{91,91}",
     "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
+      "ARGS_GET:GCLID"
     ],
     "severity": "LOW",
     "action": "log",
@@ -48,12 +24,11 @@
     "description": "No description provided."
   },
   {
-    "id": "942220",
+    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-60",
     "phase": 2,
-    "pattern": "@rx ^(?i:-0000023456|4294967295|4294967296|2147483648|2147483647|0000012345|-2147483648|-2147483649|0000023456|2.2250738585072007e-308|2.2250738585072011e-308|1e309)$",
+    "pattern": "(?i)\\b(?:a(?:dd(?:dat|tim)e|es_(?:de|en)crypt|s(?:cii(?:str)?|in)|tan2?)|b(?:enchmark|i(?:n_to_num|t_(?:and|count|length|x?or)))|c(?:har(?:acter)?_length|iel(?:ing)?|o(?:alesce|ercibility|llation|(?:mpres)?s|n(?:cat(?:_ws)?|nection_id|v(?:ert(?:_tz)?)?)|t)|r32|ur(?:(?:dat|tim)e|rent_(?:date|setting|time(?:stamp)?|user)))|d(?:a(?:t(?:abase(?:_to_xml)?|e(?:_(?:add|format|sub)|diff))|y(?:name|of(?:month|week|year)))|count|e(?:code|grees|s_(?:de|en)crypt)|ump)|e(?:lt|n(?:c(?:ode|rypt)|ds_?with)|x(?:p(?:ort_set)?|tract(?:value)?))|f(?:i(?:el|n)d_in_set|ound_rows|rom_(?:base64|days|unixtime))|g(?:e(?:ometrycollection|t(?:_(?:format|lock)|pgusername))|(?:r(?:eates|oup_conca)|tid_subse)t)|hex(?:toraw)?|i(?:fnull|n(?:et6?_(?:aton|ntoa)|s(?:ert|tr)|terval)|s(?:_(?:(?:free|used)_lock|ipv(?:4(?:_(?:compat|mapped))?|6)|n(?:ot(?:_null)?|ull)|superuser)|null))|json(?:_(?:a(?:gg|rray(?:_(?:elements(?:_text)?|length))?)|build_(?:array|object)|e(?:ac|xtract_pat)h(?:_text)?|object(?:_(?:agg|keys))?|populate_record(?:set)?|strip_nulls|t(?:o_record(?:set)?|ypeof))|b(?:_(?:array(?:_(?:elements(?:_text)?|length))?|build_(?:array|object)|object(?:_(?:agg|keys))?|e(?:ac|xtract_pat)h(?:_text)?|insert|p(?:ath_(?:(?:exists|match)(?:_tz)?|query(?:_(?:(?:array|first)(?:_tz)?|tz))?)|opulate_record(?:set)?|retty)|s(?:et(?:_lax)?|trip_nulls)|t(?:o_record(?:set)?|ypeof)))?|path)?|l(?:ast_(?:day|inser_id)|case|e(?:as|f)t|i(?:kel(?:ihood|y)|nestring)|o(?:_(?:from_bytea|put)|ad_file|ca(?:ltimestamp|te)|g(?:10|2)|wer)|pad|trim)|m(?:a(?:ke(?:_set|date)|ster_pos_wait)|d5|i(?:crosecon)?d|onthname|ulti(?:linestring|po(?:int|lygon)))|n(?:ame_const|ot_in|ullif)|o(?:ct(?:et_length)?|(?:ld_passwo)?rd)|p(?:eriod_(?:add|diff)|g_(?:client_encoding|(?:databas|read_fil)e|l(?:argeobject|s_dir)|sleep|user)|o(?:(?:lyg|siti)on|w)|rocedure_analyse)|qu(?:arter|ery_to_xml|ote)|r(?:a(?:dians|nd|wtohex)|elease_lock|ow_(?:count|to_json)|pad|trim)|s(?:chema|e(?:c_to_time|ssion_user)|ha[12]?|in|oundex|pace|q(?:lite_(?:compileoption_(?:get|used)|source_id)|rt)|t(?:arts_?with|d(?:dev_(?:po|sam)p)?|r(?:_to_date|cmp))|ub(?:(?:dat|tim)e|str(?:ing(?:_index)?)?)|ys(?:date|tem_user))|t(?:ime(?:_(?:format|to_sec)|diff|stamp(?:add|diff)?)|o(?:_(?:base64|jsonb?)|n?char|(?:day|second)s)|r(?:im|uncate))|u(?:case|n(?:compress(?:ed_length)?|hex|i(?:str|x_timestamp)|likely)|(?:pdatexm|se_json_nul)l|tc_(?:date|time(?:stamp)?)|uid(?:_short)?)|var(?:_(?:po|sam)p|iance)|we(?:ek(?:day|ofyear)|ight_string)|xmltype|yearweek)[^0-9A-Z_a-z]*\\(",
     "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
+      "REQUEST_HEADERS:REFERER|REQUEST_HEADERS:USER-AGENT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -61,32 +36,11 @@
     "description": "No description provided."
   },
   {
-    "id": "942013",
-    "phase": 1,
-    "pattern": "@lt 2",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942014",
+    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-61",
     "phase": 2,
-    "pattern": "@lt 2",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942361",
-    "phase": 2,
-    "pattern": "@rx (?i:^[\\W\\d]+\\s*?(?:alter|union)\\b)",
+    "pattern": "(?i)create[\\s\\x0b]+(?:function|procedure)[\\s\\x0b]*?[0-9A-Z_a-z]+[\\s\\x0b]*?\\([\\s\\x0b]*?\\)[\\s\\x0b]*?-|d(?:eclare[^0-9A-Z_a-z]+[#@][\\s\\x0b]*?[0-9A-Z_a-z]+|iv[\\s\\x0b]*?\\([\\+\\-]*[\\s\\x0b\\.0-9]+,[\\+\\-]*[\\s\\x0b\\.0-9]+\\))|exec[\\s\\x0b]*?\\([\\s\\x0b]*?@|(?:lo_(?:impor|ge)t|procedure[\\s\\x0b]+analyse)[\\s\\x0b]*?\\(|;[\\s\\x0b]*?(?:declare|open)[\\s\\x0b]+[\\-0-9A-Z_a-z]+|::(?:b(?:igint|ool)|double[\\s\\x0b]+precision|int(?:eger)?|numeric|oid|real|(?:tex|smallin)t)",
     "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
+      "REQUEST_HEADERS:REFERER|REQUEST_HEADERS:USER-AGENT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -94,151 +48,12 @@
     "description": "No description provided."
   },
   {
-    "id": "942441",
+    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-68",
     "phase": 2,
-    "pattern": "@rx [a-zA-Z0-9_-]{61,61}",
+    "pattern": "\\W{4}",
     "targets": [
       "ARGS"
     ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942442",
-    "phase": 2,
-    "pattern": "@rx [a-zA-Z0-9_-]{91,91}",
-    "targets": [
-      "ARGS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942440",
-    "phase": 2,
-    "pattern": "@rx /\\*!?|\\*/|[';]--|--(?:[\\s\\x0b]|[^\\-]*?-)|[^&\\-]#.*?[\\s\\x0b]|;?\\x00",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942450",
-    "phase": 2,
-    "pattern": "@rx (?i:\\b0x[a-f\\d]{3,})",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942510",
-    "phase": 2,
-    "pattern": "@rx (?:`(?:(?:[\\w\\s=_\\-+{}()<@]){2,29}|(?:[A-Za-z0-9+/]{4})+(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?)`)",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942101",
-    "phase": 2,
-    "pattern": "@detectSQLi",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942015",
-    "phase": 1,
-    "pattern": "@lt 3",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942016",
-    "phase": 2,
-    "pattern": "@lt 3",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942460",
-    "phase": 2,
-    "pattern": "@rx \\W{4}",
-    "targets": [
-      "ARGS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942511",
-    "phase": 2,
-    "pattern": "@rx (?:'(?:(?:[\\w\\s=_\\-+{}()<@]){2,29}|(?:[A-Za-z0-9+/]{4})+(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?)')",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942530",
-    "phase": 2,
-    "pattern": "@rx ';",
-    "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942017",
-    "phase": 1,
-    "pattern": "@lt 4",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "942018",
-    "phase": 2,
-    "pattern": "@lt 4",
-    "targets": [],
     "severity": "LOW",
     "action": "log",
     "score": 1,

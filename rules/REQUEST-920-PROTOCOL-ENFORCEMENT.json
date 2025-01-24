@@ -1,31 +1,10 @@
 [
   {
-    "id": "920011",
-    "phase": 1,
-    "pattern": "@lt 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920012",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-5",
     "phase": 2,
-    "pattern": "@lt 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920160",
-    "phase": 2,
-    "pattern": "!@rx ^\\d+$",
+    "pattern": "^(?!^\\d+$).*",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:CONTENT-LENGTH"
     ],
     "severity": "LOW",
     "action": "log",
@@ -33,42 +12,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920170",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-6",
     "phase": 2,
-    "pattern": "@rx ^(?:GET|HEAD)$",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920171",
-    "phase": 2,
-    "pattern": "@rx ^(?:GET|HEAD)$",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920180",
-    "phase": 2,
-    "pattern": "!@within HTTP/2 HTTP/2.0 HTTP/3 HTTP/3.0",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920181",
-    "phase": 2,
-    "pattern": "!@eq 0",
+    "pattern": "^(?:GET|HEAD)$",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_METHOD"
     ],
     "severity": "LOW",
     "action": "log",
@@ -76,12 +24,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920190",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-7",
     "phase": 2,
-    "pattern": "@rx (\\d+)-(\\d+)",
+    "pattern": "^(?!^0?$).*",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:CONTENT-LENGTH"
     ],
     "severity": "LOW",
     "action": "log",
@@ -89,12 +36,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920210",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-8",
     "phase": 2,
-    "pattern": "@rx \\b(?:keep-alive|close),\\s?(?:keep-alive|close)\\b",
+    "pattern": "^(?:GET|HEAD)$",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_METHOD"
     ],
     "severity": "LOW",
     "action": "log",
@@ -102,23 +48,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920250",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-11",
     "phase": 2,
-    "pattern": "@eq 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920270",
-    "phase": 2,
-    "pattern": "@validateByteRange 1-255",
+    "pattern": "^POST$",
     "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_METHOD"
     ],
     "severity": "LOW",
     "action": "log",
@@ -126,12 +60,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920280",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-16",
     "phase": 2,
-    "pattern": "@eq 0",
+    "pattern": "(\\d+)-(\\d+)",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
     ],
     "severity": "LOW",
     "action": "log",
@@ -139,12 +72,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920290",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-18",
     "phase": 2,
-    "pattern": "@rx ^$",
+    "pattern": "\\b(?:keep-alive|close),\\s?(?:keep-alive|close)\\b",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:CONNECTION"
     ],
     "severity": "LOW",
     "action": "log",
@@ -152,12 +84,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920310",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-24",
     "phase": 2,
-    "pattern": "@rx ^$",
+    "pattern": "^$",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:HOST"
     ],
     "severity": "LOW",
     "action": "log",
@@ -165,12 +96,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920311",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-25",
     "phase": 2,
-    "pattern": "@rx ^$",
+    "pattern": "^$",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:ACCEPT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -178,12 +108,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920330",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-26",
     "phase": 2,
-    "pattern": "@rx ^$",
+    "pattern": "^(?!^OPTIONS$).*",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_METHOD"
     ],
     "severity": "LOW",
     "action": "log",
@@ -191,12 +120,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920340",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-27",
     "phase": 2,
-    "pattern": "!@rx ^0$",
+    "pattern": "!@pm AppleWebKit Android Business Enterprise Entreprise",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:USER-AGENT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -204,12 +132,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920350",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-28",
     "phase": 2,
-    "pattern": "@rx (?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)",
+    "pattern": "^$",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:ACCEPT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -217,9 +144,105 @@
     "description": "No description provided."
   },
   {
-    "id": "920380",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-29",
     "phase": 2,
-    "pattern": "@eq 1",
+    "pattern": "^(?!^OPTIONS$).*",
+    "targets": [
+      "REQUEST_METHOD"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-31",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:USER-AGENT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-32",
+    "phase": 2,
+    "pattern": "^(?!^0$).*",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-LENGTH"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-34",
+    "phase": 2,
+    "pattern": "(?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)",
+    "targets": [
+      "REQUEST_HEADERS:HOST"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-49",
+    "phase": 2,
+    "pattern": "^[^;\\s]+",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-53",
+    "phase": 2,
+    "pattern": "charset.*?charset",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-68",
+    "phase": 2,
+    "pattern": "^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){6}",
+    "targets": [
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-71",
+    "phase": 2,
+    "pattern": "^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){63}",
+    "targets": [
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-72",
+    "phase": 2,
+    "pattern": "%[0-9a-fA-F]{2}",
     "targets": [
       "ARGS"
     ],
@@ -229,62 +252,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920360",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-76",
     "phase": 2,
-    "pattern": "@eq 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920370",
-    "phase": 2,
-    "pattern": "@eq 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920390",
-    "phase": 2,
-    "pattern": "@eq 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920400",
-    "phase": 2,
-    "pattern": "@eq 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920410",
-    "phase": 2,
-    "pattern": "@eq 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920420",
-    "phase": 2,
-    "pattern": "@rx ^[^;\\s]+",
+    "pattern": "^(?!^0$).*",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:CONTENT-LENGTH"
     ],
     "severity": "LOW",
     "action": "log",
@@ -292,12 +264,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920530",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-81",
     "phase": 2,
-    "pattern": "@rx charset.*?charset",
+    "pattern": "\\x25",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_BODY"
     ],
     "severity": "LOW",
     "action": "log",
@@ -305,42 +276,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920430",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-87",
     "phase": 2,
-    "pattern": "!@within %{tx.allowed_http_versions}",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920440",
-    "phase": 2,
-    "pattern": "@rx \\.([^.]+)$",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920500",
-    "phase": 2,
-    "pattern": "@rx \\.[^.~]+~(?:/.*|)$",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920450",
-    "phase": 2,
-    "pattern": "@rx ^.*$",
+    "pattern": "^(?!^(?:OPTIONS|CONNECT)$).*",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_METHOD"
     ],
     "severity": "LOW",
     "action": "log",
@@ -348,12 +288,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920520",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-88",
     "phase": 2,
-    "pattern": "@gt 100",
+    "pattern": "!@pm AppleWebKit Android",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:USER-AGENT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -361,11 +300,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920540",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-92",
     "phase": 2,
-    "pattern": "!@streq JSON",
+    "pattern": "^(?!^(?:(?:max-age=[0-9]+|min-fresh=[0-9]+|no-cache|no-store|no-transform|only-if-cached|max-stale(?:=[0-9]+)?)(?:\\s*\\,\\s*|$)){1,7}$).*",
     "targets": [
-      "BODY"
+      "REQUEST_HEADERS:CACHE-CONTROL"
     ],
     "severity": "LOW",
     "action": "log",
@@ -373,22 +312,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920610",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-93",
     "phase": 2,
-    "pattern": "@contains #",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920620",
-    "phase": 2,
-    "pattern": "@gt 1",
+    "pattern": "^(?!br|compress|deflate|(?:pack200-)?gzip|identity|\\*|^$|aes128gcm|exi|zstd|x-(?:compress|gzip)).*",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:ACCEPT-ENCODING"
     ],
     "severity": "LOW",
     "action": "log",
@@ -396,32 +324,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920013",
-    "phase": 1,
-    "pattern": "@lt 2",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920014",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-97",
     "phase": 2,
-    "pattern": "@lt 2",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920200",
-    "phase": 2,
-    "pattern": "@rx ^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){6}",
+    "pattern": "^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){6}",
     "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
     ],
     "severity": "LOW",
     "action": "log",
@@ -429,244 +336,11 @@
     "description": "No description provided."
   },
   {
-    "id": "920201",
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-100",
     "phase": 2,
-    "pattern": "@endsWith .pdf",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920230",
-    "phase": 2,
-    "pattern": "@rx %[0-9a-fA-F]{2}",
+    "pattern": "^(?!^(?:\\?[01])?$).*",
     "targets": [
-      "ARGS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920271",
-    "phase": 2,
-    "pattern": "@validateByteRange 9,10,13,32-126,128-255",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920320",
-    "phase": 2,
-    "pattern": "@eq 0",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920341",
-    "phase": 2,
-    "pattern": "!@rx ^0$",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920451",
-    "phase": 2,
-    "pattern": "@rx ^.*$",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920015",
-    "phase": 1,
-    "pattern": "@lt 3",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920016",
-    "phase": 2,
-    "pattern": "@lt 3",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920272",
-    "phase": 2,
-    "pattern": "@validateByteRange 32-36,38-126",
-    "targets": [
-      "ARGS",
-      "BODY",
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920300",
-    "phase": 2,
-    "pattern": "@eq 0",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920490",
-    "phase": 2,
-    "pattern": "@ge 1",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920510",
-    "phase": 2,
-    "pattern": "@gt 0",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920521",
-    "phase": 2,
-    "pattern": "!@rx br|compress|deflate|(?:pack200-)?gzip|identity|\\*|^$|aes128gcm|exi|zstd|x-(?:compress|gzip)",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920017",
-    "phase": 1,
-    "pattern": "@lt 4",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920018",
-    "phase": 2,
-    "pattern": "@lt 4",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920202",
-    "phase": 2,
-    "pattern": "@endsWith .pdf",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920273",
-    "phase": 2,
-    "pattern": "@validateByteRange 38,44-46,48-58,61,65-90,95,97-122",
-    "targets": [
-      "ARGS",
-      "BODY"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920274",
-    "phase": 2,
-    "pattern": "@validateByteRange 32,34,38,42-59,61,65-90,95,97-122",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920275",
-    "phase": 2,
-    "pattern": "!@rx ^(?:\\?[01])?$",
-    "targets": [
-      "HEADERS",
-      "REQUEST_HEADERS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "920460",
-    "phase": 2,
-    "pattern": "@rx (?:^|[^\\x5c])\\x5c[cdeghijklmpqwxyz123456789]",
-    "targets": [
-      "ARGS",
-      "HEADERS",
-      "REQUEST_HEADERS"
+      "REQUEST_HEADERS:SEC-FETCH-USER|REQUEST_HEADERS:SEC-CH-UA-MOBILE"
     ],
     "severity": "LOW",
     "action": "log",

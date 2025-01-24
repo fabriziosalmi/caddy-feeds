@@ -1,116 +1,11 @@
 [
   {
-    "id": "943011",
-    "phase": 1,
-    "pattern": "@lt 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943012",
+    "id": "synthetic-id-REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION-5",
     "phase": 2,
-    "pattern": "@lt 1",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943100",
-    "phase": 2,
-    "pattern": "@rx (?i:\\.cookie\\b.*?;\\W*?(?:expires|domain)\\W*?=|\\bhttp-equiv\\W+set-cookie\\b)",
+    "pattern": "^(?:ht|f)tps?://(.*?)/",
     "targets": [
-      "ARGS",
-      "REQUEST_COOKIES"
+      "REQUEST_HEADERS:REFERER"
     ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943110",
-    "phase": 2,
-    "pattern": "@rx ^(?:jsessionid|aspsessionid|asp\\.net_sessionid|phpsession|phpsessid|weblogicsession|session_id|session-id|cfid|cftoken|cfsid|jservsession|jwsession)$",
-    "targets": [
-      "ARGS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943120",
-    "phase": 2,
-    "pattern": "@rx ^(?:jsessionid|aspsessionid|asp\\.net_sessionid|phpsession|phpsessid|weblogicsession|session_id|session-id|cfid|cftoken|cfsid|jservsession|jwsession)$",
-    "targets": [
-      "ARGS"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943013",
-    "phase": 1,
-    "pattern": "@lt 2",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943014",
-    "phase": 2,
-    "pattern": "@lt 2",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943015",
-    "phase": 1,
-    "pattern": "@lt 3",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943016",
-    "phase": 2,
-    "pattern": "@lt 3",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943017",
-    "phase": 1,
-    "pattern": "@lt 4",
-    "targets": [],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "943018",
-    "phase": 2,
-    "pattern": "@lt 4",
-    "targets": [],
     "severity": "LOW",
     "action": "log",
     "score": 1,
