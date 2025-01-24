@@ -217,33 +217,22 @@ def convert_ir_to_custom_rule(rule_ir: ModSecurityRuleIR, filename: str, stats: 
         stats['rules_skipped_no_targets'] += 1
         return None
 
-    # Handle pattern conversion
+    # Remove @rx prefix from pattern
     pattern = rule_ir.pattern
-    logging.debug(f"  Rule '{rule_ir.rule_id}': Original pattern: '{pattern}'")
-
-    # Remove @rx prefix if present
     if pattern.startswith('@rx '):
         pattern = pattern[4:].strip()
-        logging.debug(f"  Rule '{rule_ir.rule_id}': Removed @rx prefix. New pattern: '{pattern}'")
+    logging.debug(f"  Rule '{rule_ir.rule_id}': Using pattern: '{pattern}'")
 
-    # Handle negation (e.g., !@rx)
-    if pattern.startswith('!@rx '):
-        pattern = pattern[5:].strip()
-        pattern = f"^(?!{pattern}).*"  # Convert negation to a negative lookahead regex
-        logging.debug(f"  Rule '{rule_ir.rule_id}': Converted negation to regex. New pattern: '{pattern}'")
-
-    # Validate the final regex pattern
-    try:
-        re.compile(pattern)
-    except re.error as e:
-        logging.warning(f"Invalid regex pattern in rule {rule_ir.rule_id}: {pattern}. Error: {e}. Skipping rule.")
-        stats['rules_skipped_invalid_regex'] += 1
-        return None
-
+    # Set severity and action
     severity_val = rule_ir.actions.get('severity', 'LOW').upper()
     action_val = rule_ir.actions.get('action', 'log').lower()
     description_val = rule_ir.actions.get('msg', 'No description provided.')
 
+    # Improve description if possible
+    if "internal dummy connection" in pattern.lower():
+        description_val = "Detects internal dummy connections in the User-Agent header."
+
+    # Calculate score
     score = 0
     if action_val == "pass":
         score = 1
@@ -254,10 +243,11 @@ def convert_ir_to_custom_rule(rule_ir: ModSecurityRuleIR, filename: str, stats: 
         score_map_log = {"CRITICAL": 6, "HIGH": 5, "MEDIUM": 3, "LOW": 1}
         score = score_map_log.get(severity_val, 2)
 
+    # Build the custom rule
     custom_rule = {
         "id": rule_ir.rule_id,
         "phase": rule_ir.phase,
-        "pattern": pattern,  # Use the cleaned pattern
+        "pattern": pattern,
         "targets": targets,
         "severity": severity_val,
         "action": action_val,
@@ -267,7 +257,6 @@ def convert_ir_to_custom_rule(rule_ir: ModSecurityRuleIR, filename: str, stats: 
 
     logging.debug(f"  Rule '{rule_ir.rule_id}': Successfully converted to custom rule: {custom_rule}")
     return custom_rule
-
 
 def download_owasp_rules(repo_url, rules_dir, stats):
     """Downloads and processes OWASP rules, updating statistics."""

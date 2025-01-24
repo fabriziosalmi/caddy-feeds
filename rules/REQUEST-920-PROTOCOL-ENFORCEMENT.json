@@ -2,7 +2,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-5",
     "phase": 2,
-    "pattern": "^(?!^\\d+$).*",
+    "pattern": "!@rx ^\\d+$",
     "targets": [
       "REQUEST_HEADERS:CONTENT-LENGTH"
     ],
@@ -26,7 +26,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-7",
     "phase": 2,
-    "pattern": "^(?!^0?$).*",
+    "pattern": "!@rx ^0?$",
     "targets": [
       "REQUEST_HEADERS:CONTENT-LENGTH"
     ],
@@ -110,7 +110,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-26",
     "phase": 2,
-    "pattern": "^(?!^OPTIONS$).*",
+    "pattern": "!@rx ^OPTIONS$",
     "targets": [
       "REQUEST_METHOD"
     ],
@@ -146,7 +146,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-29",
     "phase": 2,
-    "pattern": "^(?!^OPTIONS$).*",
+    "pattern": "!@rx ^OPTIONS$",
     "targets": [
       "REQUEST_METHOD"
     ],
@@ -170,7 +170,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-32",
     "phase": 2,
-    "pattern": "^(?!^0$).*",
+    "pattern": "!@rx ^0$",
     "targets": [
       "REQUEST_HEADERS:CONTENT-LENGTH"
     ],
@@ -192,9 +192,45 @@
     "description": "No description provided."
   },
   {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-44",
+    "phase": 2,
+    "pattern": "^(?i)multipart/form-data",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-48",
+    "phase": 2,
+    "pattern": "!@rx ^[\\w/.+*-]+(?:\\s?;\\s*(?:action|boundary|charset|component|start(?:-info)?|type|version)\\s?=\\s?['\\]",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-49",
     "phase": 2,
     "pattern": "^[^;\\s]+",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-51",
+    "phase": 2,
+    "pattern": "charset\\s*=\\s*[\\]",
     "targets": [
       "REQUEST_HEADERS:CONTENT-TYPE"
     ],
@@ -209,6 +245,18 @@
     "pattern": "charset.*?charset",
     "targets": [
       "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-61",
+    "phase": 2,
+    "pattern": "!@rx ^(?:(?:\\*|[^!\\]",
+    "targets": [
+      "REQUEST_HEADERS:ACCEPT"
     ],
     "severity": "LOW",
     "action": "log",
@@ -254,9 +302,21 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-76",
     "phase": 2,
-    "pattern": "^(?!^0$).*",
+    "pattern": "!@rx ^0$",
     "targets": [
       "REQUEST_HEADERS:CONTENT-LENGTH"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-80",
+    "phase": 2,
+    "pattern": "^(?i)application/x-www-form-urlencoded",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
     ],
     "severity": "LOW",
     "action": "log",
@@ -278,7 +338,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-87",
     "phase": 2,
-    "pattern": "^(?!^(?:OPTIONS|CONNECT)$).*",
+    "pattern": "!@rx ^(?:OPTIONS|CONNECT)$",
     "targets": [
       "REQUEST_METHOD"
     ],
@@ -300,9 +360,21 @@
     "description": "No description provided."
   },
   {
+    "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-90",
+    "phase": 2,
+    "pattern": "^(?i)up",
+    "targets": [
+      "REQUEST_HEADERS:USER-AGENT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "No description provided."
+  },
+  {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-92",
     "phase": 2,
-    "pattern": "^(?!^(?:(?:max-age=[0-9]+|min-fresh=[0-9]+|no-cache|no-store|no-transform|only-if-cached|max-stale(?:=[0-9]+)?)(?:\\s*\\,\\s*|$)){1,7}$).*",
+    "pattern": "!@rx ^(?:(?:max-age=[0-9]+|min-fresh=[0-9]+|no-cache|no-store|no-transform|only-if-cached|max-stale(?:=[0-9]+)?)(?:\\s*\\,\\s*|$)){1,7}$",
     "targets": [
       "REQUEST_HEADERS:CACHE-CONTROL"
     ],
@@ -314,7 +386,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-93",
     "phase": 2,
-    "pattern": "^(?!br|compress|deflate|(?:pack200-)?gzip|identity|\\*|^$|aes128gcm|exi|zstd|x-(?:compress|gzip)).*",
+    "pattern": "!@rx br|compress|deflate|(?:pack200-)?gzip|identity|\\*|^$|aes128gcm|exi|zstd|x-(?:compress|gzip)",
     "targets": [
       "REQUEST_HEADERS:ACCEPT-ENCODING"
     ],
@@ -338,7 +410,7 @@
   {
     "id": "synthetic-id-REQUEST-920-PROTOCOL-ENFORCEMENT-100",
     "phase": 2,
-    "pattern": "^(?!^(?:\\?[01])?$).*",
+    "pattern": "!@rx ^(?:\\?[01])?$",
     "targets": [
       "REQUEST_HEADERS:SEC-FETCH-USER|REQUEST_HEADERS:SEC-CH-UA-MOBILE"
     ],
