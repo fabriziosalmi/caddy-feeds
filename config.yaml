@@ -49,10 +49,3 @@ dns_lists:
     - address: "1.1.1.1"
       protocol: "plain"
   output_file: "dns_blacklist.txt"
-
-owasp_rules:
-  sources:
-    - name: "OWASP CRS - REQUEST-900"
-      url: "https://raw.githubusercontent.com/coreruleset/coreruleset/v4.0/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf"
-      format: "plain"
-  output_file: "rules/rules.json"
