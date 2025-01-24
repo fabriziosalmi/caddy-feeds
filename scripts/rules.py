@@ -338,6 +338,11 @@ def main():
                 else:  # other reasons for None return (though now unlikely)
                     stats['rules_skipped_no_targets'] += 1
 
+        # Skip saving if no valid rules were converted
+        if not custom_rules:
+            logging.info(f"Skipping file {filename} - no valid rules to save.")
+            continue
+
         output_file = os.path.join(OUTPUT_DIR, f"{filename.replace('.conf', '')}.json")
         try:
             with open(output_file, 'w') as f:
@@ -347,13 +352,17 @@ def main():
         except IOError as e:
             logging.error(f"Error writing to output file {output_file}: {e}")
 
-    output_file = os.path.join(OUTPUT_DIR, "rules.json")
-    try:
-        with open(output_file, 'w') as f:
-            json.dump(aggregated_rules, f, indent=2)
-        logging.info(f"Successfully saved all aggregated rules to {output_file}")
-    except IOError as e:
-        logging.error(f"Error writing to aggregated output file {output_file}: {e}")
+    # Save aggregated rules only if there are any
+    if aggregated_rules:
+        output_file = os.path.join(OUTPUT_DIR, "rules.json")
+        try:
+            with open(output_file, 'w') as f:
+                json.dump(aggregated_rules, f, indent=2)
+            logging.info(f"Successfully saved all aggregated rules to {output_file}")
+        except IOError as e:
+            logging.error(f"Error writing to aggregated output file {output_file}: {e}")
+    else:
+        logging.info("No rules were aggregated. Skipping saving aggregated rules.")
 
     logging.info("OWASP rules aggregation complete.")
     logging.info("--- Rule Conversion Statistics ---")
@@ -364,3 +373,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
