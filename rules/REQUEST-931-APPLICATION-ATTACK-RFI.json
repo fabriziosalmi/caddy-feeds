@@ -1,38 +1,62 @@
 [
   {
-    "id": "synthetic-id-REQUEST-931-APPLICATION-ATTACK-RFI-3",
+    "id": "931100",
     "phase": 2,
-    "pattern": "^(?i:file|ftps?|https?)://(?:\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})",
+    "pattern": ".*",
     "targets": [
       "ARGS"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-931-APPLICATION-ATTACK-RFI-5",
+    "id": "931110",
     "phase": 2,
-    "pattern": "^(?i:file|ftps?|https?).*?\\?+$",
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "931120",
+    "phase": 2,
+    "pattern": ".*",
     "targets": [
       "ARGS"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-931-APPLICATION-ATTACK-RFI-8",
+    "id": "931130",
     "phase": 2,
-    "pattern": "(?i)(?:(?:url|jar):)?(?:a(?:cap|f[ps]|ttachment)|b(?:eshare|itcoin|lob)|c(?:a(?:llto|p)|id|vs|ompress.(?:zlib|bzip2))|d(?:a(?:v|ta)|ict|n(?:s|tp))|e(?:d2k|xpect)|f(?:(?:ee)?d|i(?:le|nger|sh)|tps?)|g(?:it|o(?:pher)?|lob)|h(?:323|ttps?)|i(?:ax|cap|(?:ma|p)ps?|rc[6s]?)|ja(?:bbe)?r|l(?:dap[is]?|ocal_file)|m(?:a(?:ilto|ven)|ms|umble)|n(?:e(?:tdoc|ws)|fs|ntps?)|ogg|p(?:aparazzi|h(?:ar|p)|op(?:2|3s?)|r(?:es|oxy)|syc)|r(?:mi|sync|tm(?:f?p)?|ar)|s(?:3|ftp|ips?|m(?:[bs]|tps?)|n(?:ews|mp)|sh(?:2(?:.(?:s(?:hell|(?:ft|c)p)|exec|tunnel))?)?|vn(?:\\+ssh)?)|t(?:e(?:amspeak|lnet)|ftp|urns?)|u(?:dp|nreal|t2004)|v(?:entrilo|iew-source|nc)|w(?:ebcal|ss?)|x(?:mpp|ri)|zip)://(?:[^@]+@)?([^/]*)",
+    "pattern": ".*",
     "targets": [
       "ARGS"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
+  },
+  {
+    "id": "931131",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
   }
 ]

@@ -1,50 +1,50 @@
 [
   {
-    "id": "synthetic-id-REQUEST-921-PROTOCOL-ATTACK-11",
+    "id": "921421",
     "phase": 2,
     "pattern": "^[^\\s\\x0b,;]+[\\s\\x0b,;].*?(?:application/(?:.+\\+)?json|(?:application/(?:soap\\+)?|text/)xml)",
     "targets": [
       "REQUEST_HEADERS:CONTENT-TYPE"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-921-PROTOCOL-ATTACK-12",
+    "id": "921240",
     "phase": 2,
     "pattern": "unix:[^|]*\\|",
     "targets": [
       "REQUEST_URI"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-921-PROTOCOL-ATTACK-15",
+    "id": "921151",
     "phase": 2,
     "pattern": "[\\n\\r]",
     "targets": [
       "ARGS_GET"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-921-PROTOCOL-ATTACK-16",
+    "id": "921422",
     "phase": 2,
     "pattern": "^[^\\s\\x0b,;]+[\\s\\x0b,;].*?\\b(?:((?:tex|multipar)t|application)|((?:audi|vide)o|image|cs[sv]|(?:vn|relate)d|p(?:df|lain)|json|(?:soa|cs)p|x(?:ml|-www-form-urlencoded)|form-data|x-amf|(?:octe|repor)t|stream)|([\\+/]))\\b",
     "targets": [
       "REQUEST_HEADERS:CONTENT-TYPE"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   }
 ]

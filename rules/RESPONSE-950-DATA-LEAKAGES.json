@@ -1,6 +1,6 @@
 [
   {
-    "id": "synthetic-id-RESPONSE-950-DATA-LEAKAGES-2",
+    "id": "950010",
     "phase": 2,
     "pattern": "gzip\\ compress\\ deflate\\ br\\ zstd",
     "targets": [

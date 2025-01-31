@@ -1,14 +1,14 @@
 [
   {
-    "id": "synthetic-id-REQUEST-911-METHOD-ENFORCEMENT-3",
+    "id": "911100",
     "phase": 2,
-    "pattern": "!@within DYNAMIC_VAR",
+    "pattern": "!@within %{tx.allowed_methods}",
     "targets": [
       "REQUEST_METHOD"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   }
 ]

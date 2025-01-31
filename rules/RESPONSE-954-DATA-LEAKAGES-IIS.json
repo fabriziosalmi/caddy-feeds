@@ -1,6 +1,6 @@
 [
   {
-    "id": "synthetic-id-RESPONSE-954-DATA-LEAKAGES-IIS-1",
+    "id": "954010",
     "phase": 2,
     "pattern": "gzip\\ compress\\ deflate\\ br\\ zstd",
     "targets": [

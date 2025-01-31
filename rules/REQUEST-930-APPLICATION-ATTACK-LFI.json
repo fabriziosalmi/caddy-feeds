@@ -1,18 +1,6 @@
 [
   {
-    "id": "953010",
-    "phase": 2,
-    "pattern": "gzip\\ compress\\ deflate\\ br\\ zstd",
-    "targets": [
-      "RESPONSE_HEADERS:CONTENT-ENCODING"
-    ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
-  },
-  {
-    "id": "953120",
+    "id": "930100",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
     "targets": [

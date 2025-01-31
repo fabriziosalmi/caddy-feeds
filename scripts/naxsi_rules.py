@@ -2,7 +2,8 @@ import requests
 import re
 import json
 import logging
-from typing import List, Dict
+from typing import List, Dict, Optional
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -11,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 NAXSI_RULES_URL = "https://raw.githubusercontent.com/nbs-system/naxsi/master/naxsi_config/naxsi_core.rules"
 OUTPUT_FILE = "naxsi_rules.json"
 
-def fetch_naxsi_rules(url: str) -> str:
+def fetch_naxsi_rules(url: str) -> Optional[str]:
     """
     Fetches the latest NAXSI rules from the given URL.
 
@@ -19,7 +20,7 @@ def fetch_naxsi_rules(url: str) -> str:
         url (str): The URL to fetch the NAXSI rules from.
 
     Returns:
-        str: The raw content of the NAXSI rules file.
+        Optional[str]: The raw content of the NAXSI rules file.
     """
     try:
         response = requests.get(url, timeout=10)
@@ -29,9 +30,9 @@ def fetch_naxsi_rules(url: str) -> str:
         return content
     except requests.exceptions.RequestException as e:
         logging.error(f"Error fetching NAXSI rules from {url}: {e}")
-        return None
+    return None
 
-def convert_naxsi_rule(naxsi_rule: str) -> Dict:
+def convert_naxsi_rule(naxsi_rule: str) -> Optional[Dict]:
     """
     Converts a single NAXSI MainRule into Caddy WAF format.
 
@@ -39,9 +40,8 @@ def convert_naxsi_rule(naxsi_rule: str) -> Dict:
         naxsi_rule (str): The NAXSI rule to convert.
 
     Returns:
-        dict: The converted rule in Caddy WAF format, or None if the rule is invalid.
+        Optional[Dict]: The converted rule in Caddy WAF format, or None if the rule is invalid.
     """
-    # Extract rule ID, pattern, message, match zone, and score
     match = re.search(
         r'MainRule\s+"(rx:[^"]+|str:[^"]+)"\s+"msg:([^"]+)"\s+"mz:([^"]+)"\s+"s:\$[^:]+:(\d+)"\s+id:(\d+);',
         naxsi_rule
@@ -50,13 +50,9 @@ def convert_naxsi_rule(naxsi_rule: str) -> Dict:
         logging.warning(f"Skipping invalid NAXSI rule: {naxsi_rule}")
         return None
 
-    pattern = match.group(1)  # rx: or str: pattern
-    description = match.group(2)  # msg: description
-    mz = match.group(3)  # mz: match zone
-    score = int(match.group(4))  # s: score
-    rule_id = match.group(5)  # id: rule ID
+    pattern, description, mz, score, rule_id = match.groups()
+    score = int(score)
 
-    # Extract targets from match zone
     targets = []
     for part in mz.split("|"):
         if part.startswith("$HEADERS_VAR:"):
@@ -64,7 +60,6 @@ def convert_naxsi_rule(naxsi_rule: str) -> Dict:
         elif part in ["ARGS", "BODY", "URL"]:
             targets.append(part)
 
-    # Build the Caddy WAF rule
     rule = {
         "id": rule_id,
         "phase": 2,  # Default phase for request inspection
@@ -107,7 +102,8 @@ def save_rules_to_file(rules: List[Dict], output_file: str):
         output_file (str): The path to the output JSON file.
     """
     try:
-        with open(output_file, "w") as f:
+        output_path = Path(output_file)
+        with output_path.open("w") as f:
             json.dump(rules, f, indent=2)
         logging.info(f"Successfully saved {len(rules)} rules to {output_file}")
     except IOError as e:

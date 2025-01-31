@@ -1,6 +1,6 @@
 [
   {
-    "id": "1000",
+    "id": "naxsi-1000",
     "phase": 2,
     "pattern": "(?:select|union|update|delete|insert)\\s+.+\\s+from",
     "targets": ["ARGS", "BODY"],
@@ -10,7 +10,7 @@
     "description": "SQL injection attempt with SELECT/UNION/UPDATE/DELETE/INSERT"
   },
   {
-    "id": "1002",
+    "id": "naxsi-1002",
     "phase": 2,
     "pattern": "0x[0-9a-fA-F]{2,}",
     "targets": ["ARGS", "BODY"],
@@ -20,7 +20,7 @@
     "description": "Possible hex-encoded payload"
   },
   {
-    "id": "1003",
+    "id": "naxsi-1003",
     "phase": 2,
     "pattern": "/\\*.*?\\*/",
     "targets": ["ARGS", "BODY"],
@@ -30,7 +30,7 @@
     "description": "MySQL comment (/* ... */)"
   },
   {
-    "id": "1007",
+    "id": "naxsi-1007",
     "phase": 2,
     "pattern": "--\\s",
     "targets": ["ARGS", "BODY"],
@@ -40,9 +40,9 @@
     "description": "MySQL comment (--)"
   },
   {
-    "id": "1009",
+    "id": "naxsi-1009",
     "phase": 2,
-    "pattern": "=\\s*['\"]?\\s*\\d+\\s*['\"]?",
+    "pattern": "=\\s*['\"]?\\s*\\d{5,}\\s*['\"]?",
     "targets": ["ARGS"],
     "severity": "MEDIUM",
     "action": "block",
@@ -50,7 +50,7 @@
     "description": "Equal sign with numeric value, possible SQL/XSS"
   },
   {
-    "id": "1100",
+    "id": "naxsi-1100",
     "phase": 2,
     "pattern": "(?:http|https|ftp|php|sftp|zlib|data|glob|phar|file|gopher|zip|expect|input)://",
     "targets": ["ARGS", "BODY"],
@@ -60,7 +60,7 @@
     "description": "Potential Remote File Inclusion (RFI) attempt"
   },
   {
-    "id": "1200",
+    "id": "naxsi-1200",
     "phase": 2,
     "pattern": "\\.\\./",
     "targets": ["ARGS", "URL"],
@@ -70,7 +70,7 @@
     "description": "Directory traversal attempt (../)"
   },
   {
-    "id": "1202",
+    "id": "naxsi-1202",
     "phase": 2,
     "pattern": "/etc/passwd",
     "targets": ["ARGS", "URL"],
@@ -80,7 +80,7 @@
     "description": "Attempt to access /etc/passwd"
   },
   {
-    "id": "1203",
+    "id": "naxsi-1203",
     "phase": 2,
     "pattern": "[cC]:\\\\",
     "targets": ["ARGS", "URL"],
@@ -90,7 +90,7 @@
     "description": "Windows path traversal attempt"
   },
   {
-    "id": "1204",
+    "id": "naxsi-1204",
     "phase": 2,
     "pattern": "cmd\\.exe",
     "targets": ["ARGS", "URL"],
@@ -100,7 +100,7 @@
     "description": "Attempt to execute cmd.exe"
   },
   {
-    "id": "1302",
+    "id": "naxsi-1302",
     "phase": 2,
     "pattern": "<script",
     "targets": ["ARGS", "BODY"],
@@ -110,9 +110,9 @@
     "description": "Potential XSS attempt (<script>)"
   },
   {
-    "id": "1303",
+    "id": "naxsi-1303",
     "phase": 2,
-    "pattern": ">",
+    "pattern": "<\\s*/\\s*script\\s*>",
     "targets": ["ARGS", "BODY"],
     "severity": "MEDIUM",
     "action": "block",
@@ -120,7 +120,7 @@
     "description": "HTML close tag, possible XSS"
   },
   {
-    "id": "1314",
+    "id": "naxsi-1314",
     "phase": 2,
     "pattern": "`",
     "targets": ["ARGS", "BODY"],
@@ -130,7 +130,7 @@
     "description": "Backtick character, possible XSS"
   },
   {
-    "id": "1315",
+    "id": "naxsi-1315",
     "phase": 2,
     "pattern": "%[23][0-9a-fA-F]",
     "targets": ["ARGS", "URL"],
@@ -140,7 +140,7 @@
     "description": "Double encoding attempt"
   },
   {
-    "id": "1400",
+    "id": "naxsi-1400",
     "phase": 2,
     "pattern": "&#",
     "targets": ["ARGS", "BODY"],
@@ -150,7 +150,7 @@
     "description": "UTF-7/8 encoding attempt"
   },
   {
-    "id": "1401",
+    "id": "naxsi-1401",
     "phase": 2,
     "pattern": "%U",
     "targets": ["ARGS", "BODY"],
@@ -160,7 +160,7 @@
     "description": "Microsoft encoding attempt"
   },
   {
-    "id": "1500",
+    "id": "naxsi-1500",
     "phase": 2,
     "pattern": "\\.(?:php|asp|ht|jsp)",
     "targets": ["FILE_EXT"],

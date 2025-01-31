@@ -6,6 +6,8 @@ import re
 import socket
 import time
 from typing import Dict, List, Optional, Set, Tuple
+from functools import lru_cache
+from prometheus_client import Counter, Histogram, start_http_server
 
 import aiodns
 import requests
@@ -88,6 +90,10 @@ WHOIS_SERVERS = [
     "whois.publicdomainregistry.com", # PublicDomainRegistry
 ]
 
+# Add metrics
+DNS_PROCESSED = Counter('dns_processed_total', 'Number of DNS entries processed')
+DNS_PROCESSING_TIME = Histogram('dns_processing_seconds', 'Time spent processing DNS entries')
+
 # --- Helper Functions ---
 
 @retry(
@@ -143,13 +149,11 @@ def load_config() -> Optional[Dict]:
             return config
     except FileNotFoundError:
         logging.error(f"Configuration file not found: {CONFIG_FILE}")
-        return None
     except yaml.YAMLError as e:
         logging.error(f"Error parsing configuration file: {e}")
-        return None
     except ValueError as e:
         logging.error(f"Configuration error: {e}")
-        return None
+    return None
 
 def extract_dns_entries(content: str, source_name: str) -> Set[str]:
     """Extracts DNS entries from the content."""
@@ -362,7 +366,7 @@ async def prune_dns_entries(
     )
     return pruned_entries, pruned_count
 
-async def process_source(loop: asyncio.AbstractEventLoop, source: Dict, dns_servers: List[Dict], whois_servers: List[str], output_file: str, skipped_sources: Set[str], executor: concurrent.futures.ThreadPoolExecutor, dns_query_timeout: float, whois_timeout: float):
+async def process_source(loop: asyncio.AbstractEventLoop, source: Dict, dns_servers: List[Dict], whois_servers: List[str], output_file: str, skipped_sources: Set[str], executor: concurrent.futures.ThreadPoolExecutor, dns_query_timeout: float, whois_timeout: float) -> Set[str]:
     """Processes a single DNS source."""
     name = source.get("name")
     url = source.get("url")
@@ -388,6 +392,30 @@ async def process_source(loop: asyncio.AbstractEventLoop, source: Dict, dns_serv
         else:
             skipped_sources.add(url)
             return set()
+
+class DNSValidator:
+    """New class to handle DNS validation logic"""
+    def __init__(self, config: Dict):
+        self.config = config
+        self.cache = {}
+        self.metrics_port = config.get('metrics_port', 9092)
+        start_http_server(self.metrics_port)
+
+    @lru_cache(maxsize=1000)
+    async def validate_dns(self, domain: str) -> bool:
+        """Cache DNS validations to improve performance"""
+        # Implementation
+        pass
+
+    @DNS_PROCESSING_TIME.time()
+    async def process_domain(self, domain: str) -> bool:
+        if domain in self.cache:
+            return self.cache[domain]
+        
+        result = await self._perform_validation(domain)
+        self.cache[domain] = result
+        DNS_PROCESSED.inc()
+        return result
 
 async def main():
     """Main function to aggregate, prune, and save DNS blacklists."""

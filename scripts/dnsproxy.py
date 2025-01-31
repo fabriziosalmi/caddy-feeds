@@ -3,21 +3,23 @@ from dnslib import DNSRecord, DNSHeader, DNSQuestion, RR
 from collections import defaultdict
 import threading
 import dns.resolver
+from typing import List, Optional, Tuple
+import logging
 
 class DNSLoadBalancer:
-    def __init__(self, dns_servers):
+    def __init__(self, dns_servers: List[str]):
         self.dns_servers = dns_servers
         self.server_usage = defaultdict(int)  # Track usage of each DNS server
         self.lock = threading.Lock()  # Thread-safe access to server_usage
 
-    def get_least_used_server(self):
+    def get_least_used_server(self) -> str:
         """Return the DNS server with the least usage."""
         with self.lock:
             least_used_server = min(self.dns_servers, key=lambda x: self.server_usage[x])
             self.server_usage[least_used_server] += 1
             return least_used_server
 
-    def resolve(self, domain, record_type="A"):
+    def resolve(self, domain: str, record_type: str = "A") -> Optional[List[str]]:
         """Resolve a domain using the least-used DNS server."""
         server = self.get_least_used_server()
         resolver = dns.resolver.Resolver()
@@ -26,11 +28,11 @@ class DNSLoadBalancer:
             answers = resolver.resolve(domain, record_type)
             return [rdata.to_text() for rdata in answers]
         except Exception as e:
-            print(f"Failed with {server}: {e}")
+            logging.error(f"Failed with {server}: {e}")
             return None
 
 class DNSProxy:
-    def __init__(self, dns_servers, listen_port=53):
+    def __init__(self, dns_servers: List[str], listen_port: int = 53):
         self.dns_servers = dns_servers
         self.listen_port = listen_port
         self.load_balancer = DNSLoadBalancer(dns_servers)
@@ -39,16 +41,16 @@ class DNSProxy:
         """Start the DNS proxy server."""
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as udp_sock:
             udp_sock.bind(("0.0.0.0", self.listen_port))
-            print(f"DNS Proxy listening on port {self.listen_port}...")
+            logging.info(f"DNS Proxy listening on port {self.listen_port}...")
             while True:
                 data, addr = udp_sock.recvfrom(1024)
                 threading.Thread(target=self.handle_request, args=(data, addr)).start()
 
-    def handle_request(self, data, addr):
+    def handle_request(self, data: bytes, addr: Tuple[str, int]):
         """Handle a DNS request and send back the response."""
         request = DNSRecord.parse(data)
         domain = str(request.q.qname)
-        print(f"Received request for: {domain}")
+        logging.info(f"Received request for: {domain}")
 
         # Forward request to the least-used DNS server
         answers = self.load_balancer.resolve(domain)

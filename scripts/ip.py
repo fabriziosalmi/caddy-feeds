@@ -3,6 +3,11 @@ import yaml
 import re
 import logging
 import ipaddress
+from typing import Set, Dict, List, Optional
+import aiohttp
+import asyncio
+from functools import lru_cache
+from prometheus_client import Counter, Histogram, start_http_server
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -35,19 +40,22 @@ EXCLUDE_RANGES = [
 
 EXCLUDE_NETWORKS = [ipaddress.ip_network(range_str) for range_str in EXCLUDE_RANGES]
 
-def load_config():
+# Add metrics
+IP_PROCESSED = Counter('ips_processed_total', 'Number of IPs processed')
+IP_PROCESSING_TIME = Histogram('ip_processing_seconds', 'Time spent processing IPs')
+
+def load_config() -> Optional[Dict]:
     """Loads the configuration from config.yaml."""
     try:
         with open(CONFIG_FILE, 'r') as f:
             return yaml.safe_load(f)
     except FileNotFoundError:
         logging.error(f"Configuration file not found: {CONFIG_FILE}")
-        return None
     except yaml.YAMLError as e:
         logging.error(f"Error parsing configuration file: {e}")
-        return None
+    return None
 
-def fetch_content(url):
+def fetch_content(url: str) -> Optional[str]:
     """Fetches the content from a given URL."""
     try:
         response = requests.get(url, timeout=10)
@@ -55,21 +63,18 @@ def fetch_content(url):
         return response.text
     except requests.exceptions.RequestException as e:
         logging.error(f"Error fetching content from {url}: {e}")
-        return None
+    return None
 
-def is_excluded(ip_address):
+def is_excluded(ip_address: str) -> bool:
     """Checks if the given IP address or network is in the exclusion list."""
     try:
         ip = ipaddress.ip_network(ip_address, strict=False)  # Handle both IPs and networks
-        for excluded_network in EXCLUDE_NETWORKS:
-            if ip.overlaps(excluded_network):
-                return True
-        return False
+        return any(ip.overlaps(excluded_network) for excluded_network in EXCLUDE_NETWORKS)
     except ValueError:
         logging.warning(f"Invalid IP address or network: {ip_address}")
         return True  # Treat invalid IPs as excluded
 
-def extract_ips(content):
+def extract_ips(content: str) -> Set[str]:
     """Extracts IP addresses from the content and filters out excluded ranges."""
     ip_pattern = r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:/\d{1,2})?$'
     ips = set()
@@ -84,6 +89,34 @@ def extract_ips(content):
                 else:
                     logging.debug(f"Excluding IP/Network: {ip_or_network}")
     return ips
+
+@lru_cache(maxsize=1000)
+async def resolve_ip(ip: str, dns_servers: List[str]) -> bool:
+    """Cache DNS resolutions to improve performance"""
+    # Implementation of DNS resolution logic
+    pass
+
+class IPValidator:
+    """New class to handle IP validation logic"""
+    def __init__(self, config: Dict):
+        self.config = config
+        self.cache = {}
+        self.metrics_port = config.get('metrics_port', 9091)
+        start_http_server(self.metrics_port)
+
+    @IP_PROCESSING_TIME.time()
+    async def validate_ip(self, ip: str) -> bool:
+        if ip in self.cache:
+            return self.cache[ip]
+        
+        result = await self._perform_validation(ip)
+        self.cache[ip] = result
+        IP_PROCESSED.inc()
+        return result
+
+    async def _perform_validation(self, ip: str) -> bool:
+        # Implementation of IP validation logic
+        pass
 
 def main():
     """Main function to aggregate and save IP blacklists."""

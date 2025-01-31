@@ -1,6 +1,462 @@
 [
   {
-    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-49",
+    "id": "942140",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942151",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942170",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942190",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942230",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942240",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942250",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942270",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942280",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942290",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942320",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942350",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942360",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942500",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942540",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942560",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942550",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942120",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942130",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942131",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942150",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942180",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942200",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942210",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942260",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942300",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942310",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942330",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942340",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942362",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942370",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942380",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942390",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942400",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942410",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942470",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942480",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942430",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942441",
     "phase": 2,
     "pattern": "[a-zA-Z0-9_-]{61,61}",
     "targets": [
@@ -12,7 +468,7 @@
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-50",
+    "id": "942442",
     "phase": 2,
     "pattern": "[a-zA-Z0-9_-]{91,91}",
     "targets": [
@@ -24,51 +480,135 @@
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-56",
+    "id": "942520",
     "phase": 2,
-    "pattern": "(?i)^(?:[^']*?(?:'[^']*?'[^']*?)*?'|[^\\]",
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942521",
+    "phase": 2,
+    "pattern": ".*",
     "targets": [
       "REQUEST_HEADERS:USER-AGENT|REQUEST_HEADERS:REFERER|ARGS_NAMES|ARGS|XML:/*"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-60",
+    "id": "942522",
     "phase": 2,
-    "pattern": "(?i)\\b(?:a(?:dd(?:dat|tim)e|es_(?:de|en)crypt|s(?:cii(?:str)?|in)|tan2?)|b(?:enchmark|i(?:n_to_num|t_(?:and|count|length|x?or)))|c(?:har(?:acter)?_length|iel(?:ing)?|o(?:alesce|ercibility|llation|(?:mpres)?s|n(?:cat(?:_ws)?|nection_id|v(?:ert(?:_tz)?)?)|t)|r32|ur(?:(?:dat|tim)e|rent_(?:date|setting|time(?:stamp)?|user)))|d(?:a(?:t(?:abase(?:_to_xml)?|e(?:_(?:add|format|sub)|diff))|y(?:name|of(?:month|week|year)))|count|e(?:code|grees|s_(?:de|en)crypt)|ump)|e(?:lt|n(?:c(?:ode|rypt)|ds_?with)|x(?:p(?:ort_set)?|tract(?:value)?))|f(?:i(?:el|n)d_in_set|ound_rows|rom_(?:base64|days|unixtime))|g(?:e(?:ometrycollection|t(?:_(?:format|lock)|pgusername))|(?:r(?:eates|oup_conca)|tid_subse)t)|hex(?:toraw)?|i(?:fnull|n(?:et6?_(?:aton|ntoa)|s(?:ert|tr)|terval)|s(?:_(?:(?:free|used)_lock|ipv(?:4(?:_(?:compat|mapped))?|6)|n(?:ot(?:_null)?|ull)|superuser)|null))|json(?:_(?:a(?:gg|rray(?:_(?:elements(?:_text)?|length))?)|build_(?:array|object)|e(?:ac|xtract_pat)h(?:_text)?|object(?:_(?:agg|keys))?|populate_record(?:set)?|strip_nulls|t(?:o_record(?:set)?|ypeof))|b(?:_(?:array(?:_(?:elements(?:_text)?|length))?|build_(?:array|object)|object(?:_(?:agg|keys))?|e(?:ac|xtract_pat)h(?:_text)?|insert|p(?:ath_(?:(?:exists|match)(?:_tz)?|query(?:_(?:(?:array|first)(?:_tz)?|tz))?)|opulate_record(?:set)?|retty)|s(?:et(?:_lax)?|trip_nulls)|t(?:o_record(?:set)?|ypeof)))?|path)?|l(?:ast_(?:day|inser_id)|case|e(?:as|f)t|i(?:kel(?:ihood|y)|nestring)|o(?:_(?:from_bytea|put)|ad_file|ca(?:ltimestamp|te)|g(?:10|2)|wer)|pad|trim)|m(?:a(?:ke(?:_set|date)|ster_pos_wait)|d5|i(?:crosecon)?d|onthname|ulti(?:linestring|po(?:int|lygon)))|n(?:ame_const|ot_in|ullif)|o(?:ct(?:et_length)?|(?:ld_passwo)?rd)|p(?:eriod_(?:add|diff)|g_(?:client_encoding|(?:databas|read_fil)e|l(?:argeobject|s_dir)|sleep|user)|o(?:(?:lyg|siti)on|w)|rocedure_analyse)|qu(?:arter|ery_to_xml|ote)|r(?:a(?:dians|nd|wtohex)|elease_lock|ow_(?:count|to_json)|pad|trim)|s(?:chema|e(?:c_to_time|ssion_user)|ha[12]?|in|oundex|pace|q(?:lite_(?:compileoption_(?:get|used)|source_id)|rt)|t(?:arts_?with|d(?:dev_(?:po|sam)p)?|r(?:_to_date|cmp))|ub(?:(?:dat|tim)e|str(?:ing(?:_index)?)?)|ys(?:date|tem_user))|t(?:ime(?:_(?:format|to_sec)|diff|stamp(?:add|diff)?)|o(?:_(?:base64|jsonb?)|n?char|(?:day|second)s)|r(?:im|uncate))|u(?:case|n(?:compress(?:ed_length)?|hex|i(?:str|x_timestamp)|likely)|(?:pdatexm|se_json_nul)l|tc_(?:date|time(?:stamp)?)|uid(?:_short)?)|var(?:_(?:po|sam)p|iance)|we(?:ek(?:day|ofyear)|ight_string)|xmltype|yearweek)[^0-9A-Z_a-z]*\\(",
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942152",
+    "phase": 2,
+    "pattern": ".*",
     "targets": [
       "REQUEST_HEADERS:REFERER|REQUEST_HEADERS:USER-AGENT"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-61",
+    "id": "942321",
     "phase": 2,
-    "pattern": "(?i)create[\\s\\x0b]+(?:function|procedure)[\\s\\x0b]*?[0-9A-Z_a-z]+[\\s\\x0b]*?\\([\\s\\x0b]*?\\)[\\s\\x0b]*?-|d(?:eclare[^0-9A-Z_a-z]+[#@][\\s\\x0b]*?[0-9A-Z_a-z]+|iv[\\s\\x0b]*?\\([\\+\\-]*[\\s\\x0b\\.0-9]+,[\\+\\-]*[\\s\\x0b\\.0-9]+\\))|exec[\\s\\x0b]*?\\([\\s\\x0b]*?@|(?:lo_(?:impor|ge)t|procedure[\\s\\x0b]+analyse)[\\s\\x0b]*?\\(|;[\\s\\x0b]*?(?:declare|open)[\\s\\x0b]+[\\-0-9A-Z_a-z]+|::(?:b(?:igint|ool)|double[\\s\\x0b]+precision|int(?:eger)?|numeric|oid|real|(?:tex|smallin)t)",
+    "pattern": ".*",
     "targets": [
       "REQUEST_HEADERS:REFERER|REQUEST_HEADERS:USER-AGENT"
     ],
-    "severity": "LOW",
+    "severity": "CRITICAL",
     "action": "log",
-    "score": 1,
+    "score": 6,
     "description": "No description provided."
   },
   {
-    "id": "synthetic-id-REQUEST-942-APPLICATION-ATTACK-SQLI-68",
+    "id": "942251",
     "phase": 2,
-    "pattern": "\\W{4}",
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
     "targets": [
-      "ARGS"
+      "HEADERS:User-Agent"
     ],
-    "severity": "LOW",
-    "action": "log",
-    "score": 1,
-    "description": "No description provided."
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942490",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942420",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942431",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942421",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "942432",
+    "phase": 2,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools."
   }
 ]

@@ -1,6 +1,6 @@
 [
   {
-    "id": "synthetic-id-RESPONSE-952-DATA-LEAKAGES-JAVA-1",
+    "id": "952010",
     "phase": 2,
     "pattern": "gzip\\ compress\\ deflate\\ br\\ zstd",
     "targets": [
