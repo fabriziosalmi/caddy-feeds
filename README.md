@@ -19,7 +19,7 @@ https://github.com/fabriziosalmi/caddy-feeds/releases/download/latest/dns_blackl
 
 ### OWASP rules
 > [!WARNING]
-> You can use IP and DNS blacklist but DON'T rely on the generated rules files at the moment since it will need additional fixes and improvements. I suggest to start with the [base ruleset](https://github.com/fabriziosalmi/caddy-waf/blob/main/rules.go) provided by the caddy-waf repository.
+> You can use IP and DNS blacklist but DON'T rely on the generated OWASP rules files at the moment since it will need additional fixes and improvements. I suggest to start with the [base ruleset](https://github.com/fabriziosalmi/caddy-waf/blob/main/rules.go) provided by the caddy-waf repository.
 
 ```
 https://github.com/fabriziosalmi/caddy-feeds/releases/download/latest/rules.json
