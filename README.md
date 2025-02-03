@@ -3,7 +3,8 @@
 This repository contains a workflow to daily update and release IP blacklist, DNS blacklist and OWASP rules for the [caddy-waf](https://github.com/fabriziosalmi/caddy-waf) project. This is useful to avoid the hassle to mantain updated lists for caddy-waf features like IP, DNS and regex rules blacklisting.
 
 > [!NOTE]
-> This project is still under development since there are critical bugs still to fix. Once fixed you can expect the first tagged release :)
+> This project is still under development since there are critical bugs still to fix for the rules conversion/composition (IP and DNS blacklists are usable indeed.
+
 ## Lists
 
 ### IP blacklist
