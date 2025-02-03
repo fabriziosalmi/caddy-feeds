@@ -57,7 +57,7 @@ def download_and_aggregate_dns_lists(config_file):
         return
 
     sources = dns_lists_config.get('sources', [])
-    output_file = dns_lists_config.get('output_file', 'dns_blacklist.txt')
+    output_file = dns_lists_config.get('output_file', 'lists/dns_blacklist.txt')
 
     aggregated_domains = set()  # Use a set to store unique domains
 
