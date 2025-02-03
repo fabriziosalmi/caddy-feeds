@@ -36,7 +36,6 @@ ip_lists:
     - name: "Dragon Research Group"
       url: "https://drg.pt/blocklist.txt"
       format: "netset"
-
   output_file: "lists/ip_blacklist.txt"
 
 dns_lists:
@@ -45,10 +44,4 @@ dns_lists:
       url: "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt"
     - name: "Phishing Army"
       url: "https://phishing.army/download/phishing_army_blocklist_extended.txt"
-
-  dns_servers:
-    - address: "8.8.8.8"
-      protocol: "plain"
-    - address: "1.1.1.1"
-      protocol: "plain"
-  output_file: "dns_blacklist.txt"
+  output_file: "lists/dns_blacklist.txt"
