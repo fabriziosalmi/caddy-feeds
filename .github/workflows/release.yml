@@ -1,5 +1,8 @@
 name: Daily Release
 
+permissions:
+  contents: write  # Required to delete and create releases
+
 on:
   schedule:
     - cron: '0 0 * * *'
