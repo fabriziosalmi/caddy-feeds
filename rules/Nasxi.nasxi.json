@@ -1,0 +1,452 @@
+[
+  {
+    "id": "1000",
+    "phase": 2,
+    "pattern": "select|union|update|delete|insert|table|from|ascii|hex|unhex|drop|load_file|substr|group_concat|dumpfile",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "sql keywords"
+  },
+  {
+    "id": "1002",
+    "phase": 2,
+    "pattern": "0x",
+    "targets": [],
+    "severity": "MEDIUM",
+    "action": "alert",
+    "score": 6,
+    "description": "0x, possible hex encoding"
+  },
+  {
+    "id": "1003",
+    "phase": 2,
+    "pattern": "/*",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (/*)"
+  },
+  {
+    "id": "1004",
+    "phase": 2,
+    "pattern": "*/",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (*/)"
+  },
+  {
+    "id": "1005",
+    "phase": 2,
+    "pattern": "|",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql keyword (|)"
+  },
+  {
+    "id": "1006",
+    "phase": 2,
+    "pattern": "&&",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql keyword (&&)"
+  },
+  {
+    "id": "1007",
+    "phase": 2,
+    "pattern": "--",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (--)"
+  },
+  {
+    "id": "1008",
+    "phase": 2,
+    "pattern": ";",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "semicolon"
+  },
+  {
+    "id": "1009",
+    "phase": 2,
+    "pattern": "=",
+    "targets": [],
+    "severity": "MEDIUM",
+    "action": "alert",
+    "score": 6,
+    "description": "equal sign in var, probable sql/xss"
+  },
+  {
+    "id": "1010",
+    "phase": 2,
+    "pattern": "(",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "open parenthesis, probable sql/xss"
+  },
+  {
+    "id": "1011",
+    "phase": 2,
+    "pattern": ")",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "close parenthesis, probable sql/xss"
+  },
+  {
+    "id": "1013",
+    "phase": 2,
+    "pattern": "'",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "simple quote"
+  },
+  {
+    "id": "1015",
+    "phase": 2,
+    "pattern": ",",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "comma"
+  },
+  {
+    "id": "1016",
+    "phase": 2,
+    "pattern": "#",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (#)"
+  },
+  {
+    "id": "1017",
+    "phase": 2,
+    "pattern": "@@",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "double arobase (@@)"
+  },
+  {
+    "id": "1100",
+    "phase": 2,
+    "pattern": "http://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "http:// scheme"
+  },
+  {
+    "id": "1101",
+    "phase": 2,
+    "pattern": "https://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "https:// scheme"
+  },
+  {
+    "id": "1102",
+    "phase": 2,
+    "pattern": "ftp://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "ftp:// scheme"
+  },
+  {
+    "id": "1103",
+    "phase": 2,
+    "pattern": "php://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "php:// scheme"
+  },
+  {
+    "id": "1104",
+    "phase": 2,
+    "pattern": "sftp://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "sftp:// scheme"
+  },
+  {
+    "id": "1105",
+    "phase": 2,
+    "pattern": "zlib://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "zlib:// scheme"
+  },
+  {
+    "id": "1106",
+    "phase": 2,
+    "pattern": "data://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "data:// scheme"
+  },
+  {
+    "id": "1107",
+    "phase": 2,
+    "pattern": "glob://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "glob:// scheme"
+  },
+  {
+    "id": "1108",
+    "phase": 2,
+    "pattern": "phar://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "phar:// scheme"
+  },
+  {
+    "id": "1109",
+    "phase": 2,
+    "pattern": "file://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "file:// scheme"
+  },
+  {
+    "id": "1110",
+    "phase": 2,
+    "pattern": "gopher://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "gopher:// scheme"
+  },
+  {
+    "id": "1111",
+    "phase": 2,
+    "pattern": "zip://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "zip:// scheme"
+  },
+  {
+    "id": "1112",
+    "phase": 2,
+    "pattern": "expect://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "expect:// scheme"
+  },
+  {
+    "id": "1113",
+    "phase": 2,
+    "pattern": "input://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "input:// scheme"
+  },
+  {
+    "id": "1200",
+    "phase": 2,
+    "pattern": "..",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "double dot"
+  },
+  {
+    "id": "1202",
+    "phase": 2,
+    "pattern": "/etc/passwd",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "obvious probe"
+  },
+  {
+    "id": "1203",
+    "phase": 2,
+    "pattern": "c:\\\\",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "obvious windows path"
+  },
+  {
+    "id": "1204",
+    "phase": 2,
+    "pattern": "cmd.exe",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "obvious probe"
+  },
+  {
+    "id": "1205",
+    "phase": 2,
+    "pattern": "\\\\",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "backslash"
+  },
+  {
+    "id": "1207",
+    "phase": 2,
+    "pattern": "/..;/",
+    "targets": [],
+    "severity": "MEDIUM",
+    "action": "alert",
+    "score": 6,
+    "description": "dir traversal bypass"
+  },
+  {
+    "id": "1302",
+    "phase": 2,
+    "pattern": "<",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "html open tag"
+  },
+  {
+    "id": "1303",
+    "phase": 2,
+    "pattern": ">",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "html close tag"
+  },
+  {
+    "id": "1310",
+    "phase": 2,
+    "pattern": "[",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "open square backet ([), possible js"
+  },
+  {
+    "id": "1311",
+    "phase": 2,
+    "pattern": "]",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "close square bracket (]), possible js"
+  },
+  {
+    "id": "1312",
+    "phase": 2,
+    "pattern": "~",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "tilde (~) character"
+  },
+  {
+    "id": "1314",
+    "phase": 2,
+    "pattern": "`",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "grave accent (`)"
+  },
+  {
+    "id": "1315",
+    "phase": 2,
+    "pattern": "%[23].",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "double encoding"
+  },
+  {
+    "id": "1400",
+    "phase": 2,
+    "pattern": "&#",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "utf7/8 encoding"
+  },
+  {
+    "id": "1401",
+    "phase": 2,
+    "pattern": "%U",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "M$ encoding"
+  },
+  {
+    "id": "1500",
+    "phase": 2,
+    "pattern": "\\.ph|\\.asp|\\.ht|\\.jsp",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "asp/php/jsp file upload"
+  }
+]

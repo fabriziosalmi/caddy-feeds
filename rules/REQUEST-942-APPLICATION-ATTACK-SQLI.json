@@ -588,6 +588,18 @@
     "description": "Block traffic from known vulnerability scanners and penetration testing tools."
   },
   {
+    "id": "942460",
+    "phase": 2,
+    "pattern": "\\W{4}",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
     "id": "942421",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",

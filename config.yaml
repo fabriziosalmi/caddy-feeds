@@ -1,3 +1,4 @@
+repo_url: "https://api.github.com/repos/coreruleset/coreruleset"
 ip_lists:
   sources:
     - name: "FireHOL Level 1"
@@ -45,3 +46,26 @@ dns_lists:
     - name: "Phishing Army"
       url: "https://phishing.army/download/phishing_army_blocklist_extended.txt"
   output_file: "lists/dns_blacklist.txt"
+
+owasp_rules:
+  sources:
+    - name: "OWASP"
+      url: "https://raw.githubusercontent.com/coreruleset/coreruleset/v4.0/rules/"  # Added trailing slash
+      format: "crs-rule-conf"
+  output_file: "rules/owasp_rules.json"
+
+nasxi_rules:
+  sources:
+    - name: "Nasxi"
+      url: "https://raw.githubusercontent.com/nbs-system/naxsi/master/naxsi_config/naxsi_core.rules"
+      format: "nasxi"
+  output_file: "rules/nasxi_rules.json"
+
+base_rules:
+  sources:
+    - name: "Base rules"
+      url: "https://raw.githubusercontent.com/fabriziosalmi/caddy-waf/refs/heads/main/rules.json"
+      format: "caddywaf"
+  output_file: "rules/base_rules.json"
+
+

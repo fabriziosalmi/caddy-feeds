@@ -42,6 +42,9 @@ class Config:
     metrics_port: Optional[int] = None
     cache_ttl: int = 3600  # Add cache TTL
     ip_lists: Optional[List[str]] = field(default_factory=list)  # Add ip_lists field
+    owasp_rules: Optional[Dict[str, Any]] = None   # Added new field for extra rule sources
+    nasxi_rules: Optional[Dict[str, Any]] = None   # Added new field for nasxi rule sources
+    base_rules: Optional[Dict[str, Any]] = None      # Added new field for base rules support
     
     def validate(self) -> None:
         """Validate configuration values"""
@@ -138,7 +141,7 @@ class ModSecurityRuleProcessor(RuleProcessor):
                         
         if pattern.startswith('@lt'):
             try:
-                value = int(pattern[3:].strip())
+                value = int(pattern[3:].trip())
                 pattern = f'@rx ^[0-{value-1}]$'
             except ValueError:
                 logging.warning(f"Invalid @lt operator in pattern '{pattern}', using safe fallback.")
@@ -155,6 +158,26 @@ class ModSecurityRuleProcessor(RuleProcessor):
 
     @PROCESSING_TIME.time()
     def process_rule(self, rule: ModSecurityRuleIR) -> Optional[Dict[str, Any]]:
+        # Updated branch to support both "nasxi" and "nasxia" operator names
+        if rule.operator in ('nasxi', 'nasxia'):
+            pattern = rule.pattern.replace('nasxi:', '').replace('nasxia:', '').strip()
+            severity_val = rule.actions.get('severity', 'MEDIUM').upper()
+            action_val = rule.actions.get('action', 'alert').lower()
+            description_val = rule.actions.get('msg', 'Nasxi rule conversion.')
+            score = 6 if action_val == "alert" else 5
+            custom_rule = {
+                "id": rule.rule_id,
+                "phase": rule.phase,
+                "pattern": pattern,
+                "targets": [],  # Nasxi rules may not have targets
+                "severity": severity_val,
+                "action": action_val,
+                "score": score,
+                "description": description_val
+            }
+            self.cache[f"nasxi:{rule.rule_id}"] = custom_rule
+            RULES_PROCESSED.inc()
+            return custom_rule
         # Cache check
         cache_key = f"{rule.rule_id}:{rule.pattern}"
         if cache_key in self.cache:
@@ -201,6 +224,22 @@ class ModSecurityRuleProcessor(RuleProcessor):
             else:
                 logging.debug(f"Skipping rule '{rule.rule_id}' from {rule.filename} - no valid targets after conversion.")
                 return None
+
+        # --- Added intelligence heuristics ---
+        if rule.operator == 'rx':
+            if re.search(r'(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap)', rule.pattern):
+                rule.actions['severity'] = 'CRITICAL'
+                rule.actions['action'] = 'block'
+                rule.actions['msg'] = 'Block traffic from known vulnerability scanners and penetration testing tools.'
+            elif re.search(r'(?i)(Mozilla|Chrome|Safari|Edge|Firefox|Opera|Googlebot|Bingbot|Slurp|DuckDuckBot)', rule.pattern):
+                rule.actions['severity'] = 'LOW'
+                rule.actions['action'] = 'log'
+                rule.actions['msg'] = 'Allow and log traffic from legitimate browsers, search engine crawlers, and social media bots.'
+            elif rule.pattern == '^$':
+                rule.actions['severity'] = 'LOW'
+                rule.actions['action'] = 'log'
+                rule.actions['msg'] = 'Log requests with empty body that may indicate missing login form fields.'
+        # --- End Added intelligence heuristics ---
 
         # Remove @rx prefix from pattern
         pattern = rule.pattern
@@ -278,11 +317,10 @@ class ModSecurityRuleProcessor(RuleProcessor):
                     if operator == 'lt':
                         try:
                             value = int(operator_arg)
-                            operator_arg = f"^[0-{value-1}]$"
+                            operator_arg = f'@rx ^[0-{value - 1}]$'
                         except ValueError:
-                            logging.warning(f"Invalid @lt operator in rule {rule_id}: {pattern}, File: {filename}. Skipping.")
-                            self.stats.increment('rules_parse_errors')
-                            continue
+                            logging.warning(f"Invalid @lt operator in rule {rule_id}, using safe fallback.")
+                            operator_arg = '@rx .*'
                     elif operator == 'rx':
                         operator_arg = '@rx ' + operator_arg
                         operator_arg = self.preprocess_pattern(operator_arg)
@@ -297,7 +335,7 @@ class ModSecurityRuleProcessor(RuleProcessor):
                     elif operator == 'beginsWith':
                         operator_arg = f'@rx ^{re.escape(operator_arg)}'
                     elif operator == 'endsWith':
-                        operator_arg = f'@rx {re.escape(operator_arg)}$'
+                        operator_arg = f'@rx ^{re.escape(operator_arg)}$'
                     elif operator == 'eq':
                         operator_arg = f'@rx ^{re.escape(operator_arg)}$'
                     elif operator == 'ge':
@@ -348,19 +386,19 @@ class ModSecurityRuleProcessor(RuleProcessor):
 
         return rules_ir
 
-    def write_rules(self, rules: List[Dict[str, Any]]) -> None:
+    def write_rules(self, rules: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         aggregated_rules = []
-        logging.info("Saving OWASP CRS rules into individual files in the rules directory.")
+        logging.info("Saving OWASP CRS and Nasxi rules into individual files.")
         for filename, rules_ir in rules:
             custom_rules = []
             for rule_ir in rules_ir:
-                custom_rule = self.process_rule(rule_ir)
+                custom_rule = self.rule_processor.process_rule(rule_ir)
                 if custom_rule:
                     severity_val = custom_rule['severity']
-                    if severity_val in ["CRITICAL", "HIGH", "MEDIUM", "LOW"]:  # Include LOW severity
+                    if severity_val in ["CRITICAL", "HIGH", "MEDIUM", "LOW"]:
                         custom_rules.append(custom_rule)
                         self.stats.increment('rules_successfully_converted')
-                        logging.debug(f"  Rule '{custom_rule['id']}' of severity '{severity_val}' successfully converted and added.")
+                        logging.debug(f"Rule '{custom_rule['id']}' of severity '{severity_val}' converted and added.")
                     else:
                         self.stats.increment('rules_parsed_but_skipped_low_priority')
                 elif custom_rule is None:
@@ -369,40 +407,119 @@ class ModSecurityRuleProcessor(RuleProcessor):
                             self.stats.increment('rules_skipped_generic_pattern')
                         else:
                             self.stats.increment('rules_skipped_no_targets')
-                    elif rule_ir.operator != 'rx':  # Count rules skipped for non-rx operator
+                    else:
                         self.stats.increment('rules_skipped_non_rx_operator')
-                    else:  # other reasons for None return (though now unlikely)
-                        self.stats.increment('rules_skipped_no_targets')
-
-            # Skip saving if no valid rules were converted
             if not custom_rules:
-                logging.info(f"Skipping file {filename} - no valid rules to save.")
+                if filename.lower().startswith("nasxi"):
+                    logging.debug(f"Skipping file {filename} - no valid Nasxi rules to save.")
+                else:
+                    logging.info(f"Skipping file {filename} - no valid rules to save.")
                 continue
-
             output_file = os.path.join(self.config.output_dir, "rules", f"{filename.replace('.conf', '')}.json")
             try:
                 with open(output_file, 'w') as f:
                     json.dump(custom_rules, f, indent=2)
-                logging.info(f"Successfully saved {len(custom_rules)} rules from {filename} to {output_file}")
+                logging.info(f"Saved {len(custom_rules)} rules from {filename} to {output_file}")
                 aggregated_rules.extend(custom_rules)
             except IOError as e:
-                logging.error(f"Error writing to output file {output_file}: {e}")
-            except Exception as e:
-                logging.error(f"Unexpected error writing to output file {output_file}: {e}")
+                logging.error(f"Error writing to {output_file}: {e}")
+        return aggregated_rules
 
-        # Save aggregated rules only if there are any
-        if aggregated_rules:
-            output_file = os.path.join(self.config.output_dir, "rules", "rules.json")
-            try:
-                with open(output_file, 'w') as f:
-                    json.dump(aggregated_rules, f, indent=2)
-                logging.info(f"Successfully saved all aggregated rules to {output_file}")
-            except IOError as e:
-                logging.error(f"Error writing aggregated rules to {output_file}: {e}")
+    def extract_nasxi_rules(self, rule_text: str, filename: str) -> List[ModSecurityRuleIR]:
+        rules_ir = []
+        for line in rule_text.splitlines():
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            if line.startswith("MainRule"):
+                # Use regex to parse MainRule lines
+                import re
+                match = re.match(r'^MainRule\s+"([^"]+)"\s+"([^"]+)"\s+"([^"]+)"\s+"([^"]+)"\s+id:(\d+);', line)
+                if match:
+                    pattern_str = match.group(1)
+                    msg = match.group(2)
+                    variables_str = match.group(3)
+                    s_value = match.group(4)
+                    rule_id = match.group(5)
+                    
+                    # Remove operator prefix from pattern if present
+                    clean_pattern = pattern_str.split(":", 1)[1] if (pattern_str.startswith("rx:") or pattern_str.startswith("str:")) else pattern_str
+                    # Clean message
+                    description = msg.split("msg:", 1)[-1].strip() if "msg:" in msg else msg
+                    # Determine severity based on s_value content
+                    if "4" in s_value:
+                        severity = "CRITICAL"
+                    elif "8" in s_value:
+                        severity = "HIGH"
+                    else:
+                        severity = "MEDIUM"
+                    actions = {'severity': severity, 'action': 'alert', 'msg': description}
+                    # Process variables if available (remove mz: prefix)
+                    variables = variables_str.split('|') if variables_str.startswith("mz:") else []
+                    
+                    rule_ir = ModSecurityRuleIR(
+                        rule_id=rule_id,
+                        phase=2,
+                        variables=variables,
+                        operator="nasxi",
+                        pattern=clean_pattern,
+                        actions=actions,
+                        original_actions_str=line,
+                        filename=filename
+                    )
+                    rules_ir.append(rule_ir)
+                continue
+            # ...existing fallback parsing (e.g. pipe-separated format)...
+            parts = line.split('|')
+            if len(parts) >= 3:
+                rule_id = parts[0].strip()
+                pattern = parts[1].strip()
+                severity_val = parts[2].strip().upper()
+                actions = {'severity': severity_val, 'action': 'alert', 'msg': 'Converted nasxi rule.'}
+                rule_ir = ModSecurityRuleIR(
+                    rule_id=rule_id,
+                    phase=2,
+                    variables=[],
+                    operator='nasxi',
+                    pattern=pattern,
+                    actions=actions,
+                    original_actions_str=line,
+                    filename=filename
+                )
+                rules_ir.append(rule_ir)
+        return rules_ir
+
+    def process_base_rules(self) -> List[Dict[str, Any]]:
+        base_rules = []
+        if self.config.base_rules and self.config.base_rules.get("sources"):
+            for source in self.config.base_rules["sources"]:
+                try:
+                    self.logger.info(f"Fetching base rules from source: {source['name']}")
+                    content = self.http_client.get(source["url"])
+                    try:
+                        parsed = json.loads(content)
+                        if isinstance(parsed, list):
+                            base_rules.extend(parsed)
+                        else:
+                            base_rules.append(parsed)
+                        self.logger.info(f"Successfully fetched base rules from {source['name']}")
+                    except json.JSONDecodeError:
+                        self.logger.error(f"Base rules from {source['name']} are not valid JSON.")
+                except FetchError as e:
+                    self.logger.error(f"Error fetching base rules from {source['name']}: {e}")
+        return base_rules
 
     def run(self):
-        rules = self.fetch_and_process_rules()
-        self.write_rules(rules)
+        aggregated_converted = self.write_rules(self.fetch_and_process_rules())
+        base_rules = self.process_base_rules()
+        merged_rules = aggregated_converted + base_rules
+        output_file = os.path.join(self.config.output_dir, "rules", "rules.json")
+        try:
+            with open(output_file, 'w') as f:
+                json.dump(merged_rules, f, indent=2)
+            self.logger.info(f"Successfully saved all aggregated rules to {output_file}")
+        except Exception as e:
+            self.logger.error(f"Error writing aggregated rules to {output_file}: {e}")
         self.stats.report()
 
 class RuleWriter:
@@ -455,28 +572,80 @@ class RuleAggregator:
         self.stats = Statistics()
         self.logger = logging.getLogger(__name__)
 
-    def fetch_and_process_rules(self) -> List[Dict[str, Any]]:
+    # New write_rules method to fix missing attribute error
+    def write_rules(self, rules_with_filenames: List[tuple]) -> List[Dict[str, Any]]:
+        aggregated_converted = []
+        for filename, rules_ir in rules_with_filenames:
+            custom_rules = []
+            for rule_ir in rules_ir:
+                custom_rule = self.rule_processor.process_rule(rule_ir)
+                if custom_rule:
+                    custom_rules.append(custom_rule)
+                    self.stats.increment('rules_successfully_converted')
+                else:
+                    self.stats.increment('rules_skipped_non_rx_operator')
+            if custom_rules:
+                # Use RuleWriter to write individual files (ignoring nasxi rules if needed)
+                if not filename.lower().startswith("nasxi"):
+                    try:
+                        out_filename = f"{filename.replace('.conf','')}.json"
+                        self.rule_writer.write_rules(custom_rules, out_filename)
+                    except IOError as e:
+                        self.logger.error(f"Failed to write rules to {out_filename}: {e}")
+                aggregated_converted.extend(custom_rules)
+            else:
+                if filename.lower().startswith("nasxi"):
+                    self.logger.debug(f"Skipping file {filename} - no valid Nasxi rules to save.")
+                else:
+                    self.logger.info(f"Skipping file {filename} - no valid rules to save.")
+        return aggregated_converted
+
+    def fetch_and_process_rules(self) -> List[tuple]:
         all_rules_with_filenames = []
-        headers = {}
 
-        try:
-            api_url = f"https://api.github.com/repos/coreruleset/coreruleset/contents/rules"
-            response = self.http_client.get(api_url)
-            files = json.loads(response)
+        # --- New block for rule sources defined in config.owasp_rules ---
+        if self.config.owasp_rules and self.config.owasp_rules.get("sources"):
+            for source in self.config.owasp_rules["sources"]:
+                try:
+                    self.logger.info(f"Fetching rules from source: {source['name']}")
+                    file_content = self.http_client.get(source["url"])
+                    pseudo_filename = f"{source['name']}.conf"
+                    rules_ir = self.extract_rules(file_content, pseudo_filename)
+                    all_rules_with_filenames.append((pseudo_filename, rules_ir))
+                except FetchError as e:
+                    self.logger.error(f"Error fetching rules from {source['name']}: {e}")
+        # Fallback: if no OWASP rules were loaded and a valid repo_url is provided, fetch using the GitHub API.
+        if not all_rules_with_filenames and self.config.repo_url != "default_repo_url":
+            try:
+                self.logger.info("Fallback: Fetching OWASP rules using GitHub API.")
+                api_url = f"https://api.github.com/repos/coreruleset/coreruleset/contents/rules"
+                response = self.http_client.get(api_url)
+                files = json.loads(response)
+                for file in files:
+                    if not file['name'].endswith('.conf'):
+                        continue
+                    time.sleep(0.5)
+                    file_content = self.http_client.get(file["download_url"])
+                    self.logger.info(f"Processing rule file: {file['name']}")
+                    rules_ir = self.extract_rules(file_content, file['name'])
+                    all_rules_with_filenames.append((file['name'], rules_ir))
+            except FetchError as e:
+                self.logger.error(f"Fallback Error fetching OWASP rules: {e}")
 
-            for file in files:
-                if not file['name'].endswith('.conf'):
-                    continue
-
-                time.sleep(0.5)
-                file_content = self.http_client.get(file["download_url"])
-                logging.info(f"Processing rule file: {file['name']}")
-
-                rules_ir = self.extract_rules(file_content, file['name'])
-                all_rules_with_filenames.append((file['name'], rules_ir))
-
-        except FetchError as e:
-            logging.error(f"Error downloading OWASP rules: {e}")
+        # New block for nasxi rules
+        if self.config.nasxi_rules and self.config.nasxi_rules.get("sources"):
+            for source in self.config.nasxi_rules["sources"]:
+                try:
+                    self.logger.info(f"Fetching nasxi rules from source: {source['name']}")
+                    file_content = self.http_client.get(source["url"])
+                    pseudo_filename = f"{source['name']}.nasxi"
+                    rules_ir = self.extract_nasxi_rules(file_content, pseudo_filename)
+                    all_rules_with_filenames.append((pseudo_filename, rules_ir))
+                except FetchError as e:
+                    self.logger.error(f"Error fetching nasxi rules from {source['name']}: {e}")
+        else:
+            # ...existing fallback logic...
+            pass
 
         return all_rules_with_filenames
 
@@ -509,11 +678,10 @@ class RuleAggregator:
                     if operator == 'lt':
                         try:
                             value = int(operator_arg)
-                            operator_arg = f"^[0-{value-1}]$"
+                            operator_arg = f'@rx ^[0-{value - 1}]$'
                         except ValueError:
-                            logging.warning(f"Invalid @lt operator in rule {rule_id}: {pattern}, File: {filename}. Skipping.")
-                            self.stats.increment('rules_parse_errors')
-                            continue
+                            logging.warning(f"Invalid @lt operator in rule {rule_id}, using safe fallback.")
+                            operator_arg = '@rx .*'
                     elif operator == 'rx':
                         operator_arg = '@rx ' + operator_arg
                         operator_arg = self.rule_processor.preprocess_pattern(operator_arg)
@@ -528,7 +696,7 @@ class RuleAggregator:
                     elif operator == 'beginsWith':
                         operator_arg = f'@rx ^{re.escape(operator_arg)}'
                     elif operator == 'endsWith':
-                        operator_arg = f'@rx {re.escape(operator_arg)}$'
+                        operator_arg = f'@rx ^{re.escape(operator_arg)}$'
                     elif operator == 'eq':
                         operator_arg = f'@rx ^{re.escape(operator_arg)}$'
                     elif operator == 'ge':
@@ -579,62 +747,102 @@ class RuleAggregator:
 
         return rules_ir
 
-    def write_rules(self, rules: List[Dict[str, Any]]) -> None:
-        aggregated_rules = []
-        logging.info("Saving OWASP CRS rules into individual files in the rules directory.")
-        for filename, rules_ir in rules:
-            custom_rules = []
-            for rule_ir in rules_ir:
-                custom_rule = self.rule_processor.process_rule(rule_ir)
-                if custom_rule:
-                    severity_val = custom_rule['severity']
-                    if severity_val in ["CRITICAL", "HIGH", "MEDIUM", "LOW"]:  # Include LOW severity
-                        custom_rules.append(custom_rule)
-                        self.stats.increment('rules_successfully_converted')
-                        logging.debug(f"  Rule '{custom_rule['id']}' of severity '{severity_val}' successfully converted and added.")
-                    else:
-                        self.stats.increment('rules_parsed_but_skipped_low_priority')
-                elif custom_rule is None:
-                    if rule_ir.operator == 'rx':
-                        if rule_ir.pattern == '.*':
-                            self.stats.increment('rules_skipped_generic_pattern')
-                        else:
-                            self.stats.increment('rules_skipped_no_targets')
-                    elif rule_ir.operator != 'rx':  # Count rules skipped for non-rx operator
-                        self.stats.increment('rules_skipped_non_rx_operator')
-                    else:  # other reasons for None return (though now unlikely)
-                        self.stats.increment('rules_skipped_no_targets')
-
-            # Skip saving if no valid rules were converted
-            if not custom_rules:
-                logging.info(f"Skipping file {filename} - no valid rules to save.")
+    def extract_nasxi_rules(self, rule_text: str, filename: str) -> List[ModSecurityRuleIR]:
+        rules_ir = []
+        for line in rule_text.splitlines():
+            line = line.strip()
+            if not line or line.startswith('#'):
                 continue
+            if line.startswith("MainRule"):
+                # Use regex to parse MainRule lines
+                import re
+                match = re.match(r'^MainRule\s+"([^"]+)"\s+"([^"]+)"\s+"([^"]+)"\s+"([^"]+)"\s+id:(\d+);', line)
+                if match:
+                    pattern_str = match.group(1)
+                    msg = match.group(2)
+                    variables_str = match.group(3)
+                    s_value = match.group(4)
+                    rule_id = match.group(5)
+                    
+                    # Remove operator prefix from pattern if present
+                    clean_pattern = pattern_str.split(":", 1)[1] if (pattern_str.startswith("rx:") or pattern_str.startswith("str:")) else pattern_str
+                    # Clean message
+                    description = msg.split("msg:", 1)[-1].strip() if "msg:" in msg else msg
+                    # Determine severity based on s_value content
+                    if "4" in s_value:
+                        severity = "CRITICAL"
+                    elif "8" in s_value:
+                        severity = "HIGH"
+                    else:
+                        severity = "MEDIUM"
+                    actions = {'severity': severity, 'action': 'alert', 'msg': description}
+                    # Process variables if available (remove mz: prefix)
+                    variables = variables_str.split('|') if variables_str.startswith("mz:") else []
+                    
+                    rule_ir = ModSecurityRuleIR(
+                        rule_id=rule_id,
+                        phase=2,
+                        variables=variables,
+                        operator="nasxi",
+                        pattern=clean_pattern,
+                        actions=actions,
+                        original_actions_str=line,
+                        filename=filename
+                    )
+                    rules_ir.append(rule_ir)
+                continue
+            # ...existing fallback parsing (e.g. pipe-separated format)...
+            parts = line.split('|')
+            if len(parts) >= 3:
+                rule_id = parts[0].strip()
+                pattern = parts[1].strip()
+                severity_val = parts[2].strip().upper()
+                actions = {'severity': severity_val, 'action': 'alert', 'msg': 'Converted nasxi rule.'}
+                rule_ir = ModSecurityRuleIR(
+                    rule_id=rule_id,
+                    phase=2,
+                    variables=[],
+                    operator='nasxi',
+                    pattern=pattern,
+                    actions=actions,
+                    original_actions_str=line,
+                    filename=filename
+                )
+                rules_ir.append(rule_ir)
+        return rules_ir
 
-            output_file = os.path.join(self.config.output_dir, "rules", f"{filename.replace('.conf', '')}.json")
-            try:
-                with open(output_file, 'w') as f:
-                    json.dump(custom_rules, f, indent=2)
-                logging.info(f"Successfully saved {len(custom_rules)} rules from {filename} to {output_file}")
-                aggregated_rules.extend(custom_rules)
-            except IOError as e:
-                logging.error(f"Error writing to output file {output_file}: {e}")
-            except Exception as e:
-                logging.error(f"Unexpected error writing to output file {output_file}: {e}")
-
-        # Save aggregated rules only if there are any
-        if aggregated_rules:
-            output_file = os.path.join(self.config.output_dir, "rules", "rules.json")
-            try:
-                with open(output_file, 'w') as f:
-                    json.dump(aggregated_rules, f, indent=2)
-                logging.info(f"Successfully saved all aggregated rules to {output_file}")
-            except IOError as e:
-                logging.error(f"Error writing aggregated rules to {output_file}: {e}")
+    def process_base_rules(self) -> List[Dict[str, Any]]:
+        base_rules = []
+        if self.config.base_rules and self.config.base_rules.get("sources"):
+            for source in self.config.base_rules["sources"]:
+                try:
+                    self.logger.info(f"Fetching base rules from source: {source['name']}")
+                    content = self.http_client.get(source["url"])
+                    try:
+                        parsed = json.loads(content)
+                        if isinstance(parsed, list):
+                            base_rules.extend(parsed)
+                        else:
+                            base_rules.append(parsed)
+                        self.logger.info(f"Successfully fetched base rules from {source['name']}")
+                    except json.JSONDecodeError:
+                        self.logger.error(f"Base rules from {source['name']} are not valid JSON.")
+                except FetchError as e:
+                    self.logger.error(f"Error fetching base rules from {source['name']}: {e}")
+        return base_rules
 
     def run(self):
-        rules = self.fetch_and_process_rules()
-        self.write_rules(rules)
-        self.stats.report()  # Ensure statistics are logged at the end
+        aggregated_converted = self.write_rules(self.fetch_and_process_rules())
+        base_rules = self.process_base_rules()
+        merged_rules = aggregated_converted + base_rules
+        output_file = os.path.join(self.config.output_dir, "rules", "rules.json")
+        try:
+            with open(output_file, 'w') as f:
+                json.dump(merged_rules, f, indent=2)
+            self.logger.info(f"Successfully saved all aggregated rules to {output_file}")
+        except Exception as e:
+            self.logger.error(f"Error writing aggregated rules to {output_file}: {e}")
+        self.stats.report()
 
 def main():
     # Setup structured logging

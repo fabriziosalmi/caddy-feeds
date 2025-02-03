@@ -36,6 +36,30 @@
     "description": "No description provided."
   },
   {
+    "id": "920190",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
+    "id": "920210",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:CONNECTION"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
     "id": "920260",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
@@ -54,9 +78,69 @@
     "targets": [
       "REQUEST_HEADERS:HOST"
     ],
-    "severity": "CRITICAL",
+    "severity": "LOW",
     "action": "log",
-    "score": 6,
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920310",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:ACCEPT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920311",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:ACCEPT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920330",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:USER-AGENT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920340",
+    "phase": 2,
+    "pattern": "!@rx ^0$",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-LENGTH"
+    ],
+    "severity": "NOTICE",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
+    "id": "920350",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:HOST"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
     "description": "No description provided."
   },
   {
@@ -120,6 +204,30 @@
     "description": "No description provided."
   },
   {
+    "id": "920200",
+    "phase": 2,
+    "pattern": "^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){6}",
+    "targets": [
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
+    "id": "920230",
+    "phase": 2,
+    "pattern": "%[0-9a-fA-F]{2}",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
     "id": "920121",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
@@ -141,6 +249,18 @@
     "severity": "CRITICAL",
     "action": "log",
     "score": 6,
+    "description": "No description provided."
+  },
+  {
+    "id": "920240",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
     "description": "No description provided."
   },
   {

@@ -48,6 +48,30 @@
     "description": "No description provided."
   },
   {
+    "id": "920190",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
+    "id": "920210",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:CONNECTION"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
     "id": "920260",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
@@ -66,9 +90,69 @@
     "targets": [
       "REQUEST_HEADERS:HOST"
     ],
-    "severity": "CRITICAL",
+    "severity": "LOW",
     "action": "log",
-    "score": 6,
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920310",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:ACCEPT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920311",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:ACCEPT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920330",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "REQUEST_HEADERS:USER-AGENT"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Log requests with empty body that may indicate missing login form fields."
+  },
+  {
+    "id": "920340",
+    "phase": 2,
+    "pattern": "!@rx ^0$",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-LENGTH"
+    ],
+    "severity": "NOTICE",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
+    "id": "920350",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:HOST"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
     "description": "No description provided."
   },
   {
@@ -132,6 +216,30 @@
     "description": "No description provided."
   },
   {
+    "id": "920200",
+    "phase": 2,
+    "pattern": "^bytes=(?:(?:\\d+)?-(?:\\d+)?\\s*,?\\s*){6}",
+    "targets": [
+      "REQUEST_HEADERS:RANGE|REQUEST_HEADERS:REQUEST-RANGE"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
+    "id": "920230",
+    "phase": 2,
+    "pattern": "%[0-9a-fA-F]{2}",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
     "id": "920121",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
@@ -153,6 +261,18 @@
     "severity": "CRITICAL",
     "action": "log",
     "score": 6,
+    "description": "No description provided."
+  },
+  {
+    "id": "920240",
+    "phase": 2,
+    "pattern": ".*",
+    "targets": [
+      "REQUEST_HEADERS:CONTENT-TYPE"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
     "description": "No description provided."
   },
   {
@@ -1536,6 +1656,18 @@
     "description": "Block traffic from known vulnerability scanners and penetration testing tools."
   },
   {
+    "id": "942460",
+    "phase": 2,
+    "pattern": "\\W{4}",
+    "targets": [
+      "ARGS"
+    ],
+    "severity": "WARNING",
+    "action": "log",
+    "score": 2,
+    "description": "No description provided."
+  },
+  {
     "id": "942421",
     "phase": 2,
     "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
@@ -1810,5 +1942,880 @@
     "action": "block",
     "score": 10,
     "description": "Block traffic from known vulnerability scanners and penetration testing tools."
+  },
+  {
+    "id": "1000",
+    "phase": 2,
+    "pattern": "select|union|update|delete|insert|table|from|ascii|hex|unhex|drop|load_file|substr|group_concat|dumpfile",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "sql keywords"
+  },
+  {
+    "id": "1002",
+    "phase": 2,
+    "pattern": "0x",
+    "targets": [],
+    "severity": "MEDIUM",
+    "action": "alert",
+    "score": 6,
+    "description": "0x, possible hex encoding"
+  },
+  {
+    "id": "1003",
+    "phase": 2,
+    "pattern": "/*",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (/*)"
+  },
+  {
+    "id": "1004",
+    "phase": 2,
+    "pattern": "*/",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (*/)"
+  },
+  {
+    "id": "1005",
+    "phase": 2,
+    "pattern": "|",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql keyword (|)"
+  },
+  {
+    "id": "1006",
+    "phase": 2,
+    "pattern": "&&",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql keyword (&&)"
+  },
+  {
+    "id": "1007",
+    "phase": 2,
+    "pattern": "--",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (--)"
+  },
+  {
+    "id": "1008",
+    "phase": 2,
+    "pattern": ";",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "semicolon"
+  },
+  {
+    "id": "1009",
+    "phase": 2,
+    "pattern": "=",
+    "targets": [],
+    "severity": "MEDIUM",
+    "action": "alert",
+    "score": 6,
+    "description": "equal sign in var, probable sql/xss"
+  },
+  {
+    "id": "1010",
+    "phase": 2,
+    "pattern": "(",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "open parenthesis, probable sql/xss"
+  },
+  {
+    "id": "1011",
+    "phase": 2,
+    "pattern": ")",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "close parenthesis, probable sql/xss"
+  },
+  {
+    "id": "1013",
+    "phase": 2,
+    "pattern": "'",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "simple quote"
+  },
+  {
+    "id": "1015",
+    "phase": 2,
+    "pattern": ",",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "comma"
+  },
+  {
+    "id": "1016",
+    "phase": 2,
+    "pattern": "#",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "mysql comment (#)"
+  },
+  {
+    "id": "1017",
+    "phase": 2,
+    "pattern": "@@",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "double arobase (@@)"
+  },
+  {
+    "id": "1100",
+    "phase": 2,
+    "pattern": "http://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "http:// scheme"
+  },
+  {
+    "id": "1101",
+    "phase": 2,
+    "pattern": "https://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "https:// scheme"
+  },
+  {
+    "id": "1102",
+    "phase": 2,
+    "pattern": "ftp://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "ftp:// scheme"
+  },
+  {
+    "id": "1103",
+    "phase": 2,
+    "pattern": "php://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "php:// scheme"
+  },
+  {
+    "id": "1104",
+    "phase": 2,
+    "pattern": "sftp://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "sftp:// scheme"
+  },
+  {
+    "id": "1105",
+    "phase": 2,
+    "pattern": "zlib://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "zlib:// scheme"
+  },
+  {
+    "id": "1106",
+    "phase": 2,
+    "pattern": "data://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "data:// scheme"
+  },
+  {
+    "id": "1107",
+    "phase": 2,
+    "pattern": "glob://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "glob:// scheme"
+  },
+  {
+    "id": "1108",
+    "phase": 2,
+    "pattern": "phar://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "phar:// scheme"
+  },
+  {
+    "id": "1109",
+    "phase": 2,
+    "pattern": "file://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "file:// scheme"
+  },
+  {
+    "id": "1110",
+    "phase": 2,
+    "pattern": "gopher://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "gopher:// scheme"
+  },
+  {
+    "id": "1111",
+    "phase": 2,
+    "pattern": "zip://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "zip:// scheme"
+  },
+  {
+    "id": "1112",
+    "phase": 2,
+    "pattern": "expect://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "expect:// scheme"
+  },
+  {
+    "id": "1113",
+    "phase": 2,
+    "pattern": "input://",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "input:// scheme"
+  },
+  {
+    "id": "1200",
+    "phase": 2,
+    "pattern": "..",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "double dot"
+  },
+  {
+    "id": "1202",
+    "phase": 2,
+    "pattern": "/etc/passwd",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "obvious probe"
+  },
+  {
+    "id": "1203",
+    "phase": 2,
+    "pattern": "c:\\\\",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "obvious windows path"
+  },
+  {
+    "id": "1204",
+    "phase": 2,
+    "pattern": "cmd.exe",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "obvious probe"
+  },
+  {
+    "id": "1205",
+    "phase": 2,
+    "pattern": "\\\\",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "backslash"
+  },
+  {
+    "id": "1207",
+    "phase": 2,
+    "pattern": "/..;/",
+    "targets": [],
+    "severity": "MEDIUM",
+    "action": "alert",
+    "score": 6,
+    "description": "dir traversal bypass"
+  },
+  {
+    "id": "1302",
+    "phase": 2,
+    "pattern": "<",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "html open tag"
+  },
+  {
+    "id": "1303",
+    "phase": 2,
+    "pattern": ">",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "html close tag"
+  },
+  {
+    "id": "1310",
+    "phase": 2,
+    "pattern": "[",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "open square backet ([), possible js"
+  },
+  {
+    "id": "1311",
+    "phase": 2,
+    "pattern": "]",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "close square bracket (]), possible js"
+  },
+  {
+    "id": "1312",
+    "phase": 2,
+    "pattern": "~",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "tilde (~) character"
+  },
+  {
+    "id": "1314",
+    "phase": 2,
+    "pattern": "`",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "grave accent (`)"
+  },
+  {
+    "id": "1315",
+    "phase": 2,
+    "pattern": "%[23].",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "double encoding"
+  },
+  {
+    "id": "1400",
+    "phase": 2,
+    "pattern": "&#",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "utf7/8 encoding"
+  },
+  {
+    "id": "1401",
+    "phase": 2,
+    "pattern": "%U",
+    "targets": [],
+    "severity": "CRITICAL",
+    "action": "alert",
+    "score": 6,
+    "description": "M$ encoding"
+  },
+  {
+    "id": "1500",
+    "phase": 2,
+    "pattern": "\\.ph|\\.asp|\\.ht|\\.jsp",
+    "targets": [],
+    "severity": "HIGH",
+    "action": "alert",
+    "score": 6,
+    "description": "asp/php/jsp file upload"
+  },
+  {
+    "id": "allow-legit-browsers",
+    "phase": 1,
+    "pattern": "(?i)(caddy-waf-ui|Mozilla|Chrome|Safari|Edge|Firefox|Opera|AppleWebKit|Gecko|Trident|MSIE|Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|YandexBot|Sogou|Exabot|facebot|facebookexternalhit|Twitterbot|Slackbot|LinkedInBot|TelegramBot)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 1,
+    "description": "Allow and log traffic from legitimate browsers, search engine crawlers, and social media bots."
+  },
+  {
+    "id": "auth-login-form-missing",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 3,
+    "description": "Log login requests that do not contain login form fields"
+  },
+  {
+    "id": "block-scanners",
+    "phase": 1,
+    "pattern": "(?i)(nikto|sqlmap|nmap|acunetix|nessus|openvas|wpscan|dirbuster|burpsuite|owasp zap|netsparker|appscan|arachni|skipfish|gobuster|wfuzz|hydra|metasploit|nessus|openvas|qualys|zap|w3af|openwebspider|netsparker|appspider|rapid7|nessus|qualys|nuclei|zgrab|vega|gospider|gxspider|whatweb|xspider|joomscan|uniscan|blindelephant)",
+    "targets": [
+      "HEADERS:User-Agent"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "Block traffic from known vulnerability scanners and penetration testing tools. Includes more scanners."
+  },
+  {
+    "id": "crlf-injection-headers",
+    "phase": 1,
+    "pattern": "(?i)(%0d|\\r)%0a|%0a(%0d|$)|\\n|%0d%0a|%0a%0d|\\r\\n",
+    "targets": [
+      "HEADERS"
+    ],
+    "severity": "MEDIUM",
+    "action": "log",
+    "score": 5,
+    "description": "Log requests with potential CRLF injection characters in headers. Improved pattern matching."
+  },
+  {
+    "id": "csrf-missing-token-post",
+    "phase": 2,
+    "pattern": "^$",
+    "targets": [
+      "BODY"
+    ],
+    "severity": "HIGH",
+    "action": "log",
+    "score": 6,
+    "description": "Log POST requests to write operation endpoints that are missing a CSRF token in the body (use this with a condition to ensure that a write operation was done)."
+  },
+  {
+    "id": "header-attacks-consolidated",
+    "phase": 1,
+    "pattern": "(?i)(?:1'\\s+OR\\s+'1'='1|<script[^>]*>|\\.\\.\\/\\.\\.\\/etc\\/passwd|1'\\s+UNION\\s+SELECT\\s+NULL--|\\b(?:select|insert|update|delete|drop|alter)\\b(?:\\s|\\/\\*.*?\\*\\/|--.*?)?(?:from|into|where|table)\\b|\\bunion\\b(?:\\s|\\/\\*.*?\\*\\/|--.*?)?\\bselect\\b|'\\s*(?:and|or)\\s*\\d+\\s*(?:=|[<>!]+\\s*)\\d+|\\)\\s*(?:and|or)\\s*\\(\\d+\\s*(?:=|[<>!]+\\s*)\\d+\\)|\\b(?:sleep|benchmark|waitfor\\s+delay)\\s*\\()",
+    "targets": [
+      "HEADERS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block SQL injection, XSS, and path traversal attempts in headers. Improved pattern matching."
+  },
+  {
+    "id": "http-request-smuggling",
+    "phase": 1,
+    "pattern": "(?i)(?:Transfer-Encoding.*?(?:chunked|identity)|Content-Length:\\s*0|(?:Content-Length:\\s*\\d+)(?:\\n.*){2,}|(?:Content-Length:\\s*\\d+)(?:\\n\\w+:\\s*.*?\\n+)|(?:TE:\\s*chunked)(?:\\n.*){2,}|(?:TE:\\s*identity)(?:\\n.*){2,})",
+    "targets": [
+      "HEADERS",
+      "BODY"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Detects HTTP request smuggling patterns. Targets Transfer-Encoding and Content-Length headers."
+  },
+  {
+    "id": "idor-attacks",
+    "phase": 2,
+    "pattern": "(?i)(?:(?:\\b(?:id|user|account|profile|order|item|product|comment|post|blog|thread|task|note|group|file|image|report|json|api|rest|download|admin|dashboard|email|video)\\b(?:\\s*)[=:]\\s*(?:[\\-\\/]?\\d+|[\\w\\-\\.]+|[a-f0-9\\-]+))|\\b(?:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})\\b|\\/\\d+(?:\\/|$)|\\/[a-f0-9]{32}|\\/[a-f0-9]{40})",
+    "targets": [
+      "URI",
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "MEDIUM",
+    "action": "log",
+    "score": 7,
+    "description": "Detects Insecure Direct Object Reference (IDOR) attempts by identifying common ID patterns in URIs, body, headers and cookies."
+  },
+  {
+    "id": "insecure-deserialization-java",
+    "phase": 2,
+    "pattern": "(?:rO0AB|aced0005|\\xac\\xed\\x00\\x05)",
+    "targets": [
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 9,
+    "description": "Block requests containing potential Java serialized objects, including magic bytes for serialized objects."
+  },
+  {
+    "id": "jwt-tampering",
+    "phase": 1,
+    "pattern": "^(eyJ[A-Za-z0-9_-]{0,}\\.eyJ[A-Za-z0-9_-]{0,}\\.[A-Za-z0-9_-]{0,})",
+    "targets": [
+      "HEADERS:Authorization",
+      "COOKIES"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Block potential JWT tampering attempts in Authorization headers or cookies."
+  },
+  {
+    "id": "nosql-injection-attacks",
+    "phase": 2,
+    "pattern": "(?i)(?:\\$(?:gt|gte|lt|lte|ne|eq|regex|where|or|and|in|nin|exists|type|jsonSchema|not|mod|elemMatch|all|size|nor|comment|slice|expr|meta|text|search|near|nearSphere|geoWithin|geoIntersects|geoNear)\\b|\\b(?:db|collection|aggregate|mapReduce|count|group|distinct|findOne|find|remove|update|insert)\\b)",
+    "targets": [
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block NoSQL injection attempts in request body, headers, and cookies. Targets MongoDB operators and keywords."
+  },
+  {
+    "id": "open-redirect-attempt",
+    "phase": 2,
+    "pattern": "(?i)(?:https?://(?:[^/]+@)?[^/]+\\.[^/]+/|\\b(?:redirect|url|next|return|r|u)\\b\\s*=\\s*(?:https?://|//))",
+    "targets": [
+      "HEADERS",
+      "BODY"
+    ],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 6,
+    "description": "Block potential open redirect attempts in request body and headers."
+  },
+  {
+    "id": "path-traversal",
+    "phase": 1,
+    "pattern": "(?:\\.\\.[/\\\\]|\\.\\./|\\.\\.\\\\/|%2e%2e[/\\\\]|%2e%2e/|%2e%2e%5c|%252e%252e|\\b(?:etc(?:\\/|%2F)(?:passwd|shadow|hosts)|(?:proc|sys)(?:\\/|%2F)(?:self(?:\\/|%2F)environ|cmdline)|boot(?:\\/|%2F)grub(?:\\/|%2F)grub\\.cfg|\\/\\.\\.(?:\\/|%2F)|(?:\\/|%5c)(\\.\\.){2,}(?:\\/|%5c)|(?:\\.\\.){2,}(?:\\/|%5c)|(?:\\.\\.){2,}|(?:%2e%2e){2,}(?:%2f|%5c)|(?:%2e%2e%2f|%2e%2e%5c){2,}|(?:\\.\\.%2f|\\.\\.%5c){2,}|(?:%252e%252e%2f|%252e%252e%5c){2,}|%252e%252e|%252f%2e%2e|%255c%2e%2e|\\/\\.(?:\\/|%2F)|\\%2e(?:%2f|%5c))\\b)",
+    "targets": [
+      "URI",
+      "HEADERS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block path traversal attempts and direct access to sensitive files (Target: URI and Headers). Improved and more aggressive pattern matching, including more obfuscation techniques."
+  },
+  {
+    "id": "rce-commands-expanded",
+    "phase": 2,
+    "pattern": "(?i)(?:\\b(?:cat|base64|whoami|echo|curl|wget|bash|sh|python|perl|ls|id|ping|nslookup|ipconfig|ifconfig|powershell)\\b)",
+    "targets": [
+      "ARGS",
+      "HEADERS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 5,
+    "description": "Expanded rule to block more RCE related commands and utilities."
+  },
+  {
+    "id": "rfi-http-url",
+    "phase": 2,
+    "pattern": "(?i)https?:\\/\\/[^\\s]+",
+    "targets": [
+      "URI",
+      "ARGS",
+      "HEADERS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Block direct use of HTTP or HTTPS URLs for inclusion."
+  },
+  {
+    "id": "sensitive-files",
+    "phase": 1,
+    "pattern": "(?i)(?:/\\.git/(?:HEAD|index|config|refs|objects)|/\\.env(?:\\.local|\\.dev|\\.prod)?$|/\\.htaccess$|/\\.htpasswd$|/\\.svn/|/\\.DS_Store$|\\/WEB-INF\\/|\\/WEB-INF\\/web\\.xml|\\/META-INF\\/|\\.git/\\s*(?:H\\.E\\.A\\.D|HEAD)|\\.dockerenv|server-status|\\b(?:config|database|credentials|secrets|private|local|development|staging|production|backup|default)\\b(?:[\\-_\\.]?)(?:[a-z0-9]+)?\\.(?:json|yaml|yml|ini|properties|txt|conf|toml|lock|log|bak|swp|orig|dist|sample|example|template|env|sql))",
+    "targets": [
+      "URI"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block access to sensitive files and directories (Target: URI). Expanded rule to include more config and backup file names."
+  },
+  {
+    "id": "sensitive-files-expanded",
+    "phase": 1,
+    "pattern": "(?i)(?:/\\.git/(?:HEAD|index|config|refs|objects)|/\\.env(?:\\.local|\\.dev|\\.prod)?$|/\\.htaccess$|/\\.htpasswd$|/\\.svn/|/\\.DS_Store$|\\/WEB-INF\\/|\\/WEB-INF\\/web.xml|\\/META-INF\\/|\\.git/\\s*(?:H\\.E\\.A\\.D|HEAD)|\\.dockerenv|server-status)",
+    "targets": [
+      "URI"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Expanded rule to block access to more sensitive files and account for obfuscation."
+  },
+  {
+    "id": "sql-injection",
+    "phase": 2,
+    "pattern": "(?i)(?:\\b(?:select|insert|update|delete|drop|alter|truncate|create|grant|revoke)\\b(?:\\s|\\/\\*.*?\\*\\/|--.*?)?(?:from|into|where|table|index|user|procedure|function|database)\\b|\\bunion\\b(?:\\s|\\/\\*.*?\\*\\/|--.*?)?(?:all|distinct)?(?:\\s|\\/\\*.*?\\*\\/|--.*?)?\\bselect\\b|'\\s*(?:and|or)\\s*['\\d]+\\s*(?:=|[<>]=?|!=)\\s*['\\d]+|\\)\\s*(?:and|or)\\s*\\([\\d]+\\s*(?:=|[<>]=?|!=)\\s*[\\d]+\\)|\\b(?:sleep|benchmark|waitfor\\s+delay)\\s*\\(|(?:\\bexec\\b|xp_cmdshell))",
+    "targets": [
+      "ARGS",
+      "BODY",
+      "HEADERS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 7,
+    "description": "Block SQL injection attempts in request arguments, body, and headers."
+  },
+  {
+    "id": "sql-injection-improved-basic",
+    "phase": 2,
+    "pattern": "(?i)(?:'\\s*(?:and|or)\\s*\\d+\\s*[=<>!]+\\s*\\d+|['\"]\\s*\\d+\\s*[=<>!]+\\s*['\"]|'\\s*\\+\\s*'|--\\s*-|-{2,}|\")",
+    "targets": [
+      "ARGS",
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Improved rule to catch basic SQL injection including quotes and boolean logic."
+  },
+  {
+    "id": "ssrf-attacks",
+    "phase": 2,
+    "pattern": "(?i)(?:(?:https?|ftp|gopher|dict|ldap|tftp|file)://(?:[^/]+@)?(?:(?:127\\.0\\.0\\.\\d{1,3}|10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|172\\.(?:1[6-9]|2\\d|3[01])\\.\\d{1,3}\\.\\d{1,3}|192\\.168\\.\\d{1,3}\\.\\d{1,3}|169\\.254\\.\\d{1,3}\\.\\d{1,3}|(?:(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4})|localhost|0\\.0\\.0\\.0|::1|\\d{1,10})|[^/]+\\.(?:internal|local|intranet|test))(?:\\:\\d{1,5})?(?:/[^\\s]*)?|\\b(?:metadata|aws|digitalocean|google|azure)\\b|\\b(?:169\\.254\\.\\d{1,3}\\.\\d{1,3})\\b(?:/[^\\s]*)?)",
+    "targets": [
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block Server-Side Request Forgery (SSRF) attempts, including internal IP ranges and cloud metadata endpoints, in body, headers and cookies. Improved pattern matching, more aggressive and includes Azure metadata service."
+  },
+  {
+    "id": "ssrf-internal-ip",
+    "phase": 2,
+    "pattern": "(?:127\\.0\\.0\\.1|10\\.|172\\.(?:1[6-9]|2\\d|3[01])\\.|192\\.168\\.)",
+    "targets": [
+      "URI",
+      "ARGS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 7,
+    "description": "Block SSRF to Internal IPs."
+  },
+  {
+    "id": "ssrf-reserved-ip",
+    "phase": 2,
+    "pattern": "(?:0\\.|169\\.254\\.|224\\.|240\\.|255\\.)",
+    "targets": [
+      "URI",
+      "ARGS"
+    ],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 5,
+    "description": "Block SSRF to Reserved/Multicast IPs."
+  },
+  {
+    "id": "ssti-attacks",
+    "phase": 2,
+    "pattern": "(?i)(?:\\{\\{.*?\\}\\}|\\{\\%.*?\\%\\}|\\$\\{.*?\\}|\\#\\{.*?\\}|\\$\\(.*?\\)|\\{\\*.*?\\*\\}|\\#\\*.*?\\*\\#|<%[=]?.*?%>|@\\{.*?\\}|\\b(?:Runtime|Process|exec|System|getClass|ClassLoader|loadLibrary|forName|newInstance|getMethod|invoke|getConstructor|getDeclaredMethod|getDeclaredField|setAccessible|getDeclaredConstructor|getInputStream|getOutputStream|get|put|setAttribute|getProperty|setProperty|setSecurityManager|load|defineClass|new|clone|readObject|writeObject|call|apply|bind|super)\\b\\s*\\(|\\b(?:T|Math|Object|String|Boolean|Number|BigInteger|BigDecimal|Date|List|Map|Set|Queue|Array|Tuple|Pattern|Locale|Class|ClassLoader|Proxy|SecurityManager|Thread|ThreadGroup)\\b)",
+    "targets": [
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block Server-Side Template Injection (SSTI) attacks in request body, headers, and cookies. Targets common template syntax and dangerous keywords for various frameworks."
+  },
+  {
+    "id": "unusual-paths",
+    "phase": 1,
+    "pattern": "(?i)(?:/wp-admin|/phpmyadmin|/admin|/login|/cgi-bin|/shell|/backdoor|/cmd|/exec|/bin/(?:sh|bash|zsh)|/console|/setup|/test|\\.php$|\\.asp$|\\.aspx$|\\.jsp$|\\.do$|\\.action$|\\.pl$|\\.py$|\\.cgi$|\\.cfm$|\\.rb$|\\.php[0-9]?$|\\.phtml$|\\.htaccess$|\\.htpasswd$|\\.ini$|\\.config$|\\.lock$|\\.log$|\\.bak$|\\.swp$|\\.orig$|\\.dist$|\\.sample$|\\.example$|\\.template$|\\.env$)",
+    "targets": [
+      "URI"
+    ],
+    "severity": "MEDIUM",
+    "action": "block",
+    "score": 7,
+    "description": "Block requests to unusual or suspicious paths and common scripting extensions (Target: URI). Expanded rule for more file types and endpoints."
+  },
+  {
+    "id": "xss-attacks",
+    "phase": 2,
+    "pattern": "(?i)(?:<script[^>]*>|<img[^>]*\\s+onerror=|javascript:|data:|vbscript:|<svg[^>]*\\s+onload=|alert\\(|document\\.(?:cookie|location)|eval\\(|base64_(?:encode|decode)|expression\\(|\\b(?:on(?:mouse(?:over|out|down|up|move)|focus|blur|click|key(?:press|down|up)|load|error|submit|reset|change))\\s*=|\\bstyle\\s*=|(?:&#[xX]?[0-9a-fA-F]+;)+|%[0-9a-fA-F]{2,}|\\biframe[^>]*srcdoc\\s*=|\\bevent\\b\\s*=\\s*['\"](?:javascript:).*?['\"]|url\\s*\\([\\s\\n]*?(?:javascript:).*?\\)|\\b(?:\\b(?:src|href|action|data|code)\\s*=\\s*['\"]?(?:javascript:|data:)|\\b(?:formaction|background|poster|xlink:href)\\s*=\\s*['\"]?(?:javascript:|data:))|\\b(?:svg|math|marquee|audio|video|embed|object|plaintext|isindex)\\b)",
+    "targets": [
+      "BODY",
+      "HEADERS",
+      "COOKIES"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 9,
+    "description": "Block XSS attempts using HTML tags, event handlers, javascript: protocol, encoded characters, iframe srcdoc, event attributes, url functions, and other vectors in request body, headers and cookies. Improved pattern matching, including more attack vectors."
+  },
+  {
+    "id": "xss-improved-encoding",
+    "phase": 2,
+    "pattern": "(?i)(?:<script[^>]*>|<img[^>]*\\s+onerror=|javascript:|data:|vbscript:|<svg[^>]*\\s+onload=|alert\\(|document\\.(?:cookie|location)|eval\\(|base64_(?:encode|decode)|expression\\(|\\b(?:on(?:mouse(?:over|out|down|up|move)|focus|blur|click|key(?:press|down|up)|load|error|submit|reset|change))\\s*=|\\bstyle\\s*=|(?:&#[xX]?[0-9a-fA-F]+;)+|%[0-9a-fA-F]{2,}|\\biframe[^>]*srcdoc\\s*=)",
+    "targets": [
+      "ARGS",
+      "BODY",
+      "HEADERS"
+    ],
+    "severity": "HIGH",
+    "action": "block",
+    "score": 8,
+    "description": "Improved XSS rule to catch encoded payloads and iframe srcdoc."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-dest-missing-block",
+    "phase": 1,
+    "pattern": "^$",
+    "targets": [
+      "HEADERS:Sec-Fetch-Dest-Presence-Check"
+    ],
+    "severity": "CRITICAL",
+    "action": "block",
+    "score": 10,
+    "description": "BLOCK: Requests missing Sec-Fetch-Dest header. Very strong indicator of non-browser traffic. High confidence, low false positive risk in modern browsers."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-mode-missing-log-score",
+    "phase": 1,
+    "pattern": "^$",
+    "targets": [
+      "HEADERS:Sec-Fetch-Mode-Presence-Check"
+    ],
+    "severity": "MEDIUM",
+    "action": "log",
+    "score": 5,
+    "description": "LOG+SCORE: Requests missing Sec-Fetch-Mode header. Suspicious, might be non-browser. Moderate confidence, low to moderate false positive risk. Assigns score."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-site-missing-log-score",
+    "phase": 1,
+    "pattern": "^$",
+    "targets": [
+      "HEADERS:Sec-Fetch-Site-Presence-Check"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 3,
+    "description": "LOG+SCORE: Requests missing Sec-Fetch-Site header. Less critical but still worth monitoring. Lower confidence, slightly higher false positive risk. Assigns score."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-user-missing-log-score",
+    "phase": 1,
+    "pattern": "^$",
+    "targets": [
+      "HEADERS:Sec-Fetch-User-Presence-Check"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 2,
+    "description": "LOG+SCORE: Requests missing Sec-Fetch-User header. Might indicate non-user-initiated actions or bots. Lowest confidence, moderate to higher false positive risk. Assigns score, mainly for correlation."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-dest-not-document-ua-suspicious-log-score",
+    "phase": 1,
+    "pattern": "(?i)^(?:script|style|image|font|fetch|xhr|audio|video|manifest|object|embed|report|worker|sharedworker|serviceworker|empty|unknown)$",
+    "targets": [
+      "HEADERS:Sec-Fetch-Dest-Not"
+    ],
+    "severity": "MEDIUM",
+    "action": "log",
+    "score": 6,
+    "description": "LOG+SCORE: Sec-Fetch-Dest not 'document' AND Suspicious User-Agent. More suspicious combination. Moderate confidence, reduced false positive risk by combining checks. Assigns score."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-mode-no-cors-document-log-score",
+    "phase": 1,
+    "pattern": "(?i)^(?:no-cors)$",
+    "targets": [
+      "HEADERS:Sec-Fetch-Mode"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 3,
+    "description": "LOG+SCORE: 'document' requests with Sec-Fetch-Mode: 'no-cors'. Less common for initial page loads. Lower confidence, low false positive risk. Assigns score."
+  },
+  {
+    "id": "browser-integrity-sec-fetch-site-cross-site-document-log-score",
+    "phase": 1,
+    "pattern": "(?i)^(?:cross-site)$",
+    "targets": [
+      "HEADERS:Sec-Fetch-Site"
+    ],
+    "severity": "LOW",
+    "action": "log",
+    "score": 2,
+    "description": "LOG+SCORE: 'document' requests with Sec-Fetch-Site: 'cross-site'. Common for external links, primarily for monitoring cross-site traffic patterns. Lowest confidence, very low false positive risk. Assigns score for traffic analysis."
   }
 ]
