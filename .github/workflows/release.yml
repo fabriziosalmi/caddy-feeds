@@ -27,6 +27,10 @@ jobs:
             pip install -r requirements.txt
           fi
 
+      - name: Clean up lists and rules folder
+        run: |
+          rm -rf lists/* rules/*
+          
       - name: Run scripts to generate lists and rules.json
         run: |
           python scripts/ip.py
