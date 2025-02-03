@@ -1,3 +1,4 @@
 requests
 PyYAML
 aiohttp
+prometheus_client
