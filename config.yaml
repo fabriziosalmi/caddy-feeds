@@ -41,8 +41,11 @@ ip_lists:
 
 dns_lists:
   sources:
-    - name: "StevenBlack Unified"
-      url: "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+    - name: "uBlockOrigin Badware"
+      url: "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt"
+    - name: "Phishing Army"
+      url: "https://phishing.army/download/phishing_army_blocklist_extended.txt"
+
   dns_servers:
     - address: "8.8.8.8"
       protocol: "plain"
