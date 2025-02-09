@@ -651,99 +651,97 @@ class RuleAggregator:
 
     def extract_rules(self, rule_text: str, filename: str) -> List[ModSecurityRuleIR]:
         rules_ir = []
-        
-        # Regular expression to match SecRule directives
-        rule_pattern = r'SecRule\s+([\s\S]+?)"([^"]+)"\s*([\s\S]+?)(?=SecRule|SecAction|SecDefaultAction|SecRuleRemoveTarget|SecRuleUpdateTargetById|SecMarker|^\s*#|$)'
-        
-        for match in re.finditer(rule_pattern, rule_text):
+
+        # Compile regular expressions once
+        rule_pattern_re = re.compile(
+            r'SecRule\s+([\s\S]+?)"([^"]+)"\s*([\s\S]+?)(?=SecRule|SecAction|SecDefaultAction|SecRuleRemoveTarget|SecRuleUpdateTargetById|SecMarker|^\s*#|$)')
+        id_pattern_re = re.compile(r'id:(\d+)')
+        operator_pattern_re = re.compile(r'@([a-zA-Z]+)\s*(.*)')
+        action_pattern_re = re.compile(r'([a-zA-Z_]+):[\'"]?([^\'"]*)[\'"]?')
+
+        # Preprocess patterns mapping
+        def preprocess_operator(operator, operator_arg):
             try:
-                variables_str = match.group(1)
-                pattern = match.group(2)
-                actions_str = match.group(3)
+                if operator == 'lt':
+                    value = int(operator_arg)
+                    return f'@rx ^[0-{value - 1}]$'
+                elif operator == 'rx':
+                    return f'@rx {self.rule_processor.preprocess_pattern(operator_arg)}'[3:].strip()
+                elif operator == 'pm':
+                    return f'@rx {"|".join(re.escape(x.strip()) for x in operator_arg.split(","))}'
+                elif operator == 'streq':
+                    return f'@rx ^{re.escape(operator_arg)}$'
+                elif operator == 'contains':
+                    return f'@rx {re.escape(operator_arg)}'
+                elif operator == 'beginsWith':
+                    return f'@rx ^{re.escape(operator_arg)}'
+                elif operator == 'endsWith':
+                    return f'@rx ^{re.escape(operator_arg)}$'
+                elif operator == 'eq':
+                    return f'@rx ^{re.escape(operator_arg)}$'
+                elif operator == 'ge':
+                    return f'@rx ^[{operator_arg}-9]$'
+                elif operator == 'le':
+                    return f'@rx ^[0-{operator_arg}]$'
+                else:
+                    self.stats.increment('rules_skipped_non_rx_operator')
+                    return None
+            except ValueError:
+                logging.warning(f"Invalid @lt operator in rule {rule_id}, using safe fallback.")
+                return '@rx .*'
+        
+        for match in rule_pattern_re.finditer(rule_text):
+            try:
+                variables_str, pattern, actions_str = match.groups()
                 
-                # Extract rule ID from actions
-                rule_id = None
-                id_match = re.search(r'id:(\d+)', actions_str)
+                # Extract rule ID
+                id_match = id_pattern_re.search(actions_str)
                 if id_match:
                     rule_id = id_match.group(1)
                 else:
                     continue
 
-                operator = None
-                operator_arg = pattern
-                operator_match = re.match(r'@([a-zA-Z]+)\s*(.*)', pattern)
-                try:
-                    operator = operator_match.group(1)
-                    operator_arg = operator_match.group(2).strip()
-                    if operator == 'lt':
-                        try:
-                            value = int(operator_arg)
-                            operator_arg = f'@rx ^[0-{value - 1}]$'
-                        except ValueError:
-                            logging.warning(f"Invalid @lt operator in rule {rule_id}, using safe fallback.")
-                            operator_arg = '@rx .*'
-                    elif operator == 'rx':
-                        operator_arg = '@rx ' + operator_arg
-                        operator_arg = self.rule_processor.preprocess_pattern(operator_arg)
-                        operator_arg = operator_arg[3:].strip()
-                    elif operator == 'pm':
-                        operator_arg = '|'.join(re.escape(x.strip()) for x in operator_arg.split(','))
-                        operator_arg = f'@rx {operator_arg}'
-                    elif operator == 'streq':
-                        operator_arg = f'@rx ^{re.escape(operator_arg)}$'
-                    elif operator == 'contains':
-                        operator_arg = f'@rx {re.escape(operator_arg)}'
-                    elif operator == 'beginsWith':
-                        operator_arg = f'@rx ^{re.escape(operator_arg)}'
-                    elif operator == 'endsWith':
-                        operator_arg = f'@rx ^{re.escape(operator_arg)}$'
-                    elif operator == 'eq':
-                        operator_arg = f'@rx ^{re.escape(operator_arg)}$'
-                    elif operator == 'ge':
-                        operator_arg = f'@rx ^[{operator_arg}-9]$'
-                    elif operator == 'le':
-                        operator_arg = f'@rx ^[0-{operator_arg}]$'
-                    else:
-                        logging.debug(f"Skipping unsupported operator '{operator}' in rule {rule_id}, File: {filename}.")
-                        self.stats.increment('rules_skipped_non_rx_operator')
-                        continue
-                except (AttributeError, IndexError) as e:
-                    logging.debug(f"Failed to parse operator in rule {rule_id}, File: {filename}: {e}")
-                    operator = 'rx'
-                    operator_arg = pattern
+                # Process operator and argument
+                operator_match = operator_pattern_re.match(pattern)
+                if operator_match:
+                    operator, operator_arg = operator_match.groups()
+                    operator_arg = operator_arg.strip()
+                else:
+                    operator, operator_arg = 'rx', pattern
 
-                regex_pattern_to_validate = operator_arg[3:].strip()
+                preprocessed_operator_arg = preprocess_operator(operator, operator_arg)
+                if preprocessed_operator_arg is None:
+                    logging.debug(f"Skipping unsupported operator '{operator}' in rule {rule_id}, File: {filename}.")
+                    continue
+                
+                # Validate regex pattern
+                regex_pattern_to_validate = preprocessed_operator_arg[3:].strip()
                 try:
                     re.compile(regex_pattern_to_validate)
                 except re.error as e:
                     logging.warning(f"Invalid regex pattern in rule {rule_id}: {regex_pattern_to_validate}. Error: {e}. Using safe fallback.")
-                    operator_arg = '@rx .*'
+                    preprocessed_operator_arg = '@rx .*'
                     self.stats.increment('rules_skipped_invalid_regex')
-
+                
                 variables_list = [v.strip() for v in variables_str.split(',')]
 
-                actions = {}
-                for action_part_match in re.finditer(r'([a-zA-Z_]+):[\'"]?([^\'"]*)[\'"]?', actions_str):
-                    action_name = action_part_match.group(1)
-                    action_param = action_part_match.group(2)
-                    actions[action_name] = action_param
+                actions = {m.group(1): m.group(2) for m in action_pattern_re.finditer(actions_str)}
 
                 rule_ir = ModSecurityRuleIR(
                     rule_id=rule_id,
                     phase=int(actions.get('phase', 2)),
                     variables=variables_list,
                     operator=operator,
-                    pattern=operator_arg,
+                    pattern=preprocessed_operator_arg,
                     actions=actions,
                     original_actions_str=actions_str,
                     filename=filename
                 )
+                
                 rules_ir.append(rule_ir)
-
             except Exception as e:
                 logging.error(f"Error parsing rule in {filename}: {e}. Raw rule content: {match.group(0)}")
                 self.stats.increment('rules_parse_errors')
-                continue
 
         return rules_ir
 
