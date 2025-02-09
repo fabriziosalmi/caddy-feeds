@@ -114,22 +114,18 @@ class ModSecurityRuleProcessor(RuleProcessor):
     @lru_cache(maxsize=1000)
     def preprocess_pattern(self, pattern: str) -> str:
         if not isinstance(pattern, str):
-            raise ValueError(f"Pattern must be string, got {type(pattern)}")
+            raise ValueError(f"Pattern must be a string, got {type(pattern)}")
             
         if not pattern:
             return '@rx .*'
-            
+        
         if pattern.startswith('@rx'):
             pattern = pattern[3:].strip()
             flags = re.match(r'^\(\?([a-z]+)\)', pattern)
             flags_str = flags.group(0) if flags else ''
             regex_body = pattern[len(flags_str):] if flags else pattern
-            
-            # Validate regex before returning
-            try:
-                re.compile(regex_body)
-            except re.error as e:
-                logging.warning(f"Invalid regex pattern '{regex_body}' in rule '{pattern}', using safe fallback: {e}")
+
+            if not self.is_valid_regex(regex_body):
                 return '@rx .*'
                 
             pattern = '@rx ' + flags_str + regex_body.strip()
@@ -140,18 +136,12 @@ class ModSecurityRuleProcessor(RuleProcessor):
                         .strip('/'))
                         
         if pattern.startswith('@lt'):
-            try:
-                value = int(pattern[3:].trip())
-                pattern = f'@rx ^[0-{value-1}]$'
-            except ValueError:
-                logging.warning(f"Invalid @lt operator in pattern '{pattern}', using safe fallback.")
+            if self.is_valid_lt_operator(pattern):
+                return self.convert_lt_to_rx(pattern)
+            else:
                 return '@rx .*'
                 
-        # Additional validation for common issues
-        try:
-            re.compile(pattern)
-        except re.error as e:
-            logging.warning(f"Invalid regex pattern '{pattern}', using safe fallback: {e}")
+        if not self.is_valid_regex(pattern):
             return '@rx .*'
                 
         return pattern
@@ -521,6 +511,26 @@ class ModSecurityRuleProcessor(RuleProcessor):
         except Exception as e:
             self.logger.error(f"Error writing aggregated rules to {output_file}: {e}")
         self.stats.report()
+
+    def is_valid_regex(self, regex_body: str) -> bool:
+        try:
+            re.compile(regex_body)
+            return True
+        except re.error as e:
+            logging.warning(f"Invalid regex pattern '{regex_body}', using safe fallback: {e}")
+            return False
+    
+    def is_valid_lt_operator(self, pattern: str) -> bool:
+        try:
+            value = int(pattern[3:].strip())
+            return value > 0
+        except ValueError:
+            logging.warning(f"Invalid @lt operator in pattern '{pattern}', using safe fallback.")
+            return False
+    
+    def convert_lt_to_rx(self, pattern: str) -> str:
+        value = int(pattern[3:].strip())  # At this point, value is guaranteed to be a valid integer
+        return f'@rx ^[0-{value-1}]$'
 
 class RuleWriter:
     def __init__(self, output_dir: str):
