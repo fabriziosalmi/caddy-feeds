@@ -65,6 +65,7 @@ def fetch_content(url: str) -> Optional[str]:
         logging.error(f"Error fetching content from {url}: {e}")
     return None
 
+@lru_cache(maxsize=1024)
 def is_excluded(ip_address: str) -> bool:
     """Checks if the given IP address or network is in the exclusion list."""
     try:
