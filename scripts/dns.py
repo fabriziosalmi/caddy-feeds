@@ -5,12 +5,27 @@ import logging
 import time
 import os  # newly added
 import shutil  # newly added
+from datetime import datetime, timezone
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] %(levelname)s: %(message)s",
 )
+
+# NOTICE header prepended to the aggregated output for third-party attribution.
+# Input comment lines (starting with '#') are skipped during parsing, so this
+# header does not pollute downstream re-aggregation of the published list.
+NOTICE_TEXT = (
+    "Aggregated by fabriziosalmi/caddy-feeds from third-party feeds "
+    "under their respective licenses - see THIRD_PARTY_NOTICES.md"
+)
+
+
+def notice_header() -> str:
+    """Builds a commented NOTICE header (attribution) for the aggregated output file."""
+    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return f"# {NOTICE_TEXT}\n# Generated: {generated}\n"
 
 # Updated helper function to filter private and reserved domains
 def is_public_domain(domain: str) -> bool:
@@ -80,18 +95,15 @@ def download_and_aggregate_dns_lists(config_file):
 
     sources = dns_lists_config.get('sources', [])
     output_file = dns_lists_config.get('output_file', 'lists/dns_blacklist.txt')
-<<<<<<< HEAD
-=======
-    
+
     # Adjust output_file to be relative to the config file's directory if not absolute
     base_dir = os.path.dirname(os.path.abspath(config_file))
     if not os.path.isabs(output_file):
         output_file = os.path.join(base_dir, output_file)
-    
+
     # Ensure the output directory exists
     output_dir = os.path.dirname(output_file)
     os.makedirs(output_dir, exist_ok=True)
->>>>>>> 317ece1 (fixes)
 
     aggregated_domains = set()  # Use a set to store unique domains
 
@@ -158,6 +170,7 @@ def download_and_aggregate_dns_lists(config_file):
     temp_output = output_file + ".tmp"
     try:
         with open(temp_output, 'w') as outfile:
+            outfile.write(notice_header())  # Prepend NOTICE header for third-party attribution
             for domain in sorted(aggregated_domains): # Sort domains alphabetically for better readability
                 outfile.write(domain + '\n')
         # Move temporary file to final destination

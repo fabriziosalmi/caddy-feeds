@@ -1,8 +1,10 @@
 import requests
 import yaml
 import re
+import os
 import logging
 import ipaddress
+from datetime import datetime, timezone
 from typing import Set, Dict, List, Optional
 import aiohttp
 import asyncio
@@ -13,6 +15,21 @@ from prometheus_client import Counter, Histogram, start_http_server
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 CONFIG_FILE = 'config.yaml'
+
+# NOTICE header prepended to the aggregated output for third-party attribution.
+# Input comment lines (starting with '#') are skipped by extract_ips(), so this
+# header does not pollute downstream re-aggregation of the published list.
+NOTICE_TEXT = (
+    "Aggregated by fabriziosalmi/caddy-feeds from third-party feeds "
+    "under their respective licenses - see THIRD_PARTY_NOTICES.md"
+)
+
+
+def notice_header() -> str:
+    """Builds a commented NOTICE header (attribution) for the aggregated output file."""
+    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return f"# {NOTICE_TEXT}\n# Generated: {generated}\n"
+
 
 # Define IP ranges to exclude (private, loopback, link-local, multicast, broadcast)
 EXCLUDE_RANGES = [
@@ -148,9 +165,15 @@ def main():
             all_ips.update(ips)
             logging.info(f"Found {len(ips)} IPs from {name} (after exclusions).")
 
-    # Save the aggregated IPs
+    # Ensure the output directory exists before writing
+    output_dir = os.path.dirname(output_file)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+
+    # Save the aggregated IPs (prepend NOTICE header for third-party attribution)
     try:
         with open(output_file, 'w') as f:
+            f.write(notice_header())
             for ip in sorted(list(all_ips)):
                 f.write(f"{ip}\n")
         logging.info(f"Successfully aggregated and saved {len(all_ips)} unique IPs to {output_file}")

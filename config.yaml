@@ -1,9 +1,6 @@
 repo_url: "https://api.github.com/repos/coreruleset/coreruleset"
 ip_lists:
   sources:
-    - name: "FireHOL Level 1"
-      url: "https://iplists.firehol.org/files/firehol_level1.netset"
-      format: "netset"
     - name: "Emerging Threats"
       url: "https://rules.emergingthreats.net/blockrules/compromised-ips.txt"
       format: "netset"
@@ -13,38 +10,12 @@ ip_lists:
     - name: "IPsum"
       url: "https://raw.githubusercontent.com/stamparm/ipsum/master/levels/1.txt"
       format: "netset"
-    - name: "BlockList.de"
-      url: "https://www.blocklist.de/lists/all.txt"
-      format: "netset"
-    - name: "Blocklist.de - SSH"
-      url: "https://www.blocklist.de/lists/ssh.txt"
-      format: "netset"
-    - name: "Greensnow"
-      url: "https://blocklist.greensnow.co/greensnow.txt"
-      format: "netset"
-    - name: "Spamhaus DROP"
-      url: "https://www.spamhaus.org/drop/drop.txt"
-      format: "netset"
-    - name: "AlienVault IP Reputation"
-      url: "https://reputation.alienvault.com/reputation.data"
-      format: "netset"
-    - name: "BinaryDefense IPs"
-      url: "https://www.binarydefense.com/banlist.txt"
-      format: "netset"
-    - name: "Nozomi Networks Bad IPs"
-      url: "https://osint.nozominetworks.com/badips.txt"
-      format: "netset"
-    - name: "Dragon Research Group"
-      url: "https://drg.pt/blocklist.txt"
-      format: "netset"
   output_file: "lists/ip_blacklist.txt"
 
 dns_lists:
   sources:
     - name: "uBlockOrigin Badware"
       url: "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt"
-    - name: "Phishing Army"
-      url: "https://phishing.army/download/phishing_army_blocklist_extended.txt"
   output_file: "lists/dns_blacklist.txt"
 
 owasp_rules:
@@ -67,5 +38,4 @@ base_rules:
       url: "https://raw.githubusercontent.com/fabriziosalmi/caddy-waf/refs/heads/main/rules.json"
       format: "caddywaf"
   output_file: "rules/base_rules.json"
-
 
